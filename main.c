@@ -83,19 +83,10 @@ typedef struct
 } ble_cus_init_t;
 
 
-
-
 void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context);
-/*uint32_t ble_cus_custom_value_update(ble_cus_t * p_cus, uint8_t custom_value);
-uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init);
-uint32_t ble_cus_custom_value_update(ble_cus_t * p_cus, uint8_t custom_value);
-uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init);*/
 
 #define BLE_CUS_DEF(_name)  static ble_cus_t _name; \
-NRF_SDH_BLE_OBSERVER(_name ## _obs,                                                                 \
-                     BLE_HRS_BLE_OBSERVER_PRIO,                                                     \
-                     ble_cus_on_ble_evt, &_name)
-
+NRF_SDH_BLE_OBSERVER(_name ## _obs, BLE_HRS_BLE_OBSERVER_PRIO, ble_cus_on_ble_evt, &_name)
 
 
 struct ble_cus_s
@@ -120,6 +111,7 @@ APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
 
 
 #define LED_BLINK_INTERVAL 800
+static char const m_target_periph_name[] = "nRF Connect";     /**< Name of the device we try to connect to. This name is searched in the scan report data*/
 
 NRF_BLE_SCAN_DEF(m_scan);                                       /**< Scanning module instance. */
 NRF_BLE_GATT_DEF(m_gatt);                                       /**< GATT module instance. */
@@ -128,8 +120,8 @@ NRF_BLE_QWR_DEF(m_qwr);                                                         
 BLE_CUS_DEF(m_cus);
 
 
-static char const m_target_periph_name[] = "nRF Connect";     /**< Name of the device we try to connect to. This name is searched in the scan report data*/
 
+// CUSTOM VALUE CODE START
 static uint8_t char_value = 0;
 
 static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
@@ -329,6 +321,7 @@ uint32_t ble_cus_custom_value_update(ble_cus_t * p_cus, uint8_t custom_value){
     return err_code;
 }
 
+// CUSTOM VALUE CODE END
 
 void blink_handler(void * p_context)
 {
