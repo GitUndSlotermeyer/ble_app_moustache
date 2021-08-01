@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "bsp_btn_ble.h": "c",
+        "ble.h": "c",
+        "nrf_sdh.h": "c",
+        "bsp.h": "c",
+        "ble_hci.h": "c",
+        "ble_db_discovery.h": "c",
+        "ble_advertising.h": "c",
+        "nrf_ble_scan.h": "c",
+        "nrf_log.h": "c",
+        "app_usbd_hid_kbd.h": "c",
+        "app_usbd_hid_generic.h": "c",
+        "nrf_log_default_backends.h": "c",
+        "nrf_cli_uart.h": "c",
+        "ble_cus.h": "c"
+    }
+}

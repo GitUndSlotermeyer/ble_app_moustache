@@ -1,0 +1,22 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+	{
+		"type": "cortex-debug",
+		"request": "launch",
+		"name": "Debug J-Link",
+		"cwd": "${workspaceRoot}",
+		"executable": "${workspaceRoot}/pca10056/s140/armgcc/_build/nrf52840_xxaa.out",
+		"serverpath": "/mnt/c/Program Files (x86)/SEGGER/JLink/JLinkGDBServerCL.exe", 
+		"servertype": "jlink",
+		"device": "nRF52840_xxAA",
+		"interface": "swd",
+		"runToMain": true,
+		"armToolchainPath": "/usr/bin/",
+		"svdFile": "${workspaceRoot}/../nRF5_SDK_17.0.0_9d13099/modules/nrfx/mdk/nrf52840.svd" 
+}
+	]
+	}
