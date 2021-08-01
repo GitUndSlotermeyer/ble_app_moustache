@@ -71,7 +71,6 @@ SRC_FILES += \
   $(SDK_ROOT)/components/softdevice/common/nrf_sdh.c \
   $(SDK_ROOT)/components/softdevice/common/nrf_sdh_ble.c \
   $(SDK_ROOT)/components/softdevice/common/nrf_sdh_soc.c \
-  $(PROJ_DIR)/ble_cus.c \
   $(SDK_ROOT)/components/libraries/cli/nrf_cli.c \
   $(SDK_ROOT)/components/libraries/cli/uart/nrf_cli_uart.c \
   $(SDK_ROOT)/components/libraries/bsp/bsp_cli.c \

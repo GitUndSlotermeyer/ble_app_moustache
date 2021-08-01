@@ -185,7 +185,7 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  ../../../../../../modules/nrfx/drivers/include/nrfx_power_clock.h \
  ../../../../../../integration/nrfx/legacy/nrf_drv_power.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_power.h \
- ../../../../../../modules/nrfx/hal/nrf_power.h ../../../ble_cus.h
+ ../../../../../../modules/nrfx/hal/nrf_power.h
 
 /usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h:
 
@@ -582,5 +582,3 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 ../../../../../../modules/nrfx/drivers/include/nrfx_power.h:
 
 ../../../../../../modules/nrfx/hal/nrf_power.h:
-
-../../../ble_cus.h:
