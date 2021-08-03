@@ -50,6 +50,9 @@
 #define APP_USBD_INTERFACE_KBD      1
 
 // SERVICE & CHARACTERISTIC UUID'S
+// CHAR0 represents state of usb
+// CHAR1 represents state of LED
+// CHAR2 represents ID
 
 #define CUSTOM_SERVICE_UUID_BASE         {0xBC, 0x8A, 0xBF, 0x45, 0xCA, 0x05, 0x50, 0xBA, 0x40, 0x42, 0xB0, 0x00, 0xC9, 0xAD, 0x64, 0xF3}
 #define CUSTOM_SERVICE_UUID               0x1400
