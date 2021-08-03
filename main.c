@@ -203,8 +203,64 @@ static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
                                                &p_cus->custom_value_handles);
     
     APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic successfully added.");
+    NRF_LOG_INFO("Characteristic 0 successfully added.");
 
+
+    return NRF_SUCCESS;
+}
+
+static uint32_t char1_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
+{
+    uint32_t            err_code = NRF_SUCCESS;
+    ble_gatts_char_md_t char_md;
+    ble_gatts_attr_md_t cccd_md;
+    ble_gatts_attr_t    attr_char_value;
+    ble_uuid_t          ble_uuid;
+    ble_gatts_attr_md_t attr_md;
+    
+    memset(&char_md, 0, sizeof(ble_gatts_char_md_t));
+
+    char_md.char_ext_props.wr_aux = 1;
+    char_md.char_ext_props.reliable_wr = 1;
+    char_md.char_props.read = 1;
+    char_md.char_props.write = 1;
+    char_md.char_props.notify = 1;
+    char_md.char_user_desc_max_size = 10;
+    char_md.char_user_desc_size = 2;
+    char_md.p_cccd_md = &cccd_md;
+
+
+    memset(&cccd_md, 0, sizeof(cccd_md));
+
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.read_perm);
+    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.write_perm);
+    cccd_md.vloc       = BLE_GATTS_VLOC_STACK;
+
+	
+    ble_uuid.type = p_cus->uuid_type;
+    ble_uuid.uuid = CHAR1_UUID;
+
+    memset(&attr_char_value, 0, sizeof(attr_char_value));
+    
+    attr_char_value.p_uuid = &ble_uuid;
+    attr_char_value.p_attr_md = &attr_md;
+    attr_char_value.init_len  = sizeof(uint8_t);
+    attr_char_value.max_len   = sizeof(uint8_t);
+    attr_char_value.p_value = &char_value;
+
+    memset(&attr_md, 0, sizeof(attr_md));
+
+    attr_md.vloc       = BLE_GATTS_VLOC_STACK;
+    attr_md.read_perm  = p_cus_init->custom_value_char_attr_md.read_perm;
+    attr_md.write_perm = p_cus_init->custom_value_char_attr_md.write_perm;
+
+
+    err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md,
+                                               &attr_char_value,
+                                               &p_cus->custom_value_handles);
+    
+    APP_ERROR_CHECK(err_code);
+    NRF_LOG_INFO("Characteristic 1 successfully added.");
 
     return NRF_SUCCESS;
 }
@@ -238,6 +294,7 @@ void ble_cus_on_ble_evt(ble_evt_t const * p_ble_evt, void * p_context)
     }
 }
 
+
 uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 {
     if (p_cus == NULL || p_cus_init == NULL)
@@ -267,6 +324,8 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
     err_code = char0_add(p_cus, p_cus_init);
     APP_ERROR_CHECK(err_code);
 
+    err_code = char1_add(p_cus, p_cus_init);
+    APP_ERROR_CHECK(err_code);
     return err_code;
 }
 
