@@ -46,7 +46,7 @@
 
 #define USBD_POWER_DETECTION true
 
-#define CONFIG_KBD_LETTER       APP_USBD_HID_KBD_G
+#define CONFIG_KBD_LETTER       APP_USBD_HID_KBD_SPACEBAR
 #define APP_USBD_INTERFACE_KBD      1
 
 // SERVICE & CHARACTERISTIC UUID'S
@@ -353,7 +353,6 @@ void ble_cus_on_ble_evt(ble_evt_t const * p_ble_evt, void * p_context)
     }
 }
 
-
 uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 {
     if (p_cus == NULL || p_cus_init == NULL)
@@ -457,12 +456,12 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
     APP_ERROR_HANDLER(nrf_error);
 }
 
-static void leds_init(void)
+static void leds_init()
 {
     bsp_board_init(BSP_INIT_LEDS);
 }
 
-static void scan_start(void)
+static void scan_start()
 {
     ret_code_t err_code;
 
@@ -485,14 +484,25 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         // Upon connection, check which peripheral has connected (HR or RSC), initiate DB
         // discovery, update LEDs status and resume scanning if necessary. */
         case BLE_GAP_EVT_CONNECTED:
-        {
-            NRF_LOG_INFO("Connected.");
+        
+            NRF_LOG_INFO("Connected %d.", p_ble_evt->evt.gap_evt.conn_handle);
 
             // Update LEDs status, and check if we should be looking for more
             // peripherals to connect to.
-            bsp_board_led_on(CENTRAL_CONNECTED_LED);
-            bsp_board_led_off(CENTRAL_SCANNING_LED);
-        } break;
+
+
+            if(p_ble_evt->evt.gap_evt.conn_handle + 1 == NRF_SDH_BLE_CENTRAL_LINK_COUNT)
+            {
+                NRF_LOG_INFO("Maximum peripherals connected.");
+                bsp_board_led_on(CENTRAL_CONNECTED_LED);
+                bsp_board_led_off(CENTRAL_SCANNING_LED);
+            }
+            else 
+            {
+                NRF_LOG_INFO("Continue scanning.");
+                scan_start();
+            }
+            break;
 
         // Upon disconnection, reset the connection handle of the peer which disconnected, update
         // the LEDs status and start scanning again.
@@ -553,11 +563,12 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
         default:
             // No implementation needed.
+            NRF_LOG_INFO("Some event happened");
             break;
     }
 }
 
-static void ble_stack_init(void)
+static void ble_stack_init()
 {
     ret_code_t err_code;
 
@@ -585,7 +596,7 @@ static void button_event_handler(bsp_event_t bsp_event)
     {
        case BSP_EVENT_KEY_0:
             NRF_LOG_INFO("Button is pressed.");
-           /* err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
+          /*  err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
             APP_ERROR_CHECK(err_code);
             err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, false);
             APP_ERROR_CHECK(err_code);*/
