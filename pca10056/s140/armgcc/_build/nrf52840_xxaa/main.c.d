@@ -161,24 +161,6 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  ../../../../../../components/libraries/log/src/nrf_log_ctrl_internal.h \
  ../../../../../../components/libraries/log/nrf_log_backend_interface.h \
  ../../../../../../components/libraries/log/nrf_log_default_backends.h \
- ../../../../../../components/libraries/bsp/bsp_cli.h \
- ../../../../../../components/libraries/cli/nrf_cli.h \
- ../../../../../../components/libraries/cli/nrf_cli_types.h \
- /usr/include/newlib/inttypes.h /usr/include/newlib/sys/_intsup.h \
- ../../../../../../components/libraries/log/nrf_log_backend_interface.h \
- ../../../../../../components/libraries/log/nrf_log_ctrl.h \
- ../../../../../../external/fprintf/nrf_fprintf.h \
- ../../../../../../external/fprintf/nrf_fprintf_format.h \
- ../../../../../../external/fprintf/nrf_fprintf.h \
- ../../../../../../components/libraries/cli/nrf_cli.h \
- ../../../../../../components/libraries/cli/uart/nrf_cli_uart.h \
- ../../../../../../integration/nrfx/legacy/nrf_drv_uart.h \
- ../../../../../../modules/nrfx/drivers/include/nrfx_uarte.h \
- ../../../../../../modules/nrfx/hal/nrf_uarte.h \
- ../../../../../../modules/nrfx/drivers/include/nrfx_uart.h \
- ../../../../../../modules/nrfx/hal/nrf_uart.h \
- ../../../../../../components/libraries/ringbuf/nrf_ringbuf.h \
- ../../../../../../components/libraries/timer/app_timer.h \
  ../../../../../../integration/nrfx/legacy/nrf_drv_clock.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_clock.h \
  ../../../../../../modules/nrfx/hal/nrf_clock.h \
@@ -530,44 +512,6 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 ../../../../../../components/libraries/log/nrf_log_backend_interface.h:
 
 ../../../../../../components/libraries/log/nrf_log_default_backends.h:
-
-../../../../../../components/libraries/bsp/bsp_cli.h:
-
-../../../../../../components/libraries/cli/nrf_cli.h:
-
-../../../../../../components/libraries/cli/nrf_cli_types.h:
-
-/usr/include/newlib/inttypes.h:
-
-/usr/include/newlib/sys/_intsup.h:
-
-../../../../../../components/libraries/log/nrf_log_backend_interface.h:
-
-../../../../../../components/libraries/log/nrf_log_ctrl.h:
-
-../../../../../../external/fprintf/nrf_fprintf.h:
-
-../../../../../../external/fprintf/nrf_fprintf_format.h:
-
-../../../../../../external/fprintf/nrf_fprintf.h:
-
-../../../../../../components/libraries/cli/nrf_cli.h:
-
-../../../../../../components/libraries/cli/uart/nrf_cli_uart.h:
-
-../../../../../../integration/nrfx/legacy/nrf_drv_uart.h:
-
-../../../../../../modules/nrfx/drivers/include/nrfx_uarte.h:
-
-../../../../../../modules/nrfx/hal/nrf_uarte.h:
-
-../../../../../../modules/nrfx/drivers/include/nrfx_uart.h:
-
-../../../../../../modules/nrfx/hal/nrf_uart.h:
-
-../../../../../../components/libraries/ringbuf/nrf_ringbuf.h:
-
-../../../../../../components/libraries/timer/app_timer.h:
 
 ../../../../../../integration/nrfx/legacy/nrf_drv_clock.h:
 

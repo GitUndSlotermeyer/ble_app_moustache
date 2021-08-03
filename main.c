@@ -28,13 +28,8 @@
 #include "../../../components/libraries/log/nrf_log.h"
 #include "../../../components/libraries/log/nrf_log_ctrl.h"
 #include "../../../components/libraries/log/nrf_log_default_backends.h"
-
-#include "bsp_cli.h"
-#include "../../../components/libraries/cli/nrf_cli.h"
-#include "../../../components/libraries/cli/uart/nrf_cli_uart.h"
 #include "nrf_drv_clock.h"
 #include "nrf_drv_power.h"
-//#include "ble_cus.h"
 
 #define DEVICE_NAME                     "Nordic_Server"                       /**< Name of device. Will be included in the advertising data. */
 #define CENTRAL_SCANNING_LED            BSP_BOARD_LED_1                     /**< Scanning LED will be on when the device is scanning. */
@@ -48,16 +43,20 @@
 #define SLAVE_LATENCY                   0                                       /**< Slave latency. */
 #define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(4000, UNIT_10_MS)         /**< Connection supervisory timeout (4 seconds). */
 
-#ifndef USBD_POWER_DETECTION
-#define USBD_POWER_DETECTION true
-#endif
 
-#define CONFIG_KBD_LETTER APP_USBD_HID_KBD_G
-#define APP_USBD_INTERFACE_KBD   1
+#define USBD_POWER_DETECTION true
+
+#define CONFIG_KBD_LETTER       APP_USBD_HID_KBD_G
+#define APP_USBD_INTERFACE_KBD      1
+
+// SERVICE & CHARACTERISTIC UUID'S
 
 #define CUSTOM_SERVICE_UUID_BASE         {0xBC, 0x8A, 0xBF, 0x45, 0xCA, 0x05, 0x50, 0xBA, 0x40, 0x42, 0xB0, 0x00, 0xC9, 0xAD, 0x64, 0xF3}
 #define CUSTOM_SERVICE_UUID               0x1400
 #define CUSTOM_VALUE_CHAR_UUID            0x1401
+
+
+// CUSTOM SERVICE STRUCTURES START
 
 typedef struct ble_cus_s ble_cus_t;
 
@@ -100,8 +99,17 @@ struct ble_cus_s
 
 static uint8_t m_custom_value = 0;
 
+// CUSTOM SERVICE STRUCTURES START
+
 static void hid_kbd_user_ev_handler(app_usbd_class_inst_t const * p_inst, app_usbd_hid_user_event_t event);
 
+static char const m_target_periph_name[] = "nRF Connect";     /**< Name of the device we try to connect to. This name is searched in the scan report data*/
+
+NRF_BLE_SCAN_DEF(m_scan);                                       /**< Scanning module instance. */
+NRF_BLE_GATT_DEF(m_gatt);                                       /**< GATT module instance. */
+NRF_BLE_GQ_DEF(m_ble_gatt_queue, NRF_SDH_BLE_CENTRAL_LINK_COUNT, NRF_BLE_GQ_QUEUE_SIZE);
+NRF_BLE_QWR_DEF(m_qwr);                                                         /**< Context for the Queued Write module.*/
+BLE_CUS_DEF(m_cus);
 APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
                             APP_USBD_INTERFACE_KBD,
                             NRFX_USBD_EPIN5 ,
@@ -110,18 +118,8 @@ APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
 );
 
 
-#define LED_BLINK_INTERVAL 800
-static char const m_target_periph_name[] = "nRF Connect";     /**< Name of the device we try to connect to. This name is searched in the scan report data*/
-
-NRF_BLE_SCAN_DEF(m_scan);                                       /**< Scanning module instance. */
-NRF_BLE_GATT_DEF(m_gatt);                                       /**< GATT module instance. */
-NRF_BLE_GQ_DEF(m_ble_gatt_queue, NRF_SDH_BLE_CENTRAL_LINK_COUNT, NRF_BLE_GQ_QUEUE_SIZE);
-NRF_BLE_QWR_DEF(m_qwr);                                                         /**< Context for the Queued Write module.*/
-BLE_CUS_DEF(m_cus);
-
-
-
 // CUSTOM VALUE CODE START
+
 static uint8_t char_value = 0;
 
 static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
@@ -323,10 +321,7 @@ uint32_t ble_cus_custom_value_update(ble_cus_t * p_cus, uint8_t custom_value){
 
 // CUSTOM VALUE CODE END
 
-void blink_handler(void * p_context)
-{
-    bsp_board_led_invert((uint32_t) p_context);
-}
+// APPLICATION CODE START
 
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
@@ -575,7 +570,6 @@ static void on_cus_evt(ble_cus_t * p_cus_service, ble_cus_evt_t * p_evt)
         case BLE_CUS_EVT_DISCONNECTED:
             break;
 
-
         default:
             break;
     }
@@ -637,7 +631,7 @@ static void hid_kbd_user_ev_handler(app_usbd_class_inst_t const * p_inst, app_us
 {
     switch (event) {
         case APP_USBD_HID_USER_EVT_SET_BOOT_PROTO:
-           hid_kbd_clear_buffer(p_inst);
+            hid_kbd_clear_buffer(p_inst);
             break;
         default:
             break;
