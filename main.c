@@ -53,7 +53,9 @@
 
 #define CUSTOM_SERVICE_UUID_BASE         {0xBC, 0x8A, 0xBF, 0x45, 0xCA, 0x05, 0x50, 0xBA, 0x40, 0x42, 0xB0, 0x00, 0xC9, 0xAD, 0x64, 0xF3}
 #define CUSTOM_SERVICE_UUID               0x1400
-#define CUSTOM_VALUE_CHAR_UUID            0x1401
+#define CHAR0_UUID                        0x1401
+#define CHAR1_UUID                        0x1402
+#define CHAR2_UUID                        0x1403
 
 
 // CUSTOM SERVICE STRUCTURES START
@@ -179,7 +181,7 @@ static uint32_t custom_value_char_add(ble_cus_t * p_cus, const ble_cus_init_t * 
 
 	
     ble_uuid.type = p_cus->uuid_type;
-    ble_uuid.uuid = CUSTOM_VALUE_CHAR_UUID;
+    ble_uuid.uuid = CHAR0_UUID;
 
     memset(&attr_char_value, 0, sizeof(attr_char_value));
     
