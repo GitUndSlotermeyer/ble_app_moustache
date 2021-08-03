@@ -152,7 +152,7 @@ static void on_disconnect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
     p_cus->conn_handle = BLE_CONN_HANDLE_INVALID;
 }
 
-static uint32_t custom_value_char_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
+static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 {
     uint32_t            err_code = NRF_SUCCESS;
     ble_gatts_char_md_t char_md;
@@ -262,12 +262,12 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 
     // Add the Custom Service
     err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_cus->service_handle);
-    if (err_code != NRF_SUCCESS)
-    {
-        return err_code;
-    }
-    NRF_LOG_INFO("Here");
-    return custom_value_char_add(p_cus, p_cus_init);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = char0_add(p_cus, p_cus_init);
+    APP_ERROR_CHECK(err_code);
+
+    return err_code;
 }
 
 uint32_t ble_cus_custom_value_update(ble_cus_t * p_cus, uint8_t custom_value){
