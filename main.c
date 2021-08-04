@@ -21,7 +21,6 @@
 #include "../../../components/libraries/usbd/app_usbd.h"
 #include "../../../components/libraries/usbd/app_usbd_core.h"
 #include "../../../components/libraries/usbd/class/hid/generic/app_usbd_hid_generic.h"
-#include "nrf_drv_usbd.h"
 #include "app_usbd_hid_kbd.h"
 
 
@@ -620,7 +619,9 @@ static void button_event_handler(bsp_event_t bsp_event)
     {
        case BSP_EVENT_KEY_0:
             NRF_LOG_INFO("Button is pressed.");
-          /*  err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
+
+            // USBD STOP THE MOVIE CODE USE IT LATER
+           /* err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
             APP_ERROR_CHECK(err_code);
             err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, false);
             APP_ERROR_CHECK(err_code);*/
@@ -805,7 +806,7 @@ static void usbd_user_ev_handler(app_usbd_event_type_t event)
             break;
         case APP_USBD_EVT_POWER_DETECTED:
             NRF_LOG_INFO("USB power detected");
-            if (!nrf_drv_usbd_is_enabled())
+            if (!nrfx_usbd_is_enabled())
             {
                 app_usbd_enable();
             }
