@@ -97,12 +97,13 @@ struct ble_cus_s
 {
     ble_cus_evt_handler_t         evt_handler;                    /**< Event handler to be called for handling events in the Custom Service. */
     uint16_t                      service_handle;                 /**< Handle of Custom Service (as provided by the BLE stack). */
-    ble_gatts_char_handles_t      custom_value_handles;           /**< Handles related to the Custom Value characteristic. */
-    uint16_t                      conn_handle;                    /**< Handle of the current connection (as provided by the BLE stack, is BLE_CONN_HANDLE_INVALID if not in a connection). */
+    ble_gatts_char_handles_t      custom_value_handles[NRF_SDH_BLE_CENTRAL_LINK_COUNT];           /**< Handles related to the Custom Value characteristic. */
+    uint16_t                      conn_handle[NRF_SDH_BLE_CENTRAL_LINK_COUNT];                    /**< Handle of the current connection (as provided by the BLE stack, is BLE_CONN_HANDLE_INVALID if not in a connection). */
     uint8_t                       uuid_type; 
 };
 
 static uint8_t m_custom_value = 0;
+static uint8_t current_conn_index = 0;
 
 // CUSTOM SERVICE STRUCTURES START
 
@@ -130,18 +131,25 @@ static uint8_t char_value = 0;
 static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 {
     ble_gatts_evt_write_t const * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
-    
+    //NRF_LOG_INFO("inside on_write funciton");
     // Custom Value Characteristic Written to.
-    if (p_evt_write->handle == p_cus->custom_value_handles.value_handle)
+
+    if(p_evt_write->len == 2) 
     {
-        nrf_gpio_pin_toggle(LED_4);
+        //NRF_LOG_INFO("CCCD value was written.");
+
+        //NRF_LOG_INFO("CCCD value is %d", p_evt_write->data[0]);
+       // NRF_LOG_INFO("CCCD value is %d", p_evt_write->data[1]);
+        NRF_LOG_INFO("CCCD Handle is %d", p_ble_evt->evt.gatts_evt.params.write.handle);
+
     }
 
 }
 
 static void on_connect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 {
-    p_cus->conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+    p_cus->conn_handle[current_conn_index++] = p_ble_evt->evt.gap_evt.conn_handle;
+    NRF_LOG_INFO(" %d = Connection handle is %d", current_conn_index - 1, p_cus->conn_handle[current_conn_index - 1]);
 
     ble_cus_evt_t evt;
     evt.evt_type = BLE_CUS_EVT_CONNECTED;
@@ -152,7 +160,17 @@ static void on_connect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 static void on_disconnect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 {
     UNUSED_PARAMETER(p_ble_evt);
-    p_cus->conn_handle = BLE_CONN_HANDLE_INVALID;
+
+    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+    {
+        if(p_cus->conn_handle[i] == p_ble_evt->evt.gatts_evt.conn_handle) 
+        {
+            p_cus->conn_handle[i] = BLE_CONN_HANDLE_INVALID;
+            current_conn_index = i;
+            break;
+        }
+    }
+
 }
 
 static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
@@ -203,10 +221,10 @@ static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 
     err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md,
                                                &attr_char_value,
-                                               &p_cus->custom_value_handles);
+                                               &p_cus->custom_value_handles[0]);
     
     APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 0 successfully added.");
+    NRF_LOG_INFO("Characteristic 0 successfully added+ value handle is %d.", p_cus->custom_value_handles[0].value_handle);
 
 
     return NRF_SUCCESS;
@@ -260,10 +278,10 @@ static uint32_t char1_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 
     err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md,
                                                &attr_char_value,
-                                               &p_cus->custom_value_handles);
+                                               &p_cus->custom_value_handles[1]);
     
     APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 1 successfully added.");
+    NRF_LOG_INFO("Characteristic 1 successfully added + value handle is %d.", p_cus->custom_value_handles[1].value_handle);
 
     return NRF_SUCCESS;
 }
@@ -313,13 +331,12 @@ static uint32_t char2_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
     attr_md.read_perm  = p_cus_init->custom_value_char_attr_md.read_perm;
     attr_md.write_perm = p_cus_init->custom_value_char_attr_md.write_perm;
 
-
     err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md,
                                                &attr_char_value,
-                                               &p_cus->custom_value_handles);
+                                               &p_cus->custom_value_handles[2]);
     
     APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 2 successfully added.");
+    NRF_LOG_INFO("Characteristic 2 successfully added + value handle is %d.", p_cus->custom_value_handles[2].value_handle);
 
     return NRF_SUCCESS;
 }
@@ -364,7 +381,10 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
     ble_uuid_t ble_uuid;
 
     // Initialize service structure
-    p_cus->conn_handle               = BLE_CONN_HANDLE_INVALID;
+    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+    {
+        p_cus->conn_handle[i]               = BLE_CONN_HANDLE_INVALID;
+    }
     p_cus->evt_handler               = p_cus_init->evt_handler;
 
     // Add Custom Service UUID
@@ -408,37 +428,41 @@ uint32_t ble_cus_custom_value_update(ble_cus_t * p_cus, uint8_t custom_value){
     gatts_value.p_value = &custom_value;
 
     // Update database.
-    err_code = sd_ble_gatts_value_set(p_cus->conn_handle,
-                                        p_cus->custom_value_handles.value_handle,
-                                        &gatts_value);
-    if (err_code != NRF_SUCCESS)
+
+    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
     {
-        return err_code;
+       if (p_cus->conn_handle[i] != BLE_CONN_HANDLE_INVALID) 
+        {
+            err_code = sd_ble_gatts_value_set(p_cus->conn_handle[i],
+                                                p_cus->custom_value_handles[i].value_handle,
+                                                &gatts_value);
+            APP_ERROR_CHECK(err_code);
+        }
     }
 
-    if ((p_cus->conn_handle != BLE_CONN_HANDLE_INVALID)) 
+    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
     {
-        ble_gatts_hvx_params_t hvx_params;
+        if (p_cus->conn_handle[i] != BLE_CONN_HANDLE_INVALID) 
+        {
+            
+            ble_gatts_hvx_params_t hvx_params;
 
-        memset(&hvx_params, 0, sizeof(hvx_params));
+            memset(&hvx_params, 0, sizeof(hvx_params));
 
-        hvx_params.handle = p_cus->custom_value_handles.value_handle;
-        hvx_params.type   = BLE_GATT_HVX_NOTIFICATION;
-        hvx_params.offset = gatts_value.offset;
-        hvx_params.p_len  = &gatts_value.len;
-        hvx_params.p_data = gatts_value.p_value;
+            hvx_params.handle = p_cus->custom_value_handles[2].value_handle;
+            hvx_params.type   = BLE_GATT_HVX_NOTIFICATION;
+            hvx_params.offset = gatts_value.offset;
+            hvx_params.p_len  = &gatts_value.len;
+            hvx_params.p_data = gatts_value.p_value;
 
-        err_code = sd_ble_gatts_hvx(p_cus->conn_handle, &hvx_params);
-        NRF_LOG_INFO("Error is %d", err_code);
-        APP_ERROR_CHECK(err_code);
-        NRF_LOG_INFO("here inside custom value update");
+            NRF_LOG_INFO("%d = Conn handle: %d, Custom value handle : %d, CCCD handle : %d", i, p_cus->conn_handle[i], p_cus->custom_value_handles[i].value_handle, p_cus->custom_value_handles[i].cccd_handle );
+            err_code = sd_ble_gatts_hvx(p_cus->conn_handle[i], &hvx_params);
+            NRF_LOG_INFO("Error is %d", err_code);
+            APP_ERROR_CHECK(err_code);
+        }
+
     }
-    else
-    {
-        err_code = NRF_ERROR_INVALID_STATE;
-    }
-
-
+ 
     return err_code;
 }
 
@@ -563,7 +587,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
         default:
             // No implementation needed.
-            NRF_LOG_INFO("Some event happened");
+           // NRF_LOG_INFO("Some event happened");
             break;
     }
 }
@@ -696,7 +720,6 @@ static void idle_state_handle()
 
 static void on_cus_evt(ble_cus_t * p_cus_service, ble_cus_evt_t * p_evt)
 {
-    NRF_LOG_INFO("Inside on_cus_evt.");
     switch(p_evt->evt_type)
     {
         case BLE_CUS_EVT_CONNECTED:
@@ -734,7 +757,7 @@ static void services_init()
     APP_ERROR_CHECK(err_code);	
 } 
 
-static void gap_params_init(void)
+static void gap_params_init()
 {
     ret_code_t              err_code;
     ble_gap_conn_params_t   gap_conn_params;

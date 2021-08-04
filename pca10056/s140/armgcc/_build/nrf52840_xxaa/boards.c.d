@@ -63,7 +63,7 @@ _build/nrf52840_xxaa/boards.c.o: \
  ../../../../../../components/softdevice/s140/headers/nrf_sd_def.h \
  ../../../../../../components/softdevice/s140/headers/nrf_soc.h \
  ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
- ../../../../../../components/boards/pca10056.h
+ ../../../../../../components/boards/pca10059.h
 
 ../../../../../../components/boards/boards.h:
 
@@ -209,4 +209,4 @@ _build/nrf52840_xxaa/boards.c.o: \
 
 ../../../../../../modules/nrfx/drivers/nrfx_errors.h:
 
-../../../../../../components/boards/pca10056.h:
+../../../../../../components/boards/pca10059.h:

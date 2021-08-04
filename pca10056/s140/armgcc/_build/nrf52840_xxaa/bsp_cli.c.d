@@ -88,7 +88,7 @@ _build/nrf52840_xxaa/bsp_cli.c.o: \
  ../../../../../../components/softdevice/s140/headers/nrf_sd_def.h \
  ../../../../../../components/softdevice/s140/headers/nrf_soc.h \
  ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
- ../../../../../../components/boards/pca10056.h \
+ ../../../../../../components/boards/pca10059.h \
  ../../../../../../components/libraries/button/app_button.h \
  ../../../../../../components/libraries/util/app_error.h
 
@@ -290,7 +290,7 @@ _build/nrf52840_xxaa/bsp_cli.c.o: \
 
 ../../../../../../modules/nrfx/drivers/nrfx_errors.h:
 
-../../../../../../components/boards/pca10056.h:
+../../../../../../components/boards/pca10059.h:
 
 ../../../../../../components/libraries/button/app_button.h:
 
