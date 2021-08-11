@@ -30,7 +30,7 @@
 #include "nrf_drv_clock.h"
 #include "nrf_drv_power.h"
 
-#define DEVICE_NAME                     "Nordic_Server"                       /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                     "nRF Connect"                       /**< Name of device. Will be included in the advertising data. */
 #define CENTRAL_SCANNING_LED            BSP_BOARD_LED_1                     /**< Scanning LED will be on when the device is scanning. */
 #define CENTRAL_CONNECTED_LED           BSP_BOARD_LED_2                    /**< Connected LED will be on when the device is connected. */
 
@@ -42,69 +42,15 @@
 #define SLAVE_LATENCY                   0                                       /**< Slave latency. */
 #define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(4000, UNIT_10_MS)         /**< Connection supervisory timeout (4 seconds). */
 
-
+#define NUMBER_OF_CHARACTERISTIC 2
 #define USBD_POWER_DETECTION true
 
 #define CONFIG_KBD_LETTER       APP_USBD_HID_KBD_SPACEBAR
 #define APP_USBD_INTERFACE_KBD      1
 
 // SERVICE & CHARACTERISTIC UUID'S
-// CHAR0 represents state of usb
-// CHAR1 represents state of LED
-// CHAR2 represents ID
-
 #define CUSTOM_SERVICE_UUID_BASE         {0xBC, 0x8A, 0xBF, 0x45, 0xCA, 0x05, 0x50, 0xBA, 0x40, 0x42, 0xB0, 0x00, 0xC9, 0xAD, 0x64, 0xF3}
 #define CUSTOM_SERVICE_UUID               0x1400
-#define CHAR0_UUID                        0x1401
-#define CHAR1_UUID                        0x1402
-#define CHAR2_UUID                        0x1403
-
-
-// CUSTOM SERVICE STRUCTURES START
-
-typedef struct ble_cus_s ble_cus_t;
-
-typedef enum
-{
-    BLE_CUS_EVT_DISCONNECTED,
-    BLE_CUS_EVT_CONNECTED,
-
-} ble_cus_evt_type_t;
-
-typedef struct
-{
-    ble_cus_evt_type_t evt_type;                                  /**< Type of event. */
-} ble_cus_evt_t;
-
-typedef void (*ble_cus_evt_handler_t) (ble_cus_t * p_cus, ble_cus_evt_t * p_evt);
-
-typedef struct
-{
-    uint8_t                       initial_custom_value;           /**< Initial custom value */
-    ble_cus_evt_handler_t         evt_handler;                    /**< Event handler to be called for handling events in the Custom Service. */
-    ble_srv_cccd_security_mode_t  custom_value_char_attr_md;     /**< Initial security level for Custom characteristics attribute */
-} ble_cus_init_t;
-
-
-void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context);
-
-#define BLE_CUS_DEF(_name)  static ble_cus_t _name; \
-NRF_SDH_BLE_OBSERVER(_name ## _obs, BLE_HRS_BLE_OBSERVER_PRIO, ble_cus_on_ble_evt, &_name)
-
-
-struct ble_cus_s
-{
-    ble_cus_evt_handler_t         evt_handler;                    /**< Event handler to be called for handling events in the Custom Service. */
-    uint16_t                      service_handle;                 /**< Handle of Custom Service (as provided by the BLE stack). */
-    ble_gatts_char_handles_t      custom_value_handles[NRF_SDH_BLE_CENTRAL_LINK_COUNT];           /**< Handles related to the Custom Value characteristic. */
-    uint16_t                      conn_handle[NRF_SDH_BLE_CENTRAL_LINK_COUNT];                    /**< Handle of the current connection (as provided by the BLE stack, is BLE_CONN_HANDLE_INVALID if not in a connection). */
-    uint8_t                       uuid_type; 
-};
-
-static uint8_t m_custom_value = 0;
-static uint8_t current_conn_index = 0;
-
-// CUSTOM SERVICE STRUCTURES START
 
 static void hid_kbd_user_ev_handler(app_usbd_class_inst_t const * p_inst, app_usbd_hid_user_event_t event);
 
@@ -114,7 +60,7 @@ NRF_BLE_SCAN_DEF(m_scan);                                       /**< Scanning mo
 NRF_BLE_GATT_DEF(m_gatt);                                       /**< GATT module instance. */
 NRF_BLE_GQ_DEF(m_ble_gatt_queue, NRF_SDH_BLE_CENTRAL_LINK_COUNT, NRF_BLE_GQ_QUEUE_SIZE);
 NRF_BLE_QWR_DEF(m_qwr);                                                         /**< Context for the Queued Write module.*/
-BLE_CUS_DEF(m_cus);
+BLE_DB_DISCOVERY_DEF(m_db_disc);
 APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
                             APP_USBD_INTERFACE_KBD,
                             NRFX_USBD_EPIN5 ,
@@ -122,352 +68,14 @@ APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
                             APP_USBD_HID_SUBCLASS_BOOT
 );
 
-
-// CUSTOM VALUE CODE START
-
-static uint8_t char_value = 0;
-
-static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
-{
-    ble_gatts_evt_write_t const * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
-    //NRF_LOG_INFO("inside on_write funciton");
-    // Custom Value Characteristic Written to.
-
-    if(p_evt_write->len == 2) 
-    {
-        //NRF_LOG_INFO("CCCD value was written.");
-
-        //NRF_LOG_INFO("CCCD value is %d", p_evt_write->data[0]);
-       // NRF_LOG_INFO("CCCD value is %d", p_evt_write->data[1]);
-        NRF_LOG_INFO("CCCD Handle is %d", p_ble_evt->evt.gatts_evt.params.write.handle);
-
-    }
-
-}
-
-static void on_connect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
-{
-    p_cus->conn_handle[current_conn_index++] = p_ble_evt->evt.gap_evt.conn_handle;
-    NRF_LOG_INFO(" %d = Connection handle is %d", current_conn_index - 1, p_cus->conn_handle[current_conn_index - 1]);
-
-    ble_cus_evt_t evt;
-    evt.evt_type = BLE_CUS_EVT_CONNECTED;
-
-    p_cus->evt_handler(p_cus, &evt);
-}
-
-static void on_disconnect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
-{
-    UNUSED_PARAMETER(p_ble_evt);
-
-    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
-    {
-        if(p_cus->conn_handle[i] == p_ble_evt->evt.gatts_evt.conn_handle) 
-        {
-            p_cus->conn_handle[i] = BLE_CONN_HANDLE_INVALID;
-            current_conn_index = i;
-            break;
-        }
-    }
-
-}
-
-static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
-{
-    uint32_t            err_code = NRF_SUCCESS;
-    ble_gatts_char_md_t char_md;
-    ble_gatts_attr_md_t cccd_md;
-    ble_gatts_attr_t    attr_char_value;
-    ble_uuid_t          ble_uuid;
-    ble_gatts_attr_md_t attr_md;
-    
-    memset(&char_md, 0, sizeof(ble_gatts_char_md_t));
-
-    char_md.char_ext_props.wr_aux = 1;
-    char_md.char_ext_props.reliable_wr = 1;
-    char_md.char_props.read = 1;
-    char_md.char_props.write = 1;
-    char_md.char_props.notify = 1;
-    char_md.char_user_desc_max_size = 10;
-    char_md.char_user_desc_size = 2;
-    char_md.p_cccd_md = &cccd_md;
-
-
-    memset(&cccd_md, 0, sizeof(cccd_md));
-
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.write_perm);
-    cccd_md.vloc       = BLE_GATTS_VLOC_STACK;
-
-	
-    ble_uuid.type = p_cus->uuid_type;
-    ble_uuid.uuid = CHAR0_UUID;
-
-    memset(&attr_char_value, 0, sizeof(attr_char_value));
-    
-    attr_char_value.p_uuid = &ble_uuid;
-    attr_char_value.p_attr_md = &attr_md;
-    attr_char_value.init_len  = sizeof(uint8_t);
-    attr_char_value.max_len   = sizeof(uint8_t);
-    attr_char_value.p_value = &char_value;
-
-    memset(&attr_md, 0, sizeof(attr_md));
-
-    attr_md.vloc       = BLE_GATTS_VLOC_STACK;
-    attr_md.read_perm  = p_cus_init->custom_value_char_attr_md.read_perm;
-    attr_md.write_perm = p_cus_init->custom_value_char_attr_md.write_perm;
-
-
-    err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md,
-                                               &attr_char_value,
-                                               &p_cus->custom_value_handles[0]);
-    
-    APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 0 successfully added+ value handle is %d.", p_cus->custom_value_handles[0].value_handle);
-
-
-    return NRF_SUCCESS;
-}
-
-static uint32_t char1_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
-{
-    uint32_t            err_code = NRF_SUCCESS;
-    ble_gatts_char_md_t char_md;
-    ble_gatts_attr_md_t cccd_md;
-    ble_gatts_attr_t    attr_char_value;
-    ble_uuid_t          ble_uuid;
-    ble_gatts_attr_md_t attr_md;
-    
-    memset(&char_md, 0, sizeof(ble_gatts_char_md_t));
-
-    char_md.char_ext_props.wr_aux = 1;
-    char_md.char_ext_props.reliable_wr = 1;
-    char_md.char_props.read = 1;
-    char_md.char_props.write = 1;
-    char_md.char_props.notify = 1;
-    char_md.char_user_desc_max_size = 10;
-    char_md.char_user_desc_size = 2;
-    char_md.p_cccd_md = &cccd_md;
-
-
-    memset(&cccd_md, 0, sizeof(cccd_md));
-
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.write_perm);
-    cccd_md.vloc       = BLE_GATTS_VLOC_STACK;
-
-	
-    ble_uuid.type = p_cus->uuid_type;
-    ble_uuid.uuid = CHAR1_UUID;
-
-    memset(&attr_char_value, 0, sizeof(attr_char_value));
-    
-    attr_char_value.p_uuid = &ble_uuid;
-    attr_char_value.p_attr_md = &attr_md;
-    attr_char_value.init_len  = sizeof(uint8_t);
-    attr_char_value.max_len   = sizeof(uint8_t);
-    attr_char_value.p_value = &char_value;
-
-    memset(&attr_md, 0, sizeof(attr_md));
-
-    attr_md.vloc       = BLE_GATTS_VLOC_STACK;
-    attr_md.read_perm  = p_cus_init->custom_value_char_attr_md.read_perm;
-    attr_md.write_perm = p_cus_init->custom_value_char_attr_md.write_perm;
-
-
-    err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md,
-                                               &attr_char_value,
-                                               &p_cus->custom_value_handles[1]);
-    
-    APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 1 successfully added + value handle is %d.", p_cus->custom_value_handles[1].value_handle);
-
-    return NRF_SUCCESS;
-}
-
-static uint32_t char2_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
-{
-    uint32_t            err_code = NRF_SUCCESS;
-    ble_gatts_char_md_t char_md;
-    ble_gatts_attr_md_t cccd_md;
-    ble_gatts_attr_t    attr_char_value;
-    ble_uuid_t          ble_uuid;
-    ble_gatts_attr_md_t attr_md;
-    
-    memset(&char_md, 0, sizeof(ble_gatts_char_md_t));
-
-    char_md.char_ext_props.wr_aux = 1;
-    char_md.char_ext_props.reliable_wr = 1;
-    char_md.char_props.read = 1;
-    char_md.char_props.write = 1;
-    char_md.char_props.notify = 1;
-    char_md.char_user_desc_max_size = 10;
-    char_md.char_user_desc_size = 2;
-    char_md.p_cccd_md = &cccd_md;
-
-
-    memset(&cccd_md, 0, sizeof(cccd_md));
-
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cccd_md.write_perm);
-    cccd_md.vloc       = BLE_GATTS_VLOC_STACK;
-
-	
-    ble_uuid.type = p_cus->uuid_type;
-    ble_uuid.uuid = CHAR2_UUID;
-
-    memset(&attr_char_value, 0, sizeof(attr_char_value));
-    
-    attr_char_value.p_uuid = &ble_uuid;
-    attr_char_value.p_attr_md = &attr_md;
-    attr_char_value.init_len  = sizeof(uint8_t);
-    attr_char_value.max_len   = sizeof(uint8_t);
-    attr_char_value.p_value = &char_value;
-
-    memset(&attr_md, 0, sizeof(attr_md));
-
-    attr_md.vloc       = BLE_GATTS_VLOC_STACK;
-    attr_md.read_perm  = p_cus_init->custom_value_char_attr_md.read_perm;
-    attr_md.write_perm = p_cus_init->custom_value_char_attr_md.write_perm;
-
-    err_code = sd_ble_gatts_characteristic_add(p_cus->service_handle, &char_md,
-                                               &attr_char_value,
-                                               &p_cus->custom_value_handles[2]);
-    
-    APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 2 successfully added + value handle is %d.", p_cus->custom_value_handles[2].value_handle);
-
-    return NRF_SUCCESS;
-}
-
-void ble_cus_on_ble_evt(ble_evt_t const * p_ble_evt, void * p_context)
-{
-    ble_cus_t * p_cus = (ble_cus_t *) p_context;
-    
-    if (p_cus == NULL || p_ble_evt == NULL)
-    {
-        return;
-    }
-    
-    switch (p_ble_evt->header.evt_id)
-    {
-        case BLE_GAP_EVT_CONNECTED:
-            on_connect(p_cus, p_ble_evt);
-            break;
-
-        case BLE_GAP_EVT_DISCONNECTED:
-            on_disconnect(p_cus, p_ble_evt);
-            break;
-        
-        case BLE_GATTS_EVT_WRITE:
-            on_write(p_cus, p_ble_evt);
-            break;
-
-        default:
-            // No implementation needed.
-            break;
-    }
-}
-
-uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
-{
-    if (p_cus == NULL || p_cus_init == NULL)
-    {
-        return NRF_ERROR_NULL;
-    }
-
-    uint32_t   err_code;
-    ble_uuid_t ble_uuid;
-
-    // Initialize service structure
-    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
-    {
-        p_cus->conn_handle[i]               = BLE_CONN_HANDLE_INVALID;
-    }
-    p_cus->evt_handler               = p_cus_init->evt_handler;
-
-    // Add Custom Service UUID
-    ble_uuid128_t base_uuid = {CUSTOM_SERVICE_UUID_BASE};
-    err_code =  sd_ble_uuid_vs_add(&base_uuid, &p_cus->uuid_type);
-    VERIFY_SUCCESS(err_code);
-    
-    ble_uuid.type = p_cus->uuid_type;
-    ble_uuid.uuid = CUSTOM_SERVICE_UUID;
-
-    // Add the Custom Service
-    err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_cus->service_handle);
-    APP_ERROR_CHECK(err_code);
-
-    err_code = char0_add(p_cus, p_cus_init);
-    APP_ERROR_CHECK(err_code);
-
-    err_code = char1_add(p_cus, p_cus_init);
-    APP_ERROR_CHECK(err_code);
-
-    err_code = char2_add(p_cus, p_cus_init);
-    APP_ERROR_CHECK(err_code);
-    
-    return err_code;
-}
-
-uint32_t ble_cus_custom_value_update(ble_cus_t * p_cus, uint8_t custom_value){
-    if (p_cus == NULL)
-    {
-        return NRF_ERROR_NULL;
-    }
-
-    uint32_t err_code = NRF_SUCCESS;
-    ble_gatts_value_t gatts_value;
-
-    // Initialize value struct.
-    memset(&gatts_value, 0, sizeof(gatts_value));
-
-    gatts_value.len     = sizeof(uint8_t);
-    gatts_value.offset  = 0;
-    gatts_value.p_value = &custom_value;
-
-    // Update database.
-
-    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
-    {
-       if (p_cus->conn_handle[i] != BLE_CONN_HANDLE_INVALID) 
-        {
-            err_code = sd_ble_gatts_value_set(p_cus->conn_handle[i],
-                                                p_cus->custom_value_handles[i].value_handle,
-                                                &gatts_value);
-            APP_ERROR_CHECK(err_code);
-        }
-    }
-
-    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
-    {
-        if (p_cus->conn_handle[i] != BLE_CONN_HANDLE_INVALID) 
-        {
-            
-            ble_gatts_hvx_params_t hvx_params;
-
-            memset(&hvx_params, 0, sizeof(hvx_params));
-
-            hvx_params.handle = p_cus->custom_value_handles[2].value_handle;
-            hvx_params.type   = BLE_GATT_HVX_NOTIFICATION;
-            hvx_params.offset = gatts_value.offset;
-            hvx_params.p_len  = &gatts_value.len;
-            hvx_params.p_data = gatts_value.p_value;
-
-            NRF_LOG_INFO("%d = Conn handle: %d, Custom value handle : %d, CCCD handle : %d", i, p_cus->conn_handle[i], p_cus->custom_value_handles[i].value_handle, p_cus->custom_value_handles[i].cccd_handle );
-            err_code = sd_ble_gatts_hvx(p_cus->conn_handle[i], &hvx_params);
-            NRF_LOG_INFO("Error is %d", err_code);
-            APP_ERROR_CHECK(err_code);
-        }
-
-    }
- 
-    return err_code;
-}
-
-// CUSTOM VALUE CODE END
-
 // APPLICATION CODE START
+
+
+static ble_gattc_handle_range_t handle_range;
+static ble_gatt_db_char_t characteristic[NRF_SDH_BLE_CENTRAL_LINK_COUNT][NUMBER_OF_CHARACTERISTIC];
+static uint16_t m_conn_handle[NRF_SDH_BLE_CENTRAL_LINK_COUNT];
+static uint8_t current_conn = 0;
+//static uint8_t current_char = 0;
 
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
@@ -510,19 +118,24 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         
             NRF_LOG_INFO("Connected %d.", p_ble_evt->evt.gap_evt.conn_handle);
 
+            m_conn_handle[current_conn++] = p_ble_evt->evt.gap_evt.conn_handle;
+
             // Update LEDs status, and check if we should be looking for more
             // peripherals to connect to.
 
+            memset(&m_db_disc, 0x00, sizeof(m_db_disc));
+            err_code = ble_db_discovery_start(&m_db_disc, p_ble_evt->evt.gap_evt.conn_handle);
+            APP_ERROR_CHECK(err_code);
 
-            if(p_ble_evt->evt.gap_evt.conn_handle + 1 == NRF_SDH_BLE_CENTRAL_LINK_COUNT)
+            NRF_LOG_INFO("DB_DISCOVERY started.");
+
+            if(current_conn == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
             {
-                NRF_LOG_INFO("Maximum peripherals connected.");
-                bsp_board_led_on(CENTRAL_CONNECTED_LED);
-                bsp_board_led_off(CENTRAL_SCANNING_LED);
+                NRF_LOG_INFO("Max peripherals connected");
             }
             else 
             {
-                NRF_LOG_INFO("Continue scanning.");
+                NRF_LOG_INFO("Continue scanning");
                 scan_start();
             }
             break;
@@ -614,7 +227,7 @@ static void ble_stack_init()
 
 static void button_event_handler(bsp_event_t bsp_event)
 {
-    ret_code_t err_code;
+    //ret_code_t err_code;
     switch ((unsigned int)bsp_event)
     {
        case BSP_EVENT_KEY_0:
@@ -626,12 +239,6 @@ static void button_event_handler(bsp_event_t bsp_event)
             err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, false);
             APP_ERROR_CHECK(err_code);*/
 
-     
-            // Increment the value of m_custom_value before nortifing it.
-            m_custom_value++;
-
-            err_code = ble_cus_custom_value_update(&m_cus, m_custom_value);
-            APP_ERROR_CHECK(err_code);
             break;
 
         default:
@@ -707,55 +314,22 @@ static void scan_init()
     APP_ERROR_CHECK(err_code);
 }
 
-static void gatt_init()
-{
-    ret_code_t err_code = nrf_ble_gatt_init(&m_gatt, NULL);
-    APP_ERROR_CHECK(err_code);
-}
-
 static void idle_state_handle()
 {
     NRF_LOG_FLUSH();
     nrf_pwr_mgmt_run();
 }
 
-static void on_cus_evt(ble_cus_t * p_cus_service, ble_cus_evt_t * p_evt)
-{
-    switch(p_evt->evt_type)
-    {
-        case BLE_CUS_EVT_CONNECTED:
-            break;
-
-        case BLE_CUS_EVT_DISCONNECTED:
-            break;
-
-        default:
-            break;
-    }
-}
-
 static void services_init()
 {
     ret_code_t         err_code;
     nrf_ble_qwr_init_t qwr_init = {0};
-    ble_cus_init_t     cus_init;
 
     // Initialize Queued Write Module.
     qwr_init.error_handler = nrf_qwr_error_handler;
 
     err_code = nrf_ble_qwr_init(&m_qwr, &qwr_init);
     APP_ERROR_CHECK(err_code);
-
-    // Initialize CUS Service init structure to zero.
-    memset(&cus_init, 0, sizeof(cus_init));
-
-    cus_init.evt_handler                = on_cus_evt;
-	
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.write_perm);
-
-    err_code = ble_cus_init(&m_cus, &cus_init);
-    APP_ERROR_CHECK(err_code);	
 } 
 
 static void gap_params_init()
@@ -780,6 +354,97 @@ static void gap_params_init()
     gap_conn_params.conn_sup_timeout  = CONN_SUP_TIMEOUT;
 
     err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
+    APP_ERROR_CHECK(err_code);
+}
+
+static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
+{
+    ret_code_t err_code;
+    
+    switch (p_evt->evt_type)
+    {
+        case BLE_DB_DISCOVERY_COMPLETE:
+            NRF_LOG_INFO("BLE_DB_DISCOVERY_COMPLETE event triggered.");
+
+            bsp_board_led_on(CENTRAL_CONNECTED_LED);
+            bsp_board_led_off(CENTRAL_SCANNING_LED);
+            
+            ble_gatt_db_srv_t  discovered_db = p_evt->params.discovered_db;
+            handle_range = discovered_db.handle_range;
+
+            // Save each characteristic to seperate variable
+            for(int i = 0; i < discovered_db.char_count; i++) 
+            {
+                NRF_LOG_INFO("Current connection handle is %d", m_conn_handle[current_conn - 1]);
+                NRF_LOG_INFO("uuid is %d", discovered_db.charateristics[i].characteristic.uuid.uuid);
+                NRF_LOG_INFO("cccd handle is %d", discovered_db.charateristics[i].cccd_handle); 
+
+                characteristic[current_conn - 1][i] = discovered_db.charateristics[i];
+            }
+
+            uint16_t const value = 0x0001;
+
+            // Enable notification for each characteristic for each client
+            for(int i = 0; i < NUMBER_OF_CHARACTERISTIC; i++)
+            {
+                ble_gattc_write_params_t const write_params = {
+                    .offset = 0,
+                    .flags = BLE_GATT_OP_WRITE_CMD,
+                    .handle = characteristic[current_conn - 1][1].cccd_handle,
+                    .len = sizeof(value),
+                    .write_op = BLE_GATT_OP_WRITE_CMD,
+                    .p_value = (uint8_t *)&value
+                };
+
+                err_code = sd_ble_gattc_write(m_conn_handle[current_conn - 1], &write_params);
+                APP_ERROR_CHECK(err_code);
+
+             NRF_LOG_INFO("CCCD %d value is set.", i);
+            }
+      
+            break;
+    
+    case BLE_DB_DISCOVERY_ERROR:
+        NRF_LOG_INFO("Database Discovery error.");
+        break;
+    
+    case BLE_DB_DISCOVERY_SRV_NOT_FOUND:
+        NRF_LOG_INFO("Service is not found.");
+        break;
+    
+    default:
+        break;
+    }
+}
+
+static void db_discovery_init()
+{
+    ble_db_discovery_init_t db_init;
+
+    memset(&db_init, 0, sizeof(db_init));
+
+    db_init.evt_handler  = db_disc_handler;
+    db_init.p_gatt_queue = &m_ble_gatt_queue;
+
+    ret_code_t err_code = ble_db_discovery_init(&db_init);
+    APP_ERROR_CHECK(err_code);
+
+    ble_uuid_t const service_uuid = 
+    {
+        .type = BLE_UUID_TYPE_VENDOR_BEGIN,
+        .uuid = 0x1400
+    };
+
+    ble_uuid_t helper_uuid = 
+    {
+        .type = BLE_UUID_TYPE_VENDOR_BEGIN
+    };
+    ble_uuid128_t const base_uuid = {CUSTOM_SERVICE_UUID_BASE};
+    err_code = sd_ble_uuid_vs_add(&base_uuid, &(helper_uuid.type));
+    NRF_LOG_INFO("sd_vs_add error is %d", err_code);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = ble_db_discovery_evt_register(&service_uuid);
     APP_ERROR_CHECK(err_code);
 }
 
@@ -858,7 +523,7 @@ int main(void)
     gap_params_init();
     services_init();
     scan_init();
-    gatt_init();
+    db_discovery_init();
 
 
     // Start execution.
