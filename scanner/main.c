@@ -70,10 +70,7 @@ APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
 
 // APPLICATION CODE START
 
-
 static ble_gatt_db_char_t characteristic[NRF_SDH_BLE_CENTRAL_LINK_COUNT][NUMBER_OF_CHARACTERISTIC];
-static uint16_t m_conn_handle[NRF_SDH_BLE_CENTRAL_LINK_COUNT];
-static uint8_t current_conn = 0;
  
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
@@ -116,8 +113,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         
            // NRF_LOG_INFO("Connected %d.", p_ble_evt->evt.gap_evt.conn_handle);
 
-            m_conn_handle[current_conn++] = p_ble_evt->evt.gap_evt.conn_handle;
-
             // Update LEDs status, and check if we should be looking for more
             // peripherals to connect to.
 
@@ -127,7 +122,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
            // NRF_LOG_INFO("DB_DISCOVERY started.");
 
-            if(current_conn == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
+            if(p_ble_evt->evt.gap_evt.conn_handle == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
             {
                 NRF_LOG_INFO("Max peripherals connected");
             }
@@ -146,7 +141,8 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             bsp_board_led_off(CENTRAL_CONNECTED_LED);
             bsp_board_led_on(CENTRAL_SCANNING_LED);
             scan_start();
-        } break;
+        } 
+        break;
 
         case BLE_GAP_EVT_TIMEOUT:
         {
@@ -379,7 +375,7 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
             // Rows are indexed by connection handles
             for(int i = 0; i < discovered_db->char_count; i++) 
             {
-                //NRF_LOG_INFO("Current connection handle is %d", m_conn_handle[p_evt->conn_handle]);
+                //NRF_LOG_INFO("Current connection handle is %d", p_evt->conn_handle);
                 //NRF_LOG_INFO("uuid is %d", discovered_db->charateristics[i].characteristic.uuid.uuid);
                 //NRF_LOG_INFO("cccd handle is %d", discovered_db->charateristics[i].cccd_handle); 
 
@@ -393,13 +389,13 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
             ble_gattc_write_params_t const write_params = {
                 .offset = 0,
                 .flags = BLE_GATT_OP_WRITE_CMD,
-                .handle = characteristic[current_conn - 1][1].cccd_handle,
+                .handle = characteristic[p_evt->conn_handle][1].cccd_handle,
                 .len = sizeof(value),
                 .write_op = BLE_GATT_OP_WRITE_CMD,
                 .p_value = (uint8_t *)&value
             };
 
-            err_code = sd_ble_gattc_write(m_conn_handle[current_conn - 1], &write_params);
+            err_code = sd_ble_gattc_write(p_evt->conn_handle, &write_params);
             APP_ERROR_CHECK(err_code);
 
             break;

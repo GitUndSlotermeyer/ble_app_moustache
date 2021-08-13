@@ -10139,473 +10139,473 @@ Linker script and memory map
  .text.usbd_user_ev_handler
                 0x000000000002c338       0x90 _build/nrf52840_xxaa/main.c.o
  .text.ble_evt_handler
-                0x000000000002c3c8      0x178 _build/nrf52840_xxaa/main.c.o
+                0x000000000002c3c8      0x160 _build/nrf52840_xxaa/main.c.o
  .text.startup.main
-                0x000000000002c540      0x28c _build/nrf52840_xxaa/main.c.o
-                0x000000000002c540                main
+                0x000000000002c528      0x28c _build/nrf52840_xxaa/main.c.o
+                0x000000000002c528                main
  .text.ble_advdata_name_find
-                0x000000000002c7cc       0x68 _build/nrf52840_xxaa/ble_advdata.c.o
-                0x000000000002c7cc                ble_advdata_name_find
+                0x000000000002c7b4       0x68 _build/nrf52840_xxaa/ble_advdata.c.o
+                0x000000000002c7b4                ble_advdata_name_find
  .text.ble_evt_handler
-                0x000000000002c834      0x160 _build/nrf52840_xxaa/ble_conn_state.c.o
+                0x000000000002c81c      0x160 _build/nrf52840_xxaa/ble_conn_state.c.o
  .text.discovery_complete_evt_trigger
-                0x000000000002c994      0x1b4 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002c97c      0x1b4 _build/nrf52840_xxaa/ble_db_discovery.c.o
  .text.descriptors_discover
-                0x000000000002cb48       0xe8 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002cb30       0xe8 _build/nrf52840_xxaa/ble_db_discovery.c.o
  .text.discovery_error_handler
-                0x000000000002cc30      0x110 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002cc18      0x110 _build/nrf52840_xxaa/ble_db_discovery.c.o
  .text.on_srv_disc_completion
-                0x000000000002cd40      0x1ac _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002cd28      0x1ac _build/nrf52840_xxaa/ble_db_discovery.c.o
  .text.ble_db_discovery_init
-                0x000000000002ceec       0x38 _build/nrf52840_xxaa/ble_db_discovery.c.o
-                0x000000000002ceec                ble_db_discovery_init
+                0x000000000002ced4       0x38 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002ced4                ble_db_discovery_init
  .text.ble_db_discovery_evt_register
-                0x000000000002cf24       0xcc _build/nrf52840_xxaa/ble_db_discovery.c.o
-                0x000000000002cf24                ble_db_discovery_evt_register
+                0x000000000002cf0c       0xcc _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002cf0c                ble_db_discovery_evt_register
  .text.ble_db_discovery_start
-                0x000000000002cff0       0xa4 _build/nrf52840_xxaa/ble_db_discovery.c.o
-                0x000000000002cff0                ble_db_discovery_start
+                0x000000000002cfd8       0xa4 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002cfd8                ble_db_discovery_start
  .text.ble_db_discovery_on_ble_evt
-                0x000000000002d094      0x7b0 _build/nrf52840_xxaa/ble_db_discovery.c.o
-                0x000000000002d094                ble_db_discovery_on_ble_evt
+                0x000000000002d07c      0x7b0 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000000002d07c                ble_db_discovery_on_ble_evt
  .text.sd_ble_gap_data_length_update
-                0x000000000002d844        0x4 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+                0x000000000002d82c        0x4 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
  .text.sd_ble_gattc_exchange_mtu_request
-                0x000000000002d848        0x4 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+                0x000000000002d830        0x4 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
  .text.sd_ble_gatts_exchange_mtu_reply
-                0x000000000002d84c        0x4 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+                0x000000000002d834        0x4 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
  .text.data_length_update
-                0x000000000002d850       0x8c _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+                0x000000000002d838       0x8c _build/nrf52840_xxaa/nrf_ble_gatt.c.o
  .text.nrf_ble_gatt_on_ble_evt
-                0x000000000002d8dc      0x208 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
-                0x000000000002d8dc                nrf_ble_gatt_on_ble_evt
+                0x000000000002d8c4      0x208 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+                0x000000000002d8c4                nrf_ble_gatt_on_ble_evt
  .text.sd_ble_gattc_primary_services_discover
-                0x000000000002dae4        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dacc        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.sd_ble_gattc_characteristics_discover
-                0x000000000002dae8        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dad0        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.sd_ble_gattc_descriptors_discover
-                0x000000000002daec        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dad4        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.sd_ble_gattc_read
-                0x000000000002daf0        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dad8        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.sd_ble_gattc_write
-                0x000000000002daf4        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dadc        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.sd_ble_gatts_hvx
-                0x000000000002daf8        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dae0        0x4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.gatts_hvx_alloc
-                0x000000000002dafc       0x3c _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dae4       0x3c _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.gattc_write_alloc
-                0x000000000002db38       0x28 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002db20       0x28 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.queues_purge.isra.0
-                0x000000000002db60       0x70 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002db48       0x70 _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.queue_process
-                0x000000000002dbd0      0x17c _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dbb8      0x17c _build/nrf52840_xxaa/nrf_ble_gq.c.o
  .text.nrf_ble_gq_item_add
-                0x000000000002dd4c      0x1c0 _build/nrf52840_xxaa/nrf_ble_gq.c.o
-                0x000000000002dd4c                nrf_ble_gq_item_add
+                0x000000000002dd34      0x1c0 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002dd34                nrf_ble_gq_item_add
  .text.nrf_ble_gq_conn_handle_register
-                0x000000000002df0c       0x9c _build/nrf52840_xxaa/nrf_ble_gq.c.o
-                0x000000000002df0c                nrf_ble_gq_conn_handle_register
+                0x000000000002def4       0x9c _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002def4                nrf_ble_gq_conn_handle_register
  .text.nrf_ble_gq_on_ble_evt
-                0x000000000002dfa8       0x94 _build/nrf52840_xxaa/nrf_ble_gq.c.o
-                0x000000000002dfa8                nrf_ble_gq_on_ble_evt
+                0x000000000002df90       0x94 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+                0x000000000002df90                nrf_ble_gq_on_ble_evt
  .text.sd_ble_gatts_rw_authorize_reply
-                0x000000000002e03c        0x4 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+                0x000000000002e024        0x4 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
  .text.sd_ble_user_mem_reply
-                0x000000000002e040        0x4 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+                0x000000000002e028        0x4 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
  .text.nrf_ble_qwr_init
-                0x000000000002e044       0x54 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
-                0x000000000002e044                nrf_ble_qwr_init
+                0x000000000002e02c       0x54 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+                0x000000000002e02c                nrf_ble_qwr_init
  .text.nrf_ble_qwr_on_ble_evt
-                0x000000000002e098      0x270 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
-                0x000000000002e098                nrf_ble_qwr_on_ble_evt
+                0x000000000002e080      0x270 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+                0x000000000002e080                nrf_ble_qwr_on_ble_evt
  .text.sd_ble_gap_scan_start
-                0x000000000002e308        0x4 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e2f0        0x4 _build/nrf52840_xxaa/nrf_ble_scan.c.o
  .text.sd_ble_gap_scan_stop
-                0x000000000002e30c        0x4 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e2f4        0x4 _build/nrf52840_xxaa/nrf_ble_scan.c.o
  .text.sd_ble_gap_connect
-                0x000000000002e310        0x4 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e2f8        0x4 _build/nrf52840_xxaa/nrf_ble_scan.c.o
  .text.nrf_ble_scan_filter_set
-                0x000000000002e314       0x64 _build/nrf52840_xxaa/nrf_ble_scan.c.o
-                0x000000000002e314                nrf_ble_scan_filter_set
+                0x000000000002e2fc       0x64 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e2fc                nrf_ble_scan_filter_set
  .text.nrf_ble_scan_filters_enable
-                0x000000000002e378       0x28 _build/nrf52840_xxaa/nrf_ble_scan.c.o
-                0x000000000002e378                nrf_ble_scan_filters_enable
+                0x000000000002e360       0x28 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e360                nrf_ble_scan_filters_enable
  .text.nrf_ble_scan_init
-                0x000000000002e3a0       0xac _build/nrf52840_xxaa/nrf_ble_scan.c.o
-                0x000000000002e3a0                nrf_ble_scan_init
+                0x000000000002e388       0xac _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e388                nrf_ble_scan_init
  .text.nrf_ble_scan_start
-                0x000000000002e44c       0x74 _build/nrf52840_xxaa/nrf_ble_scan.c.o
-                0x000000000002e44c                nrf_ble_scan_start
+                0x000000000002e434       0x74 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e434                nrf_ble_scan_start
  .text.nrf_ble_scan_on_ble_evt
-                0x000000000002e4c0      0x1cc _build/nrf52840_xxaa/nrf_ble_scan.c.o
-                0x000000000002e4c0                nrf_ble_scan_on_ble_evt
+                0x000000000002e4a8      0x1cc _build/nrf52840_xxaa/nrf_ble_scan.c.o
+                0x000000000002e4a8                nrf_ble_scan_on_ble_evt
  .text.sd_softdevice_enable
-                0x000000000002e68c        0x4 _build/nrf52840_xxaa/nrf_sdh.c.o
+                0x000000000002e674        0x4 _build/nrf52840_xxaa/nrf_sdh.c.o
  .text.nrf_sdh_enable_request
-                0x000000000002e690      0x118 _build/nrf52840_xxaa/nrf_sdh.c.o
-                0x000000000002e690                nrf_sdh_enable_request
+                0x000000000002e678      0x118 _build/nrf52840_xxaa/nrf_sdh.c.o
+                0x000000000002e678                nrf_sdh_enable_request
  .text.nrf_sdh_is_enabled
-                0x000000000002e7a8        0xc _build/nrf52840_xxaa/nrf_sdh.c.o
-                0x000000000002e7a8                nrf_sdh_is_enabled
+                0x000000000002e790        0xc _build/nrf52840_xxaa/nrf_sdh.c.o
+                0x000000000002e790                nrf_sdh_is_enabled
  .text.SWI2_EGU2_IRQHandler
-                0x000000000002e7b4       0x2c _build/nrf52840_xxaa/nrf_sdh.c.o
-                0x000000000002e7b4                SWI2_EGU2_IRQHandler
+                0x000000000002e79c       0x2c _build/nrf52840_xxaa/nrf_sdh.c.o
+                0x000000000002e79c                SWI2_EGU2_IRQHandler
  .text.sd_ble_enable
-                0x000000000002e7e0        0x4 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+                0x000000000002e7c8        0x4 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
  .text.sd_ble_cfg_set
-                0x000000000002e7e4        0x4 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+                0x000000000002e7cc        0x4 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
  .text.sd_ble_evt_get
-                0x000000000002e7e8        0x4 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+                0x000000000002e7d0        0x4 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
  .text.nrf_sdh_ble_evts_poll
-                0x000000000002e7ec       0x5c _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+                0x000000000002e7d4       0x5c _build/nrf52840_xxaa/nrf_sdh_ble.c.o
  .text.nrf_sdh_ble_default_cfg_set
-                0x000000000002e848      0x17c _build/nrf52840_xxaa/nrf_sdh_ble.c.o
-                0x000000000002e848                nrf_sdh_ble_default_cfg_set
+                0x000000000002e830      0x17c _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+                0x000000000002e830                nrf_sdh_ble_default_cfg_set
  .text.nrf_sdh_ble_enable
-                0x000000000002e9c4       0xa0 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
-                0x000000000002e9c4                nrf_sdh_ble_enable
+                0x000000000002e9ac       0xa0 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+                0x000000000002e9ac                nrf_sdh_ble_enable
  .text.sd_evt_get
-                0x000000000002ea64        0x4 _build/nrf52840_xxaa/nrf_sdh_soc.c.o
+                0x000000000002ea4c        0x4 _build/nrf52840_xxaa/nrf_sdh_soc.c.o
  .text.nrf_sdh_soc_evts_poll
-                0x000000000002ea68       0x4c _build/nrf52840_xxaa/nrf_sdh_soc.c.o
+                0x000000000002ea50       0x4c _build/nrf52840_xxaa/nrf_sdh_soc.c.o
  .text.nrfx_usbd_consumer
-                0x000000000002eab4       0x38 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002eab4                nrfx_usbd_consumer
+                0x000000000002ea9c       0x38 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002ea9c                nrfx_usbd_consumer
  .text.nrfx_usbd_feeder_ram
-                0x000000000002eaec       0x28 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002eaec                nrfx_usbd_feeder_ram
+                0x000000000002ead4       0x28 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002ead4                nrfx_usbd_feeder_ram
  .text.nrfx_usbd_feeder_ram_zlp
-                0x000000000002eb14       0x28 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002eb14                nrfx_usbd_feeder_ram_zlp
+                0x000000000002eafc       0x28 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002eafc                nrfx_usbd_feeder_ram_zlp
  .text.ev_usbreset_handler
-                0x000000000002eb3c       0x34 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002eb24       0x34 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_started_handler
-                0x000000000002eb70        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002eb58        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_sof_handler
-                0x000000000002eb74       0x48 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002eb5c       0x48 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.nrfx_usbd_feeder_flash
-                0x000000000002ebbc       0x38 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002ebbc                nrfx_usbd_feeder_flash
+                0x000000000002eba4       0x38 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002eba4                nrfx_usbd_feeder_flash
  .text.nrfx_usbd_feeder_flash_zlp
-                0x000000000002ebf4       0x40 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002ebf4                nrfx_usbd_feeder_flash_zlp
+                0x000000000002ebdc       0x40 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002ebdc                nrfx_usbd_feeder_flash_zlp
  .text.ev_dma_epout0_handler
-                0x000000000002ec34       0x80 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002ec1c       0x80 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_usbevent_handler
-                0x000000000002ecb4       0xb0 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002ec9c       0xb0 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_setup_data_handler
-                0x000000000002ed64      0x124 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002ed4c      0x124 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.usbd_dmareq_process.part.0
-                0x000000000002ee88      0x23c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002ee70      0x23c _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout5_handler
-                0x000000000002f0c4       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f0ac       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout8_handler
-                0x000000000002f140       0x68 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f128       0x68 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin8_handler
-                0x000000000002f1a8       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f190       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin0_handler
-                0x000000000002f224       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f20c       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin7_handler
-                0x000000000002f268       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f250       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin1_handler
-                0x000000000002f2ac       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f294       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin2_handler
-                0x000000000002f2f0       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f2d8       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin3_handler
-                0x000000000002f334       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f31c       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin4_handler
-                0x000000000002f378       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f360       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin5_handler
-                0x000000000002f3bc       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f3a4       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epin6_handler
-                0x000000000002f400       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f3e8       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout1_handler
-                0x000000000002f444       0x78 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f42c       0x78 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout6_handler
-                0x000000000002f4bc       0x78 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f4a4       0x78 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout7_handler
-                0x000000000002f534       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f51c       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout2_handler
-                0x000000000002f5b0       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f598       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout3_handler
-                0x000000000002f62c       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f614       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_dma_epout4_handler
-                0x000000000002f6a8       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f690       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_epdata_handler
-                0x000000000002f724      0x178 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f70c      0x178 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.ev_setup_handler
-                0x000000000002f89c      0x1ec _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002f884      0x1ec _build/nrf52840_xxaa/nrfx_usbd.c.o
  .text.nrfx_usbd_ep_abort
-                0x000000000002fa88      0x154 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002fa88                nrfx_usbd_ep_abort
+                0x000000000002fa70      0x154 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002fa70                nrfx_usbd_ep_abort
  .text.USBD_IRQHandler
-                0x000000000002fbdc       0xbc _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002fbdc                USBD_IRQHandler
+                0x000000000002fbc4       0xbc _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002fbc4                USBD_IRQHandler
  .text.nrfx_usbd_init
-                0x000000000002fc98      0x128 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002fc98                nrfx_usbd_init
+                0x000000000002fc80      0x128 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002fc80                nrfx_usbd_init
  .text.nrfx_usbd_uninit
-                0x000000000002fdc0       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002fdc0                nrfx_usbd_uninit
+                0x000000000002fda8       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002fda8                nrfx_usbd_uninit
  .text.nrfx_usbd_enable
-                0x000000000002fdd4      0x288 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000002fdd4                nrfx_usbd_enable
+                0x000000000002fdbc      0x288 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x000000000002fdbc                nrfx_usbd_enable
  .text.nrfx_usbd_disable
-                0x000000000003005c      0x240 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000003005c                nrfx_usbd_disable
+                0x0000000000030044      0x240 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030044                nrfx_usbd_disable
  .text.nrfx_usbd_start
-                0x000000000003029c       0x4c _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000003029c                nrfx_usbd_start
+                0x0000000000030284       0x4c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030284                nrfx_usbd_start
  .text.nrfx_usbd_stop
-                0x00000000000302e8      0x200 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000302e8                nrfx_usbd_stop
+                0x00000000000302d0      0x200 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000302d0                nrfx_usbd_stop
  .text.nrfx_usbd_is_initialized
-                0x00000000000304e8       0x10 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000304e8                nrfx_usbd_is_initialized
+                0x00000000000304d0       0x10 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000304d0                nrfx_usbd_is_initialized
  .text.nrfx_usbd_is_enabled
-                0x00000000000304f8       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000304f8                nrfx_usbd_is_enabled
+                0x00000000000304e0       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000304e0                nrfx_usbd_is_enabled
  .text.nrfx_usbd_suspend
-                0x000000000003050c      0x210 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000003050c                nrfx_usbd_suspend
+                0x00000000000304f4      0x210 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000304f4                nrfx_usbd_suspend
  .text.nrfx_usbd_wakeup_req
-                0x000000000003071c       0x80 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000003071c                nrfx_usbd_wakeup_req
+                0x0000000000030704       0x80 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030704                nrfx_usbd_wakeup_req
  .text.nrfx_usbd_suspend_irq_config
-                0x000000000003079c       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x000000000003079c                nrfx_usbd_suspend_irq_config
+                0x0000000000030784       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030784                nrfx_usbd_suspend_irq_config
  .text.nrfx_usbd_active_irq_config
-                0x00000000000307b0       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000307b0                nrfx_usbd_active_irq_config
+                0x0000000000030798       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030798                nrfx_usbd_active_irq_config
  .text.nrfx_usbd_force_bus_wakeup
-                0x00000000000307c4        0xc _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000307c4                nrfx_usbd_force_bus_wakeup
+                0x00000000000307ac        0xc _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000307ac                nrfx_usbd_force_bus_wakeup
  .text.nrfx_usbd_ep_max_packet_size_get
-                0x00000000000307d0       0x20 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000307d0                nrfx_usbd_ep_max_packet_size_get
+                0x00000000000307b8       0x20 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000307b8                nrfx_usbd_ep_max_packet_size_get
  .text.nrfx_usbd_ep_enable_check
-                0x00000000000307f0       0x20 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000307f0                nrfx_usbd_ep_enable_check
+                0x00000000000307d8       0x20 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000307d8                nrfx_usbd_ep_enable_check
  .text.nrfx_usbd_ep_enable
-                0x0000000000030810       0xe4 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030810                nrfx_usbd_ep_enable
+                0x00000000000307f8       0xe4 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000307f8                nrfx_usbd_ep_enable
  .text.nrfx_usbd_ep_disable
-                0x00000000000308f4      0x1b0 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x00000000000308f4                nrfx_usbd_ep_disable
+                0x00000000000308dc      0x1b0 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000000308dc                nrfx_usbd_ep_disable
  .text.nrfx_usbd_ep_transfer
-                0x0000000000030aa4      0x11c _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030aa4                nrfx_usbd_ep_transfer
+                0x0000000000030a8c      0x11c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030a8c                nrfx_usbd_ep_transfer
  .text.nrfx_usbd_ep_handled_transfer
-                0x0000000000030bc0       0xb0 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030bc0                nrfx_usbd_ep_handled_transfer
+                0x0000000000030ba8       0xb0 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030ba8                nrfx_usbd_ep_handled_transfer
  .text.nrfx_usbd_feeder_buffer_get
-                0x0000000000030c70        0x8 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030c70                nrfx_usbd_feeder_buffer_get
+                0x0000000000030c58        0x8 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030c58                nrfx_usbd_feeder_buffer_get
  .text.nrfx_usbd_ep_stall
-                0x0000000000030c78       0x18 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030c78                nrfx_usbd_ep_stall
+                0x0000000000030c60       0x18 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030c60                nrfx_usbd_ep_stall
  .text.nrfx_usbd_ep_stall_clear
-                0x0000000000030c90       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030c90                nrfx_usbd_ep_stall_clear
+                0x0000000000030c78       0x7c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030c78                nrfx_usbd_ep_stall_clear
  .text.nrfx_usbd_ep_stall_check
-                0x0000000000030d0c       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030d0c                nrfx_usbd_ep_stall_check
+                0x0000000000030cf4       0x44 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030cf4                nrfx_usbd_ep_stall_check
  .text.nrfx_usbd_ep_dtoggle_clear
-                0x0000000000030d50       0x20 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030d50                nrfx_usbd_ep_dtoggle_clear
+                0x0000000000030d38       0x20 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030d38                nrfx_usbd_ep_dtoggle_clear
  .text.nrfx_usbd_setup_get
-                0x0000000000030d70       0x4c _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030d70                nrfx_usbd_setup_get
+                0x0000000000030d58       0x4c _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030d58                nrfx_usbd_setup_get
  .text.nrfx_usbd_setup_data_clear
-                0x0000000000030dbc       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030dbc                nrfx_usbd_setup_data_clear
+                0x0000000000030da4       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030da4                nrfx_usbd_setup_data_clear
  .text.nrfx_usbd_setup_clear
-                0x0000000000030dd0       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030dd0                nrfx_usbd_setup_clear
+                0x0000000000030db8       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030db8                nrfx_usbd_setup_clear
  .text.nrfx_usbd_setup_stall
-                0x0000000000030de4       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030de4                nrfx_usbd_setup_stall
+                0x0000000000030dcc       0x14 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030dcc                nrfx_usbd_setup_stall
  .text.nrfx_usbd_last_setup_dir_get
-                0x0000000000030df8        0xc _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000000030df8                nrfx_usbd_last_setup_dir_get
+                0x0000000000030de0        0xc _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000000030de0                nrfx_usbd_last_setup_dir_get
  .text.app_usbd_hfclk_ready
-                0x0000000000030e04       0x70 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000030dec       0x70 _build/nrf52840_xxaa/app_usbd.c.o
  .text.app_usbd_event_handler
-                0x0000000000030e74       0xf0 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000030e5c       0xf0 _build/nrf52840_xxaa/app_usbd.c.o
  .text.app_usbd_power_event_handler
-                0x0000000000030f64       0xd8 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000030f4c       0xd8 _build/nrf52840_xxaa/app_usbd.c.o
  .text.app_usbd_class_descriptor_find
-                0x000000000003103c       0xb8 _build/nrf52840_xxaa/app_usbd.c.o
-                0x000000000003103c                app_usbd_class_descriptor_find
+                0x0000000000031024       0xb8 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031024                app_usbd_class_descriptor_find
  .text.app_usbd_init
-                0x00000000000310f4      0x150 _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000310f4                app_usbd_init
+                0x00000000000310dc      0x150 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000310dc                app_usbd_init
  .text.app_usbd_power_events_enable
-                0x0000000000031244       0x30 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031244                app_usbd_power_events_enable
+                0x000000000003122c       0x30 _build/nrf52840_xxaa/app_usbd.c.o
+                0x000000000003122c                app_usbd_power_events_enable
  .text.app_usbd_enable
-                0x0000000000031274        0x4 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031274                app_usbd_enable
+                0x000000000003125c        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x000000000003125c                app_usbd_enable
  .text.app_usbd_disable
-                0x0000000000031278        0x4 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031278                app_usbd_disable
+                0x0000000000031260        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031260                app_usbd_disable
  .text.app_usbd_start
-                0x000000000003127c       0x88 _build/nrf52840_xxaa/app_usbd.c.o
-                0x000000000003127c                app_usbd_start
+                0x0000000000031264       0x88 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031264                app_usbd_start
  .text.app_usbd_stop
-                0x0000000000031304       0x70 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031304                app_usbd_stop
+                0x00000000000312ec       0x70 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000312ec                app_usbd_stop
  .text.app_usbd_class_append
-                0x0000000000031374      0x11c _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031374                app_usbd_class_append
+                0x000000000003135c      0x11c _build/nrf52840_xxaa/app_usbd.c.o
+                0x000000000003135c                app_usbd_class_append
  .text.app_usbd_class_sof_register
-                0x0000000000031490       0x2c _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031490                app_usbd_class_sof_register
+                0x0000000000031478       0x2c _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031478                app_usbd_class_sof_register
  .text.app_usbd_class_sof_unregister
-                0x00000000000314bc       0x2c _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000314bc                app_usbd_class_sof_unregister
+                0x00000000000314a4       0x2c _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000314a4                app_usbd_class_sof_unregister
  .text.app_usbd_class_rwu_register
-                0x00000000000314e8       0x10 _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000314e8                app_usbd_class_rwu_register
+                0x00000000000314d0       0x10 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000314d0                app_usbd_class_rwu_register
  .text.app_usbd_class_rwu_unregister
-                0x00000000000314f8       0x10 _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000314f8                app_usbd_class_rwu_unregister
+                0x00000000000314e0       0x10 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000314e0                app_usbd_class_rwu_unregister
  .text.app_usbd_class_rwu_enabled_check
-                0x0000000000031508       0x10 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031508                app_usbd_class_rwu_enabled_check
+                0x00000000000314f0       0x10 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000314f0                app_usbd_class_rwu_enabled_check
  .text.app_usbd_ep_enable
-                0x0000000000031518       0x28 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031518                app_usbd_ep_enable
+                0x0000000000031500       0x28 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031500                app_usbd_ep_enable
  .text.app_usbd_ep_disable
-                0x0000000000031540        0x4 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031540                app_usbd_ep_disable
+                0x0000000000031528        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031528                app_usbd_ep_disable
  .text.app_usbd_class_first_get
-                0x0000000000031544        0xc _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031544                app_usbd_class_first_get
+                0x000000000003152c        0xc _build/nrf52840_xxaa/app_usbd.c.o
+                0x000000000003152c                app_usbd_class_first_get
  .text.app_usbd_iface_find
-                0x0000000000031550       0x40 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031550                app_usbd_iface_find
+                0x0000000000031538       0x40 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031538                app_usbd_iface_find
  .text.app_usbd_iface_call
-                0x0000000000031590        0x8 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031590                app_usbd_iface_call
+                0x0000000000031578        0x8 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031578                app_usbd_iface_call
  .text.app_usbd_ep_call
-                0x0000000000031598       0x2c _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031598                app_usbd_ep_call
+                0x0000000000031580       0x2c _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031580                app_usbd_ep_call
  .text.app_usbd_all_until_served_call
-                0x00000000000315c4       0x2c _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000315c4                app_usbd_all_until_served_call
+                0x00000000000315ac       0x2c _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000315ac                app_usbd_all_until_served_call
  .text.app_usbd_ep_transfer
-                0x00000000000315f0       0x28 _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000315f0                app_usbd_ep_transfer
+                0x00000000000315d8       0x28 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000315d8                app_usbd_ep_transfer
  .text.app_usbd_ep_handled_transfer
-                0x0000000000031618       0x28 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031618                app_usbd_ep_handled_transfer
+                0x0000000000031600       0x28 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031600                app_usbd_ep_handled_transfer
  .text.app_usbd_iface_select
-                0x0000000000031640       0x80 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031640                app_usbd_iface_select
+                0x0000000000031628       0x80 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031628                app_usbd_iface_select
  .text.app_usbd_iface_selection_get
-                0x00000000000316c0        0xc _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000316c0                app_usbd_iface_selection_get
+                0x00000000000316a8        0xc _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000316a8                app_usbd_iface_selection_get
  .text.app_usbd_all_iface_select_0
-                0x00000000000316cc       0xb8 _build/nrf52840_xxaa/app_usbd.c.o
-                0x00000000000316cc                app_usbd_all_iface_select_0
+                0x00000000000316b4       0xb8 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000316b4                app_usbd_all_iface_select_0
  .text.app_usbd_all_iface_deselect
-                0x0000000000031784       0x84 _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031784                app_usbd_all_iface_deselect
+                0x000000000003176c       0x84 _build/nrf52840_xxaa/app_usbd.c.o
+                0x000000000003176c                app_usbd_all_iface_deselect
  .text.app_usbd_event_execute
-                0x0000000000031808      0x60c _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031808                app_usbd_event_execute
+                0x00000000000317f0      0x60c _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000000317f0                app_usbd_event_execute
  .text.app_usbd_event_queue_process
-                0x0000000000031e14       0xbc _build/nrf52840_xxaa/app_usbd.c.o
-                0x0000000000031e14                app_usbd_event_queue_process
+                0x0000000000031dfc       0xbc _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000000031dfc                app_usbd_event_queue_process
  .text.setup_data_handler_empty
-                0x0000000000031ed0        0x4 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000000031eb8        0x4 _build/nrf52840_xxaa/app_usbd_core.c.o
  .text.usbd_descriptor_conf_feeder
-                0x0000000000031ed4      0x128 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000000031ebc      0x128 _build/nrf52840_xxaa/app_usbd_core.c.o
  .text.app_usbd_core_ep0_enable
-                0x0000000000031ffc       0x14 _build/nrf52840_xxaa/app_usbd_core.c.o
-                0x0000000000031ffc                app_usbd_core_ep0_enable
+                0x0000000000031fe4       0x14 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000000031fe4                app_usbd_core_ep0_enable
  .text.app_usbd_core_ep0_disable
-                0x0000000000032010       0x14 _build/nrf52840_xxaa/app_usbd_core.c.o
-                0x0000000000032010                app_usbd_core_ep0_disable
+                0x0000000000031ff8       0x14 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000000031ff8                app_usbd_core_ep0_disable
  .text.app_usbd_core_setup_rsp
-                0x0000000000032024       0x98 _build/nrf52840_xxaa/app_usbd_core.c.o
-                0x0000000000032024                app_usbd_core_setup_rsp
+                0x000000000003200c       0x98 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x000000000003200c                app_usbd_core_setup_rsp
  .text.app_usbd_core_event_handler
-                0x00000000000320bc      0x650 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x00000000000320a4      0x650 _build/nrf52840_xxaa/app_usbd_core.c.o
  .text.app_usbd_core_setup_data_handler_set
-                0x000000000003270c       0x28 _build/nrf52840_xxaa/app_usbd_core.c.o
-                0x000000000003270c                app_usbd_core_setup_data_handler_set
+                0x00000000000326f4       0x28 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x00000000000326f4                app_usbd_core_setup_data_handler_set
  .text.app_usbd_core_setup_transfer_buff_get
-                0x0000000000032734       0x10 _build/nrf52840_xxaa/app_usbd_core.c.o
-                0x0000000000032734                app_usbd_core_setup_transfer_buff_get
+                0x000000000003271c       0x10 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x000000000003271c                app_usbd_core_setup_transfer_buff_get
  .text.app_usbd_hid_event_handler
-                0x0000000000032744      0x5b4 _build/nrf52840_xxaa/app_usbd_hid.c.o
-                0x0000000000032744                app_usbd_hid_event_handler
+                0x000000000003272c      0x5b4 _build/nrf52840_xxaa/app_usbd_hid.c.o
+                0x000000000003272c                app_usbd_hid_event_handler
  .text.app_usbd_hid_rep_buff_in_get
-                0x0000000000032cf8        0x4 _build/nrf52840_xxaa/app_usbd_hid.c.o
-                0x0000000000032cf8                app_usbd_hid_rep_buff_in_get
+                0x0000000000032ce0        0x4 _build/nrf52840_xxaa/app_usbd_hid.c.o
+                0x0000000000032ce0                app_usbd_hid_rep_buff_in_get
  .text.app_usbd_string_desc_get
-                0x0000000000032cfc       0x80 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
-                0x0000000000032cfc                app_usbd_string_desc_get
+                0x0000000000032ce4       0x80 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
+                0x0000000000032ce4                app_usbd_string_desc_get
  .text.hid_kbd_on_set_report_data_cb
-                0x0000000000032d7c       0x24 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000032d64       0x24 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_get_class_descriptors_count
-                0x0000000000032da0        0x4 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000032d88        0x4 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_get_class_descriptors_length
-                0x0000000000032da4        0xc _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000032d8c        0xc _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_get_class_descriptors_data
-                0x0000000000032db0        0xc _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000032d98        0xc _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_feed_descriptors
-                0x0000000000032dbc      0x730 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000032da4      0x730 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_on_set_report
-                0x00000000000334ec       0x64 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x00000000000334d4       0x64 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_on_get_report
-                0x0000000000033550       0x30 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000033538       0x30 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_event_handler
-                0x0000000000033580       0x18 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000033568       0x18 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_on_idle
-                0x0000000000033598       0xcc _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000033580       0xcc _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_ep_transfer_in
-                0x0000000000033664       0xc8 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x000000000003364c       0xc8 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .text.hid_kbd_clear_buffer
-                0x000000000003372c       0x94 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
-                0x000000000003372c                hid_kbd_clear_buffer
+                0x0000000000033714       0x94 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000000033714                hid_kbd_clear_buffer
  .text.sd_power_pof_enable
-                0x00000000000337c0        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x00000000000337a8        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
  .text.sd_power_usbpwrrdy_enable
-                0x00000000000337c4        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x00000000000337ac        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
  .text.sd_power_usbdetected_enable
-                0x00000000000337c8        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x00000000000337b0        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
  .text.sd_power_usbremoved_enable
-                0x00000000000337cc        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x00000000000337b4        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
  .text.sd_power_usbregstatus_get
-                0x00000000000337d0        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x00000000000337b8        0x4 _build/nrf52840_xxaa/nrf_drv_power.c.o
  .text.nrf_drv_power_sdh_soc_evt_handler
-                0x00000000000337d4       0x44 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x00000000000337bc       0x44 _build/nrf52840_xxaa/nrf_drv_power.c.o
  .text.nrf_drv_power_sdh_state_evt_handler
-                0x0000000000033818       0x8c _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x0000000000033800       0x8c _build/nrf52840_xxaa/nrf_drv_power.c.o
  .text.nrf_drv_power_init
-                0x00000000000338a4       0x34 _build/nrf52840_xxaa/nrf_drv_power.c.o
-                0x00000000000338a4                nrf_drv_power_init
+                0x000000000003388c       0x34 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x000000000003388c                nrf_drv_power_init
  .text.nrf_drv_power_usbevt_init
-                0x00000000000338d8       0xa0 _build/nrf52840_xxaa/nrf_drv_power.c.o
-                0x00000000000338d8                nrf_drv_power_usbevt_init
- .text          0x0000000000033978        0xc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
-                0x0000000000033978                atexit
- .text          0x0000000000033984       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
-                0x0000000000033984                exit
- .text          0x00000000000339ac       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
-                0x00000000000339ac                __libc_fini_array
- .text          0x00000000000339e0       0x48 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
-                0x00000000000339e0                __libc_init_array
- .text          0x0000000000033a28       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
-                0x0000000000033a28                memcmp
- .text          0x0000000000033a88      0x134 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
-                0x0000000000033a88                memcpy
- .text          0x0000000000033bbc       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
-                0x0000000000033bbc                memset
- *fill*         0x0000000000033c5c        0x4 
+                0x00000000000338c0       0xa0 _build/nrf52840_xxaa/nrf_drv_power.c.o
+                0x00000000000338c0                nrf_drv_power_usbevt_init
+ .text          0x0000000000033960        0xc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
+                0x0000000000033960                atexit
+ .text          0x000000000003396c       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
+                0x000000000003396c                exit
+ .text          0x0000000000033994       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
+                0x0000000000033994                __libc_fini_array
+ .text          0x00000000000339c8       0x48 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+                0x00000000000339c8                __libc_init_array
+ .text          0x0000000000033a10       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
+                0x0000000000033a10                memcmp
+ .text          0x0000000000033a70      0x134 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
+                0x0000000000033a70                memcpy
+ .text          0x0000000000033ba4       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
+                0x0000000000033ba4                memset
+ *fill*         0x0000000000033c44       0x1c 
  .text          0x0000000000033c60      0x2dc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
                 0x0000000000033c68                strcmp
  *fill*         0x0000000000033f3c        0x4 
@@ -10771,7 +10771,7 @@ Linker script and memory map
                 0x0000000000034df4       0x50 _build/nrf52840_xxaa/main.c.o
  .rodata.m_target_periph_name
                 0x0000000000034e44        0xc _build/nrf52840_xxaa/main.c.o
- .rodata.usbd_config.17488
+ .rodata.usbd_config.17486
                 0x0000000000034e50        0xc _build/nrf52840_xxaa/main.c.o
  .rodata.ble_db_discovery_on_ble_evt.str1.4
                 0x0000000000034e5c      0x10a _build/nrf52840_xxaa/ble_db_discovery.c.o
@@ -11302,7 +11302,7 @@ END GROUP
  *(.fs_data)
                 [!provide]                        PROVIDE (__stop_fs_data = .)
 
-.bss            0x0000000020003768     0x13b8 load address 0x0000000000035f48
+.bss            0x0000000020003768     0x13ac load address 0x0000000000035f48
                 0x0000000020003768                . = ALIGN (0x4)
                 0x0000000020003768                __bss_start__ = .
  *(.bss*)
@@ -11420,178 +11420,173 @@ END GROUP
                 0x0000000020003fe0        0x4 _build/nrf52840_xxaa/nrfx_power.c.o
  .bss.characteristic
                 0x0000000020003fe4       0x90 _build/nrf52840_xxaa/main.c.o
- .bss.current_conn
-                0x0000000020004074        0x1 _build/nrf52840_xxaa/main.c.o
- *fill*         0x0000000020004075        0x3 
  .bss.m_app_hid_kbd_data
-                0x0000000020004078       0x4c _build/nrf52840_xxaa/main.c.o
+                0x0000000020004074       0x4c _build/nrf52840_xxaa/main.c.o
  .bss.m_app_hid_kbd_in
-                0x00000000200040c4        0x8 _build/nrf52840_xxaa/main.c.o
+                0x00000000200040c0        0x8 _build/nrf52840_xxaa/main.c.o
  .bss.m_app_hid_kbd_out_buf
-                0x00000000200040cc        0x2 _build/nrf52840_xxaa/main.c.o
- *fill*         0x00000000200040ce        0x2 
+                0x00000000200040c8        0x2 _build/nrf52840_xxaa/main.c.o
+ *fill*         0x00000000200040ca        0x2 
  .bss.m_ble_gatt_queuepool_nrf_balloc_cb
-                0x00000000200040d0        0x8 _build/nrf52840_xxaa/main.c.o
+                0x00000000200040cc        0x8 _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuepool_nrf_balloc_pool_mem
-                0x00000000200040d8       0xc0 _build/nrf52840_xxaa/main.c.o
+                0x00000000200040d4       0xc0 _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuepool_nrf_balloc_pool_stack
-                0x0000000020004198        0x8 _build/nrf52840_xxaa/main.c.o
+                0x0000000020004194        0x8 _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuepurge_queue_nrf_queue_buffer
-                0x00000000200041a0        0xa _build/nrf52840_xxaa/main.c.o
- *fill*         0x00000000200041aa        0x2 
+                0x000000002000419c        0xa _build/nrf52840_xxaa/main.c.o
+ *fill*         0x00000000200041a6        0x2 
  .bss.m_ble_gatt_queuepurge_queue_nrf_queue_cb
-                0x00000000200041ac        0xc _build/nrf52840_xxaa/main.c.o
+                0x00000000200041a8        0xc _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue0_nrf_queue_buffer
-                0x00000000200041b8       0xa0 _build/nrf52840_xxaa/main.c.o
+                0x00000000200041b4       0xa0 _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue0_nrf_queue_cb
-                0x0000000020004258        0xc _build/nrf52840_xxaa/main.c.o
+                0x0000000020004254        0xc _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue1_nrf_queue_buffer
-                0x0000000020004264       0xa0 _build/nrf52840_xxaa/main.c.o
+                0x0000000020004260       0xa0 _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue1_nrf_queue_cb
-                0x0000000020004304        0xc _build/nrf52840_xxaa/main.c.o
+                0x0000000020004300        0xc _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue2_nrf_queue_buffer
-                0x0000000020004310       0xa0 _build/nrf52840_xxaa/main.c.o
+                0x000000002000430c       0xa0 _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue2_nrf_queue_cb
-                0x00000000200043b0        0xc _build/nrf52840_xxaa/main.c.o
+                0x00000000200043ac        0xc _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue3_nrf_queue_buffer
-                0x00000000200043bc       0xa0 _build/nrf52840_xxaa/main.c.o
+                0x00000000200043b8       0xa0 _build/nrf52840_xxaa/main.c.o
  .bss.m_ble_gatt_queuereq_queue3_nrf_queue_cb
-                0x000000002000445c        0xc _build/nrf52840_xxaa/main.c.o
- .bss.m_conn_handle
-                0x0000000020004468        0x8 _build/nrf52840_xxaa/main.c.o
- .bss.m_gatt    0x0000000020004470       0x2c _build/nrf52840_xxaa/main.c.o
- .bss.m_qwr     0x000000002000449c       0x28 _build/nrf52840_xxaa/main.c.o
- .bss.m_scan    0x00000000200044c4       0x68 _build/nrf52840_xxaa/main.c.o
- .bss.m_bcs     0x000000002000452c       0x7c _build/nrf52840_xxaa/ble_conn_state.c.o
+                0x0000000020004458        0xc _build/nrf52840_xxaa/main.c.o
+ .bss.m_gatt    0x0000000020004464       0x2c _build/nrf52840_xxaa/main.c.o
+ .bss.m_qwr     0x0000000020004490       0x28 _build/nrf52840_xxaa/main.c.o
+ .bss.m_scan    0x00000000200044b8       0x68 _build/nrf52840_xxaa/main.c.o
+ .bss.m_bcs     0x0000000020004520       0x7c _build/nrf52840_xxaa/ble_conn_state.c.o
  .bss.m_evt_handler
-                0x00000000200045a8        0x4 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x000000002000459c        0x4 _build/nrf52840_xxaa/ble_db_discovery.c.o
  .bss.m_initialized
-                0x00000000200045ac        0x1 _build/nrf52840_xxaa/ble_db_discovery.c.o
- *fill*         0x00000000200045ad        0x3 
+                0x00000000200045a0        0x1 _build/nrf52840_xxaa/ble_db_discovery.c.o
+ *fill*         0x00000000200045a1        0x3 
  .bss.m_num_of_handlers_reg
-                0x00000000200045b0        0x4 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x00000000200045a4        0x4 _build/nrf52840_xxaa/ble_db_discovery.c.o
  .bss.m_registered_handlers
-                0x00000000200045b4       0x18 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x00000000200045a8       0x18 _build/nrf52840_xxaa/ble_db_discovery.c.o
  .bss.mp_gatt_queue
-                0x00000000200045cc        0x4 _build/nrf52840_xxaa/ble_db_discovery.c.o
+                0x00000000200045c0        0x4 _build/nrf52840_xxaa/ble_db_discovery.c.o
  .bss.m_nrf_sdh_continue
-                0x00000000200045d0        0x1 _build/nrf52840_xxaa/nrf_sdh.c.o
+                0x00000000200045c4        0x1 _build/nrf52840_xxaa/nrf_sdh.c.o
  .bss.m_nrf_sdh_enabled
-                0x00000000200045d1        0x1 _build/nrf52840_xxaa/nrf_sdh.c.o
+                0x00000000200045c5        0x1 _build/nrf52840_xxaa/nrf_sdh.c.o
  .bss.m_nrf_sdh_suspended
-                0x00000000200045d2        0x1 _build/nrf52840_xxaa/nrf_sdh.c.o
+                0x00000000200045c6        0x1 _build/nrf52840_xxaa/nrf_sdh.c.o
  .bss.m_stack_is_enabled
-                0x00000000200045d3        0x1 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+                0x00000000200045c7        0x1 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
  .bss.m_bus_suspend
-                0x00000000200045d4        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000200045c8        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .bss.m_dma_pending
-                0x00000000200045d5        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000200045c9        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .bss.m_drv_state
-                0x00000000200045d6        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
- *fill*         0x00000000200045d7        0x1 
+                0x00000000200045ca        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
+ *fill*         0x00000000200045cb        0x1 
  .bss.m_ep_dma_waiting
-                0x00000000200045d8        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000200045cc        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .bss.m_ep_ready
-                0x00000000200045dc        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000200045d0        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .bss.m_ep_state
-                0x00000000200045e0      0x120 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000200045d4      0x120 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .bss.m_event_handler
-                0x0000000020004700        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x00000000200046f4        0x4 _build/nrf52840_xxaa/nrfx_usbd.c.o
  .bss.m_last_setup_dir
-                0x0000000020004704        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
- *fill*         0x0000000020004705        0x3 
+                0x00000000200046f8        0x1 _build/nrf52840_xxaa/nrfx_usbd.c.o
+ *fill*         0x00000000200046f9        0x3 
  .bss.m_tx_buffer
-                0x0000000020004708       0x40 _build/nrf52840_xxaa/nrfx_usbd.c.o
- .bss.cx.14047  0x0000000020004748        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000200046fc       0x40 _build/nrf52840_xxaa/nrfx_usbd.c.o
+ .bss.cx.14047  0x000000002000473c        0x4 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_current_conf
-                0x000000002000474c        0xc _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000020004740        0xc _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_epin_conf
-                0x0000000020004758       0x48 _build/nrf52840_xxaa/app_usbd.c.o
+                0x000000002000474c       0x48 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_epout_conf
-                0x00000000200047a0       0x48 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000020004794       0x48 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_event_frame
-                0x00000000200047e8        0x2 _build/nrf52840_xxaa/app_usbd.c.o
- *fill*         0x00000000200047ea        0x2 
+                0x00000000200047dc        0x2 _build/nrf52840_xxaa/app_usbd.c.o
+ *fill*         0x00000000200047de        0x2 
  .bss.m_event_queue_data
-                0x00000000200047ec      0x108 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000200047e0      0x108 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_event_queue_inst
-                0x00000000200048f4       0x10 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000200048e8       0x10 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_p_first_cinst
-                0x0000000020004904        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000200048f8        0x4 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_p_first_sof_cinst
-                0x0000000020004908        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x00000000200048fc        0x4 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_p_first_sof_interrupt_cinst
-                0x000000002000490c        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000020004900        0x4 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_rwu_registered_counter
-                0x0000000020004910        0x1 _build/nrf52840_xxaa/app_usbd.c.o
- *fill*         0x0000000020004911        0x3 
+                0x0000000020004904        0x1 _build/nrf52840_xxaa/app_usbd.c.o
+ *fill*         0x0000000020004905        0x3 
  .bss.m_sof_events_cnt
-                0x0000000020004914        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000020004908        0x4 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.m_sustate
-                0x0000000020004918        0x1 _build/nrf52840_xxaa/app_usbd.c.o
- *fill*         0x0000000020004919        0x3 
+                0x000000002000490c        0x1 _build/nrf52840_xxaa/app_usbd.c.o
+ *fill*         0x000000002000490d        0x3 
  .bss.p_event_item.14048
-                0x000000002000491c        0x4 _build/nrf52840_xxaa/app_usbd.c.o
+                0x0000000020004910        0x4 _build/nrf52840_xxaa/app_usbd.c.o
  .bss.app_usbd_core_inst_data
-                0x0000000020004920        0xc _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000020004914        0xc _build/nrf52840_xxaa/app_usbd_core.c.o
  .bss.m_app_usbd_state
-                0x000000002000492c        0x1 _build/nrf52840_xxaa/app_usbd_core.c.o
- *fill*         0x000000002000492d        0x3 
+                0x0000000020004920        0x1 _build/nrf52840_xxaa/app_usbd_core.c.o
+ *fill*         0x0000000020004921        0x3 
  .bss.m_descriptor_conf_feed_data
-                0x0000000020004930       0x18 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000020004924       0x18 _build/nrf52840_xxaa/app_usbd_core.c.o
  .bss.m_device_features_state
-                0x0000000020004948        0x1 _build/nrf52840_xxaa/app_usbd_core.c.o
- *fill*         0x0000000020004949        0x3 
+                0x000000002000493c        0x1 _build/nrf52840_xxaa/app_usbd_core.c.o
+ *fill*         0x000000002000493d        0x3 
  .bss.m_ep0_handler_desc
-                0x000000002000494c        0x8 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000020004940        0x8 _build/nrf52840_xxaa/app_usbd_core.c.o
  .bss.m_rwu_pending
-                0x0000000020004954        0x4 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x0000000020004948        0x4 _build/nrf52840_xxaa/app_usbd_core.c.o
  .bss.m_setup_transfer_buff
-                0x0000000020004958       0x40 _build/nrf52840_xxaa/app_usbd_core.c.o
+                0x000000002000494c       0x40 _build/nrf52840_xxaa/app_usbd_core.c.o
  .bss.class_desc_cnt.13413
-                0x0000000020004998        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
- *fill*         0x0000000020004999        0x1 
+                0x000000002000498c        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ *fill*         0x000000002000498d        0x1 
  .bss.class_desc_len.13415
-                0x000000002000499a        0x2 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x000000002000498e        0x2 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .bss.endpoints.13422
-                0x000000002000499c        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
- .bss.i.13396   0x000000002000499d        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
- .bss.j.13414   0x000000002000499e        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
- *fill*         0x000000002000499f        0x1 
+                0x0000000020004990        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ .bss.i.13396   0x0000000020004991        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ .bss.j.13414   0x0000000020004992        0x1 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ *fill*         0x0000000020004993        0x1 
  .bss.p_cur_iface.13399
-                0x00000000200049a0        0x4 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+                0x0000000020004994        0x4 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
  .bss.m_initialized
-                0x00000000200049a4        0x1 _build/nrf52840_xxaa/nrf_drv_power.c.o
- *fill*         0x00000000200049a5        0x3 
- .bss           0x00000000200049a8       0x8c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
- .bss           0x0000000020004a34        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
-                0x0000000020004a34                _global_atexit
+                0x0000000020004998        0x1 _build/nrf52840_xxaa/nrf_drv_power.c.o
+ *fill*         0x0000000020004999        0x3 
+ .bss           0x000000002000499c       0x8c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
+ .bss           0x0000000020004a28        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
+                0x0000000020004a28                _global_atexit
  *(COMMON)
- COMMON         0x0000000020004a38        0xc _build/nrf52840_xxaa/app_util_platform.c.o
-                0x0000000020004a38                nrf_nvic_state
- COMMON         0x0000000020004a44        0x2 _build/nrf52840_xxaa/nrf_drv_uart.c.o
-                0x0000000020004a44                nrf_drv_uart_use_easy_dma
- COMMON         0x0000000020004a46        0x1 _build/nrf52840_xxaa/nrfx_clock.c.o
-                0x0000000020004a46                nrfx_clock_irq_enabled
- COMMON         0x0000000020004a47        0x1 _build/nrf52840_xxaa/nrfx_power.c.o
-                0x0000000020004a47                nrfx_power_irq_enabled
- COMMON         0x0000000020004a48       0xd8 _build/nrf52840_xxaa/nrfx_usbd.c.o
-                0x0000000020004a48                m_ep_feeder_state
-                0x0000000020004ab4                m_ep_consumer_state
-                0x0000000020004b20                . = ALIGN (0x4)
-                0x0000000020004b20                __bss_end__ = .
+ COMMON         0x0000000020004a2c        0xc _build/nrf52840_xxaa/app_util_platform.c.o
+                0x0000000020004a2c                nrf_nvic_state
+ COMMON         0x0000000020004a38        0x2 _build/nrf52840_xxaa/nrf_drv_uart.c.o
+                0x0000000020004a38                nrf_drv_uart_use_easy_dma
+ COMMON         0x0000000020004a3a        0x1 _build/nrf52840_xxaa/nrfx_clock.c.o
+                0x0000000020004a3a                nrfx_clock_irq_enabled
+ COMMON         0x0000000020004a3b        0x1 _build/nrf52840_xxaa/nrfx_power.c.o
+                0x0000000020004a3b                nrfx_power_irq_enabled
+ COMMON         0x0000000020004a3c       0xd8 _build/nrf52840_xxaa/nrfx_usbd.c.o
+                0x0000000020004a3c                m_ep_feeder_state
+                0x0000000020004aa8                m_ep_consumer_state
+                0x0000000020004b14                . = ALIGN (0x4)
+                0x0000000020004b14                __bss_end__ = .
 
-.heap           0x0000000020004b20        0x0
-                0x0000000020004b20                __HeapBase = .
-                0x0000000020004b20                __end__ = .
+.heap           0x0000000020004b18        0x0
+                0x0000000020004b18                __HeapBase = .
+                0x0000000020004b18                __end__ = .
                 [!provide]                        PROVIDE (end = .)
  *(.heap*)
- .heap          0x0000000020004b20        0x0 _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
-                0x0000000020004b20                __HeapLimit = .
+ .heap          0x0000000020004b18        0x0 _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
+                0x0000000020004b18                __HeapLimit = .
 
-.stack_dummy    0x0000000020004b20     0x2000
+.stack_dummy    0x0000000020004b18     0x2000
  *(.stack*)
- .stack         0x0000000020004b20     0x2000 _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
+ .stack         0x0000000020004b18     0x2000 _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
                 0x0000000020040000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
                 0x000000002003e000                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
                 0x0000000020040000                PROVIDE (__stack = __StackTop)
@@ -11835,7 +11830,7 @@ LOAD linker stubs
  .comment       0x00000000000000a7       0x5a /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
  .comment       0x00000000000000a7       0x5a /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/crtend.o
 
-.debug_line     0x0000000000000000    0x433b7
+.debug_line     0x0000000000000000    0x43392
  .debug_line    0x0000000000000000       0x87 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
  .debug_line    0x0000000000000087       0x9e _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
  .debug_line    0x0000000000000125      0x923 _build/nrf52840_xxaa/nrf_log_backend_serial.c.o
@@ -11875,43 +11870,43 @@ LOAD linker stubs
  .debug_line    0x000000000001fb4c     0x13a5 _build/nrf52840_xxaa/bsp.c.o
  .debug_line    0x0000000000020ef1      0xbe4 _build/nrf52840_xxaa/bsp_btn_ble.c.o
  .debug_line    0x0000000000021ad5     0x10fe _build/nrf52840_xxaa/nrfx_power.c.o
- .debug_line    0x0000000000022bd3     0x2339 _build/nrf52840_xxaa/main.c.o
- .debug_line    0x0000000000024f0c     0x138e _build/nrf52840_xxaa/ble_advdata.c.o
- .debug_line    0x000000000002629a     0x120b _build/nrf52840_xxaa/ble_conn_state.c.o
- .debug_line    0x00000000000274a5     0x1be6 _build/nrf52840_xxaa/ble_db_discovery.c.o
- .debug_line    0x000000000002908b      0xf0a _build/nrf52840_xxaa/nrf_ble_gatt.c.o
- .debug_line    0x0000000000029f95     0x11b7 _build/nrf52840_xxaa/nrf_ble_gq.c.o
- .debug_line    0x000000000002b14c      0xd03 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
- .debug_line    0x000000000002be4f     0x1108 _build/nrf52840_xxaa/nrf_ble_scan.c.o
- .debug_line    0x000000000002cf57     0x1082 _build/nrf52840_xxaa/nrf_sdh.c.o
- .debug_line    0x000000000002dfd9      0xbb1 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
- .debug_line    0x000000000002eb8a      0x81f _build/nrf52840_xxaa/nrf_sdh_soc.c.o
- .debug_line    0x000000000002f3a9     0x6897 _build/nrf52840_xxaa/nrfx_usbd.c.o
- .debug_line    0x0000000000035c40     0x4460 _build/nrf52840_xxaa/app_usbd.c.o
- .debug_line    0x000000000003a0a0     0x1bba _build/nrf52840_xxaa/app_usbd_core.c.o
- .debug_line    0x000000000003bc5a     0x156a _build/nrf52840_xxaa/app_usbd_hid.c.o
- .debug_line    0x000000000003d1c4      0xb26 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
- .debug_line    0x000000000003dcea     0x2cf5 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
- .debug_line    0x00000000000409df     0x108a _build/nrf52840_xxaa/nrf_drv_power.c.o
- .debug_line    0x0000000000041a69      0x14a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
- .debug_line    0x0000000000041bb3      0x154 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-ctype_.o)
- .debug_line    0x0000000000041d07      0x16c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
- .debug_line    0x0000000000041e73       0xd7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
- .debug_line    0x0000000000041f4a       0xe3 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-impure.o)
- .debug_line    0x000000000004202d      0x10d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
- .debug_line    0x000000000004213a      0x1d4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
- .debug_line    0x000000000004230e       0xbe /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
- .debug_line    0x00000000000423cc      0x26b /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
- .debug_line    0x0000000000042637      0x137 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
- .debug_line    0x000000000004276e       0xaf /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
- .debug_line    0x000000000004281d      0x228 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
- .debug_line    0x0000000000042a45      0x22a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
- .debug_line    0x0000000000042c6f       0x6e /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
- .debug_line    0x0000000000042cdd       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
- .debug_line    0x0000000000042d3d      0x61a /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
- .debug_line    0x0000000000043357       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x0000000000022bd3     0x2314 _build/nrf52840_xxaa/main.c.o
+ .debug_line    0x0000000000024ee7     0x138e _build/nrf52840_xxaa/ble_advdata.c.o
+ .debug_line    0x0000000000026275     0x120b _build/nrf52840_xxaa/ble_conn_state.c.o
+ .debug_line    0x0000000000027480     0x1be6 _build/nrf52840_xxaa/ble_db_discovery.c.o
+ .debug_line    0x0000000000029066      0xf0a _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+ .debug_line    0x0000000000029f70     0x11b7 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+ .debug_line    0x000000000002b127      0xd03 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+ .debug_line    0x000000000002be2a     0x1108 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+ .debug_line    0x000000000002cf32     0x1082 _build/nrf52840_xxaa/nrf_sdh.c.o
+ .debug_line    0x000000000002dfb4      0xbb1 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+ .debug_line    0x000000000002eb65      0x81f _build/nrf52840_xxaa/nrf_sdh_soc.c.o
+ .debug_line    0x000000000002f384     0x6897 _build/nrf52840_xxaa/nrfx_usbd.c.o
+ .debug_line    0x0000000000035c1b     0x4460 _build/nrf52840_xxaa/app_usbd.c.o
+ .debug_line    0x000000000003a07b     0x1bba _build/nrf52840_xxaa/app_usbd_core.c.o
+ .debug_line    0x000000000003bc35     0x156a _build/nrf52840_xxaa/app_usbd_hid.c.o
+ .debug_line    0x000000000003d19f      0xb26 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
+ .debug_line    0x000000000003dcc5     0x2cf5 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ .debug_line    0x00000000000409ba     0x108a _build/nrf52840_xxaa/nrf_drv_power.c.o
+ .debug_line    0x0000000000041a44      0x14a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
+ .debug_line    0x0000000000041b8e      0x154 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-ctype_.o)
+ .debug_line    0x0000000000041ce2      0x16c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
+ .debug_line    0x0000000000041e4e       0xd7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
+ .debug_line    0x0000000000041f25       0xe3 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-impure.o)
+ .debug_line    0x0000000000042008      0x10d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_line    0x0000000000042115      0x1d4 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
+ .debug_line    0x00000000000422e9       0xbe /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
+ .debug_line    0x00000000000423a7      0x26b /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
+ .debug_line    0x0000000000042612      0x137 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
+ .debug_line    0x0000000000042749       0xaf /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
+ .debug_line    0x00000000000427f8      0x228 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
+ .debug_line    0x0000000000042a20      0x22a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_line    0x0000000000042c4a       0x6e /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
+ .debug_line    0x0000000000042cb8       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_line    0x0000000000042d18      0x61a /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
+ .debug_line    0x0000000000043332       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
 
-.debug_info     0x0000000000000000    0x88f1b
+.debug_info     0x0000000000000000    0x88ef6
  .debug_info    0x0000000000000000       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
  .debug_info    0x0000000000000026       0x26 _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
  .debug_info    0x000000000000004c     0x1211 _build/nrf52840_xxaa/nrf_log_backend_serial.c.o
@@ -11951,41 +11946,41 @@ LOAD linker stubs
  .debug_info    0x00000000000399fe     0x2054 _build/nrf52840_xxaa/bsp.c.o
  .debug_info    0x000000000003ba52     0x286c _build/nrf52840_xxaa/bsp_btn_ble.c.o
  .debug_info    0x000000000003e2be     0x2564 _build/nrf52840_xxaa/nrfx_power.c.o
- .debug_info    0x0000000000040822     0x6183 _build/nrf52840_xxaa/main.c.o
- .debug_info    0x00000000000469a5     0x2901 _build/nrf52840_xxaa/ble_advdata.c.o
- .debug_info    0x00000000000492a6     0x3984 _build/nrf52840_xxaa/ble_conn_state.c.o
- .debug_info    0x000000000004cc2a     0x44fe _build/nrf52840_xxaa/ble_db_discovery.c.o
- .debug_info    0x0000000000051128     0x33e7 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
- .debug_info    0x000000000005450f     0x38f4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
- .debug_info    0x0000000000057e03     0x2faa _build/nrf52840_xxaa/nrf_ble_qwr.c.o
- .debug_info    0x000000000005adad     0x3a47 _build/nrf52840_xxaa/nrf_ble_scan.c.o
- .debug_info    0x000000000005e7f4     0x20a8 _build/nrf52840_xxaa/nrf_sdh.c.o
- .debug_info    0x000000000006089c     0x35c3 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
- .debug_info    0x0000000000063e5f      0xf4b _build/nrf52840_xxaa/nrf_sdh_soc.c.o
- .debug_info    0x0000000000064daa     0x7fe2 _build/nrf52840_xxaa/nrfx_usbd.c.o
- .debug_info    0x000000000006cd8c     0x74d3 _build/nrf52840_xxaa/app_usbd.c.o
- .debug_info    0x000000000007425f     0x4266 _build/nrf52840_xxaa/app_usbd_core.c.o
- .debug_info    0x00000000000784c5     0x25dd _build/nrf52840_xxaa/app_usbd_hid.c.o
- .debug_info    0x000000000007aaa2     0x1118 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
- .debug_info    0x000000000007bbba     0x4389 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
- .debug_info    0x000000000007ff43     0x2679 _build/nrf52840_xxaa/nrf_drv_power.c.o
- .debug_info    0x00000000000825bc      0x995 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
- .debug_info    0x0000000000082f51      0xe91 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-ctype_.o)
- .debug_info    0x0000000000083de2      0x9e7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
- .debug_info    0x00000000000847c9      0x102 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
- .debug_info    0x00000000000848cb      0x92a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-impure.o)
- .debug_info    0x00000000000851f5      0x11a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
- .debug_info    0x000000000008530f      0x9c2 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
- .debug_info    0x0000000000085cd1       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
- .debug_info    0x0000000000085cf7      0xf21 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
- .debug_info    0x0000000000086c18       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
- .debug_info    0x0000000000086c3e       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
- .debug_info    0x0000000000086c64      0xa3c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
- .debug_info    0x00000000000876a0      0xa10 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
- .debug_info    0x00000000000880b0       0xa3 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
- .debug_info    0x0000000000088153       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
- .debug_info    0x0000000000088179      0xd7c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
- .debug_info    0x0000000000088ef5       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0000000000040822     0x615e _build/nrf52840_xxaa/main.c.o
+ .debug_info    0x0000000000046980     0x2901 _build/nrf52840_xxaa/ble_advdata.c.o
+ .debug_info    0x0000000000049281     0x3984 _build/nrf52840_xxaa/ble_conn_state.c.o
+ .debug_info    0x000000000004cc05     0x44fe _build/nrf52840_xxaa/ble_db_discovery.c.o
+ .debug_info    0x0000000000051103     0x33e7 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+ .debug_info    0x00000000000544ea     0x38f4 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+ .debug_info    0x0000000000057dde     0x2faa _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+ .debug_info    0x000000000005ad88     0x3a47 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+ .debug_info    0x000000000005e7cf     0x20a8 _build/nrf52840_xxaa/nrf_sdh.c.o
+ .debug_info    0x0000000000060877     0x35c3 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+ .debug_info    0x0000000000063e3a      0xf4b _build/nrf52840_xxaa/nrf_sdh_soc.c.o
+ .debug_info    0x0000000000064d85     0x7fe2 _build/nrf52840_xxaa/nrfx_usbd.c.o
+ .debug_info    0x000000000006cd67     0x74d3 _build/nrf52840_xxaa/app_usbd.c.o
+ .debug_info    0x000000000007423a     0x4266 _build/nrf52840_xxaa/app_usbd_core.c.o
+ .debug_info    0x00000000000784a0     0x25dd _build/nrf52840_xxaa/app_usbd_hid.c.o
+ .debug_info    0x000000000007aa7d     0x1118 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
+ .debug_info    0x000000000007bb95     0x4389 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ .debug_info    0x000000000007ff1e     0x2679 _build/nrf52840_xxaa/nrf_drv_power.c.o
+ .debug_info    0x0000000000082597      0x995 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
+ .debug_info    0x0000000000082f2c      0xe91 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-ctype_.o)
+ .debug_info    0x0000000000083dbd      0x9e7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
+ .debug_info    0x00000000000847a4      0x102 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
+ .debug_info    0x00000000000848a6      0x92a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-impure.o)
+ .debug_info    0x00000000000851d0      0x11a /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_info    0x00000000000852ea      0x9c2 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
+ .debug_info    0x0000000000085cac       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
+ .debug_info    0x0000000000085cd2      0xf21 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
+ .debug_info    0x0000000000086bf3       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
+ .debug_info    0x0000000000086c19       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
+ .debug_info    0x0000000000086c3f      0xa3c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
+ .debug_info    0x000000000008767b      0xa10 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_info    0x000000000008808b       0xa3 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
+ .debug_info    0x000000000008812e       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_info    0x0000000000088154      0xd7c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
+ .debug_info    0x0000000000088ed0       0x26 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
 
 .debug_abbrev   0x0000000000000000    0x10645
  .debug_abbrev  0x0000000000000000       0x14 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
@@ -12213,7 +12208,7 @@ LOAD linker stubs
  .debug_aranges
                 0x0000000000001a50       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
 
-.debug_str      0x0000000000000000    0xc4d30
+.debug_str      0x0000000000000000    0xc4d21
  .debug_str     0x0000000000000000       0x98 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/crt0.o
  .debug_str     0x0000000000000098       0x84 _build/nrf52840_xxaa/gcc_startup_nrf52840.S.o
                                          0x90 (size before relaxing)
@@ -12287,79 +12282,79 @@ LOAD linker stubs
                                       0x97862 (size before relaxing)
  .debug_str     0x00000000000a5c0a      0xff4 _build/nrf52840_xxaa/bsp.c.o
                                       0x96160 (size before relaxing)
- .debug_str     0x00000000000a6bfe     0x6b4c _build/nrf52840_xxaa/bsp_btn_ble.c.o
+ .debug_str     0x00000000000a6bfe     0x6b58 _build/nrf52840_xxaa/bsp_btn_ble.c.o
                                       0x9b54a (size before relaxing)
- .debug_str     0x00000000000ad74a      0x7ef _build/nrf52840_xxaa/nrfx_power.c.o
+ .debug_str     0x00000000000ad756      0x7ef _build/nrf52840_xxaa/nrfx_power.c.o
                                       0x94091 (size before relaxing)
- .debug_str     0x00000000000adf39     0xae0d _build/nrf52840_xxaa/main.c.o
-                                      0xad166 (size before relaxing)
- .debug_str     0x00000000000b8d46      0x7b1 _build/nrf52840_xxaa/ble_advdata.c.o
+ .debug_str     0x00000000000adf45     0xadf2 _build/nrf52840_xxaa/main.c.o
+                                      0xad14b (size before relaxing)
+ .debug_str     0x00000000000b8d37      0x7b1 _build/nrf52840_xxaa/ble_advdata.c.o
                                       0x917ca (size before relaxing)
- .debug_str     0x00000000000b94f7      0x8eb _build/nrf52840_xxaa/ble_conn_state.c.o
+ .debug_str     0x00000000000b94e8      0x8eb _build/nrf52840_xxaa/ble_conn_state.c.o
                                       0x933ee (size before relaxing)
- .debug_str     0x00000000000b9de2      0x580 _build/nrf52840_xxaa/ble_db_discovery.c.o
+ .debug_str     0x00000000000b9dd3      0x580 _build/nrf52840_xxaa/ble_db_discovery.c.o
                                       0x99c51 (size before relaxing)
- .debug_str     0x00000000000ba362      0x502 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+ .debug_str     0x00000000000ba353      0x502 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
                                       0x940d5 (size before relaxing)
- .debug_str     0x00000000000ba864      0x279 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+ .debug_str     0x00000000000ba855      0x279 _build/nrf52840_xxaa/nrf_ble_gq.c.o
                                       0x9839c (size before relaxing)
- .debug_str     0x00000000000baadd      0x2ce _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+ .debug_str     0x00000000000baace      0x2ce _build/nrf52840_xxaa/nrf_ble_qwr.c.o
                                       0x92432 (size before relaxing)
- .debug_str     0x00000000000badab      0x3c5 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+ .debug_str     0x00000000000bad9c      0x3c5 _build/nrf52840_xxaa/nrf_ble_scan.c.o
                                       0x94fc5 (size before relaxing)
- .debug_str     0x00000000000bb170      0x509 _build/nrf52840_xxaa/nrf_sdh.c.o
+ .debug_str     0x00000000000bb161      0x509 _build/nrf52840_xxaa/nrf_sdh.c.o
                                       0x8fe17 (size before relaxing)
- .debug_str     0x00000000000bb679      0x718 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+ .debug_str     0x00000000000bb66a      0x718 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
                                       0x94e70 (size before relaxing)
- .debug_str     0x00000000000bbd91      0x199 _build/nrf52840_xxaa/nrf_sdh_soc.c.o
+ .debug_str     0x00000000000bbd82      0x199 _build/nrf52840_xxaa/nrf_sdh_soc.c.o
                                       0x8ee07 (size before relaxing)
- .debug_str     0x00000000000bbf2a     0x1cde _build/nrf52840_xxaa/nrfx_usbd.c.o
+ .debug_str     0x00000000000bbf1b     0x1cde _build/nrf52840_xxaa/nrfx_usbd.c.o
                                       0x98cdb (size before relaxing)
- .debug_str     0x00000000000bdc08      0xfbe _build/nrf52840_xxaa/app_usbd.c.o
+ .debug_str     0x00000000000bdbf9      0xfbe _build/nrf52840_xxaa/app_usbd.c.o
                                       0x9c678 (size before relaxing)
- .debug_str     0x00000000000bebc6     0x126e _build/nrf52840_xxaa/app_usbd_core.c.o
+ .debug_str     0x00000000000bebb7     0x126e _build/nrf52840_xxaa/app_usbd_core.c.o
                                       0x9c177 (size before relaxing)
- .debug_str     0x00000000000bfe34      0x44e _build/nrf52840_xxaa/app_usbd_hid.c.o
+ .debug_str     0x00000000000bfe25      0x44e _build/nrf52840_xxaa/app_usbd_hid.c.o
                                       0x9b644 (size before relaxing)
- .debug_str     0x00000000000c0282     0x14bf _build/nrf52840_xxaa/app_usbd_string_desc.c.o
+ .debug_str     0x00000000000c0273     0x14bf _build/nrf52840_xxaa/app_usbd_string_desc.c.o
                                       0x98793 (size before relaxing)
- .debug_str     0x00000000000c1741     0x14f9 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ .debug_str     0x00000000000c1732     0x14f9 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
                                       0x9a97f (size before relaxing)
- .debug_str     0x00000000000c2c3a      0x430 _build/nrf52840_xxaa/nrf_drv_power.c.o
+ .debug_str     0x00000000000c2c2b      0x430 _build/nrf52840_xxaa/nrf_drv_power.c.o
                                       0x95d6d (size before relaxing)
- .debug_str     0x00000000000c306a      0x1ee /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
+ .debug_str     0x00000000000c305b      0x1ee /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
                                         0x62d (size before relaxing)
- .debug_str     0x00000000000c3258      0x2f7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-ctype_.o)
+ .debug_str     0x00000000000c3249      0x2f7 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-ctype_.o)
                                         0x8fa (size before relaxing)
- .debug_str     0x00000000000c354f       0x69 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
+ .debug_str     0x00000000000c3540       0x69 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
                                         0x62e (size before relaxing)
- .debug_str     0x00000000000c35b8       0xcc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
+ .debug_str     0x00000000000c35a9       0xcc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
                                         0x1ff (size before relaxing)
- .debug_str     0x00000000000c3684       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-impure.o)
+ .debug_str     0x00000000000c3675       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-impure.o)
                                         0x5e2 (size before relaxing)
- .debug_str     0x00000000000c3724       0x90 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_str     0x00000000000c3715       0x90 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
                                         0x229 (size before relaxing)
- .debug_str     0x00000000000c37b4       0x96 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
+ .debug_str     0x00000000000c37a5       0x96 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
                                         0x5e6 (size before relaxing)
- .debug_str     0x00000000000c384a       0xaa /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
+ .debug_str     0x00000000000c383b       0xaa /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcpy.o)
                                          0xb6 (size before relaxing)
- .debug_str     0x00000000000c38f4       0x41 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
+ .debug_str     0x00000000000c38e5       0x41 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
                                         0x90f (size before relaxing)
- .debug_str     0x00000000000c3935       0x42 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
+ .debug_str     0x00000000000c3926       0x42 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
                                          0xb5 (size before relaxing)
- .debug_str     0x00000000000c3977       0x42 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
+ .debug_str     0x00000000000c3968       0x42 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
                                          0xb5 (size before relaxing)
- .debug_str     0x00000000000c39b9       0x7d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
+ .debug_str     0x00000000000c39aa       0x7d /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
                                         0x680 (size before relaxing)
- .debug_str     0x00000000000c3a36       0x49 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_str     0x00000000000c3a27       0x49 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
                                         0x62b (size before relaxing)
- .debug_str     0x00000000000c3a7f      0x109 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
+ .debug_str     0x00000000000c3a70      0x109 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
                                         0x19f (size before relaxing)
- .debug_str     0x00000000000c3b88       0x97 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_str     0x00000000000c3b79       0x97 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
                                          0xa3 (size before relaxing)
- .debug_str     0x00000000000c3c1f     0x10e1 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
+ .debug_str     0x00000000000c3c10     0x10e1 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
                                        0x11e6 (size before relaxing)
- .debug_str     0x00000000000c4d00       0x30 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
+ .debug_str     0x00000000000c4cf1       0x30 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_dvmd_tls.o)
                                          0xa7 (size before relaxing)
 
 .debug_loc      0x0000000000000000    0x33705
@@ -12696,7 +12691,7 @@ LOAD linker stubs
  .debug_macro   0x0000000000011c7d      0x417 _build/nrf52840_xxaa/nrf_drv_power.c.o
  .debug_macro   0x0000000000012094       0x1c _build/nrf52840_xxaa/nrf_drv_power.c.o
 
-.debug_frame    0x0000000000000000     0x4b88
+.debug_frame    0x0000000000000000     0x4b8c
  .debug_frame   0x0000000000000000       0x40 _build/nrf52840_xxaa/nrf_log_backend_serial.c.o
  .debug_frame   0x0000000000000040       0xbc _build/nrf52840_xxaa/nrf_log_backend_uart.c.o
  .debug_frame   0x00000000000000fc       0x28 _build/nrf52840_xxaa/nrf_log_default_backends.c.o
@@ -12734,33 +12729,33 @@ LOAD linker stubs
  .debug_frame   0x000000000000227c      0x18c _build/nrf52840_xxaa/bsp.c.o
  .debug_frame   0x0000000000002408       0x60 _build/nrf52840_xxaa/bsp_btn_ble.c.o
  .debug_frame   0x0000000000002468      0x188 _build/nrf52840_xxaa/nrfx_power.c.o
- .debug_frame   0x00000000000025f0      0x17c _build/nrf52840_xxaa/main.c.o
- .debug_frame   0x000000000000276c      0x1e4 _build/nrf52840_xxaa/ble_advdata.c.o
- .debug_frame   0x0000000000002950      0x2f4 _build/nrf52840_xxaa/ble_conn_state.c.o
- .debug_frame   0x0000000000002c44      0x1e0 _build/nrf52840_xxaa/ble_db_discovery.c.o
- .debug_frame   0x0000000000002e24      0x124 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
- .debug_frame   0x0000000000002f48      0x190 _build/nrf52840_xxaa/nrf_ble_gq.c.o
- .debug_frame   0x00000000000030d8      0x124 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
- .debug_frame   0x00000000000031fc      0x1b0 _build/nrf52840_xxaa/nrf_ble_scan.c.o
- .debug_frame   0x00000000000033ac      0x128 _build/nrf52840_xxaa/nrf_sdh.c.o
- .debug_frame   0x00000000000034d4       0xd8 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
- .debug_frame   0x00000000000035ac       0x40 _build/nrf52840_xxaa/nrf_sdh_soc.c.o
- .debug_frame   0x00000000000035ec      0x824 _build/nrf52840_xxaa/nrfx_usbd.c.o
- .debug_frame   0x0000000000003e10      0x538 _build/nrf52840_xxaa/app_usbd.c.o
- .debug_frame   0x0000000000004348      0x148 _build/nrf52840_xxaa/app_usbd_core.c.o
- .debug_frame   0x0000000000004490       0x6c _build/nrf52840_xxaa/app_usbd_hid.c.o
- .debug_frame   0x00000000000044fc       0x40 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
- .debug_frame   0x000000000000453c      0x1f4 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
- .debug_frame   0x0000000000004730      0x1e4 _build/nrf52840_xxaa/nrf_drv_power.c.o
- .debug_frame   0x0000000000004914       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
- .debug_frame   0x0000000000004934       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
- .debug_frame   0x000000000000495c       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
- .debug_frame   0x0000000000004990       0x2c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
- .debug_frame   0x00000000000049bc       0x38 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
- .debug_frame   0x00000000000049f4       0x38 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
- .debug_frame   0x0000000000004a2c       0x68 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
- .debug_frame   0x0000000000004a94       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
- .debug_frame   0x0000000000004ac8       0x40 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
- .debug_frame   0x0000000000004b08       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
- .debug_frame   0x0000000000004b28       0x2c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x0000000000004b54       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x00000000000025f0      0x180 _build/nrf52840_xxaa/main.c.o
+ .debug_frame   0x0000000000002770      0x1e4 _build/nrf52840_xxaa/ble_advdata.c.o
+ .debug_frame   0x0000000000002954      0x2f4 _build/nrf52840_xxaa/ble_conn_state.c.o
+ .debug_frame   0x0000000000002c48      0x1e0 _build/nrf52840_xxaa/ble_db_discovery.c.o
+ .debug_frame   0x0000000000002e28      0x124 _build/nrf52840_xxaa/nrf_ble_gatt.c.o
+ .debug_frame   0x0000000000002f4c      0x190 _build/nrf52840_xxaa/nrf_ble_gq.c.o
+ .debug_frame   0x00000000000030dc      0x124 _build/nrf52840_xxaa/nrf_ble_qwr.c.o
+ .debug_frame   0x0000000000003200      0x1b0 _build/nrf52840_xxaa/nrf_ble_scan.c.o
+ .debug_frame   0x00000000000033b0      0x128 _build/nrf52840_xxaa/nrf_sdh.c.o
+ .debug_frame   0x00000000000034d8       0xd8 _build/nrf52840_xxaa/nrf_sdh_ble.c.o
+ .debug_frame   0x00000000000035b0       0x40 _build/nrf52840_xxaa/nrf_sdh_soc.c.o
+ .debug_frame   0x00000000000035f0      0x824 _build/nrf52840_xxaa/nrfx_usbd.c.o
+ .debug_frame   0x0000000000003e14      0x538 _build/nrf52840_xxaa/app_usbd.c.o
+ .debug_frame   0x000000000000434c      0x148 _build/nrf52840_xxaa/app_usbd_core.c.o
+ .debug_frame   0x0000000000004494       0x6c _build/nrf52840_xxaa/app_usbd_hid.c.o
+ .debug_frame   0x0000000000004500       0x40 _build/nrf52840_xxaa/app_usbd_string_desc.c.o
+ .debug_frame   0x0000000000004540      0x1f4 _build/nrf52840_xxaa/app_usbd_hid_kbd.c.o
+ .debug_frame   0x0000000000004734      0x1e4 _build/nrf52840_xxaa/nrf_drv_power.c.o
+ .debug_frame   0x0000000000004918       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-atexit.o)
+ .debug_frame   0x0000000000004938       0x28 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-exit.o)
+ .debug_frame   0x0000000000004960       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fini.o)
+ .debug_frame   0x0000000000004994       0x2c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00000000000049c0       0x38 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memcmp.o)
+ .debug_frame   0x00000000000049f8       0x38 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000004a30       0x68 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strcmp.o)
+ .debug_frame   0x0000000000004a98       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__atexit.o)
+ .debug_frame   0x0000000000004acc       0x40 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_frame   0x0000000000004b0c       0x20 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libnosys.a(_exit.o)
+ .debug_frame   0x0000000000004b2c       0x2c /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x0000000000004b58       0x34 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a(_udivmoddi4.o)
