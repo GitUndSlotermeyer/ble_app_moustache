@@ -99,7 +99,7 @@ static void scan_start()
     bsp_board_led_on(CENTRAL_SCANNING_LED);
 }
 
-static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
+static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)  
 {
     ret_code_t err_code;
 
