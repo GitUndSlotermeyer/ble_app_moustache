@@ -71,6 +71,7 @@ APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
 // APPLICATION CODE START
 
 static ble_gatt_db_char_t characteristic[NRF_SDH_BLE_CENTRAL_LINK_COUNT][NUMBER_OF_CHARACTERISTIC];
+static uint8_t connected_devices = 0;
  
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
@@ -122,7 +123,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
            // NRF_LOG_INFO("DB_DISCOVERY started.");
 
-            if(p_ble_evt->evt.gap_evt.conn_handle == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
+            if(++connected_devices == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
             {
                 NRF_LOG_INFO("Max peripherals connected");
             }
@@ -138,6 +139,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         case BLE_GAP_EVT_DISCONNECTED:
         {
             NRF_LOG_INFO("Disconnected.");
+            connected_devices--;
             bsp_board_led_off(CENTRAL_CONNECTED_LED);
             bsp_board_led_on(CENTRAL_SCANNING_LED);
             scan_start();
