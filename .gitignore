@@ -1,12 +1,12 @@
-/scanner/ble_app_template.eww
-/scanner/hex
-/scanner/pca10040e
-/scanner/pca10040
-/scanner/pca10056e
-/scanner/pca10056/s140/arm5_no_packs
-/scanner/pca10056/s140/iar
-/scanner/pca10056/s140/ses
-/scanner/pca10056/s140/armgcc/_build
+/advertiser/ble_app_template.eww
+/advertiser/hex
+/advertiser/pca10040e
+/advertiser/pca10040
+/advertiser/pca10056e
+/advertiser/pca10056/s140/arm5_no_packs
+/advertiser/pca10056/s140/iar
+/advertiser/pca10056/s140/ses
+/advertiser/pca10056/s140/armgcc/_build
 
 # Prerequisites
 *.d
