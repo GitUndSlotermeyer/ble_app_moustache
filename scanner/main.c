@@ -365,8 +365,9 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
     
     switch (p_evt->evt_type)
     {
+        // structure needed for differentiation of various peripheral characterstic is filled
         case BLE_DB_DISCOVERY_COMPLETE:
-          
+        { 
             NRF_LOG_INFO("BLE_DB_DISCOVERY_COMPLETE event triggered.");
 
             ble_gatt_db_srv_t * discovered_db = &(p_evt->params.discovered_db);
@@ -375,16 +376,12 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
             // Rows are indexed by connection handles
             for(int i = 0; i < discovered_db->char_count; i++) 
             {
-                //NRF_LOG_INFO("Current connection handle is %d", p_evt->conn_handle);
-                //NRF_LOG_INFO("uuid is %d", discovered_db->charateristics[i].characteristic.uuid.uuid);
-                //NRF_LOG_INFO("cccd handle is %d", discovered_db->charateristics[i].cccd_handle); 
-
                 characteristic[p_evt->conn_handle][i] = discovered_db->charateristics[i];
             }
 
             uint16_t const value = 0x0001;
 
-            // Enable notification for second  characteristic for each client
+            // Enable notification for second characteristic for each client
             // Set CCCD value to 1
             ble_gattc_write_params_t const write_params = {
                 .offset = 0,
@@ -397,8 +394,8 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
 
             err_code = sd_ble_gattc_write(p_evt->conn_handle, &write_params);
             APP_ERROR_CHECK(err_code);
-
-            break;
+        }
+        break;
     
     case BLE_DB_DISCOVERY_ERROR:
         NRF_LOG_INFO("Database Discovery error.");
