@@ -126,13 +126,15 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             if(++connected_devices == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
             {
                 NRF_LOG_INFO("Max peripherals connected");
+                bsp_board_led_off(CENTRAL_SCANNING_LED);
+                bsp_board_led_on(CENTRAL_CONNECTED_LED); 
             }
             else 
             {
                 NRF_LOG_INFO("Continue scanning");
                 scan_start();
             }
-            break;
+        break;
 
         // Upon disconnection, reset the connection handle of the peer which disconnected, update
         // the LEDs status and start scanning again.
