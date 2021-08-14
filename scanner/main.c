@@ -1,32 +1,32 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-#include "../../../components/softdevice/common/nrf_sdh.h"
-#include "../../../components/softdevice/common/nrf_sdh_ble.h"
-#include "../../../components/softdevice/common/nrf_sdh_soc.h"
-#include "../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.h"
-#include "../../../components/libraries/timer/app_timer.h"
-#include "../../../components/boards/boards.h"
-#include "../../../components/libraries/bsp/bsp.h"
-#include "../../../components/libraries/bsp/bsp_btn_ble.h"
-#include "../../../components/softdevice/s140/headers/ble.h"
-#include "../../../components/softdevice/s140/headers/ble_hci.h"
-#include "../../../components/ble/ble_advertising/ble_advertising.h"
-#include "../../../components/ble/common/ble_conn_params.h"
-#include "../../../components/ble/nrf_ble_qwr/nrf_ble_qwr.h"
+#include "nrf_sdh.h"
+#include "nrf_sdh_ble.h"
+#include "nrf_sdh_soc.h"
+#include "nrf_pwr_mgmt.h"
+#include "app_timer.h"
+#include "boards.h"
+#include "bsp.h"
+#include "bsp_btn_ble.h"
+#include "ble.h"
+#include "ble_hci.h"
+#include "ble_advertising.h"
+#include "ble_conn_params.h"
+#include "nrf_ble_qwr.h"
 #include "ble_lbs_c.h"
-#include "../../../components/ble/nrf_ble_gatt/nrf_ble_gatt.h"
-#include "../../../components/ble/nrf_ble_scan/nrf_ble_scan.h"
-#include "../../../components/libraries/usbd/app_usbd_types.h"
-#include "../../../components/libraries/usbd/app_usbd.h"
-#include "../../../components/libraries/usbd/app_usbd_core.h"
-#include "../../../components/libraries/usbd/class/hid/generic/app_usbd_hid_generic.h"
+#include "nrf_ble_gatt.h"
+#include "nrf_ble_scan.h"
+#include "app_usbd_types.h"
+#include "app_usbd.h"
+#include "app_usbd_core.h"
+#include "app_usbd_hid_generic.h"
 #include "app_usbd_hid_kbd.h"
 
 
-#include "../../../components/libraries/log/nrf_log.h"
-#include "../../../components/libraries/log/nrf_log_ctrl.h"
-#include "../../../components/libraries/log/nrf_log_default_backends.h"
+#include "nrf_log.h"
+#include "nrf_log_ctrl.h"
+#include "nrf_log_default_backends.h"
 #include "nrf_drv_clock.h"
 #include "nrf_drv_power.h"
 
@@ -70,10 +70,9 @@ APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
 
 // APPLICATION CODE START
 
-
 static ble_gatt_db_char_t characteristic[NRF_SDH_BLE_CENTRAL_LINK_COUNT][NUMBER_OF_CHARACTERISTIC];
-static uint16_t m_conn_handle[NRF_SDH_BLE_CENTRAL_LINK_COUNT];
-static uint8_t current_conn = 0;
+static uint8_t peripheral_conn_handles[NRF_SDH_BLE_CENTRAL_LINK_COUNT];
+static uint8_t connected_devices = 0;
  
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
@@ -101,7 +100,7 @@ static void scan_start()
     bsp_board_led_on(CENTRAL_SCANNING_LED);
 }
 
-static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
+static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)  
 {
     ret_code_t err_code;
 
@@ -116,8 +115,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         
            // NRF_LOG_INFO("Connected %d.", p_ble_evt->evt.gap_evt.conn_handle);
 
-            m_conn_handle[current_conn++] = p_ble_evt->evt.gap_evt.conn_handle;
-
             // Update LEDs status, and check if we should be looking for more
             // peripherals to connect to.
 
@@ -127,26 +124,51 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
            // NRF_LOG_INFO("DB_DISCOVERY started.");
 
-            if(current_conn == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
+           // find out what field in array is uninitialized
+           for(uint8_t i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+           {
+               if(peripheral_conn_handles[i] == 0xFF) 
+               {
+                peripheral_conn_handles[i] = p_ble_evt->evt.gap_evt.conn_handle;
+               // NRF_LOG_INFO("Index = %d, value = %d", i,  p_ble_evt->evt.gap_evt.conn_handle);
+                break;
+               }
+           }
+
+            if(++connected_devices == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
             {
                 NRF_LOG_INFO("Max peripherals connected");
+                bsp_board_led_off(CENTRAL_SCANNING_LED);
+                bsp_board_led_on(CENTRAL_CONNECTED_LED); 
             }
             else 
             {
                 NRF_LOG_INFO("Continue scanning");
                 scan_start();
             }
-            break;
+        break;
 
         // Upon disconnection, reset the connection handle of the peer which disconnected, update
         // the LEDs status and start scanning again.
         case BLE_GAP_EVT_DISCONNECTED:
         {
             NRF_LOG_INFO("Disconnected.");
+            connected_devices--;
+
+            // uninitialize field of disconnected peripheral in array 
+            for(uint8_t i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+            {
+                if(peripheral_conn_handles[i] == p_ble_evt->evt.gap_evt.conn_handle)
+                {
+                    peripheral_conn_handles[i] = 0xff;
+                    break;
+                }
+            }
             bsp_board_led_off(CENTRAL_CONNECTED_LED);
             bsp_board_led_on(CENTRAL_SCANNING_LED);
             scan_start();
-        } break;
+        } 
+        break;
 
         case BLE_GAP_EVT_TIMEOUT:
         {
@@ -369,40 +391,48 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
     
     switch (p_evt->evt_type)
     {
+        // structure needed for differentiation of various peripheral characterstic is filled
         case BLE_DB_DISCOVERY_COMPLETE:
-          
-            NRF_LOG_INFO("BLE_DB_DISCOVERY_COMPLETE event triggered.");
+        { 
+           // NRF_LOG_INFO("BLE_DB_DISCOVERY_COMPLETE event triggered.");
 
             ble_gatt_db_srv_t * discovered_db = &(p_evt->params.discovered_db);
+            uint8_t index = 0xff;
+
+            // find index of conn_handle
+            for(uint8_t i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+            {
+                if(peripheral_conn_handles[i] == p_evt->conn_handle)
+                {
+                    index = i;
+                    break;
+                }
+            }
 
             // Save each characteristic to seperate row
             // Rows are indexed by connection handles
             for(int i = 0; i < discovered_db->char_count; i++) 
             {
-                //NRF_LOG_INFO("Current connection handle is %d", m_conn_handle[p_evt->conn_handle]);
-                //NRF_LOG_INFO("uuid is %d", discovered_db->charateristics[i].characteristic.uuid.uuid);
-                //NRF_LOG_INFO("cccd handle is %d", discovered_db->charateristics[i].cccd_handle); 
-
-                characteristic[p_evt->conn_handle][i] = discovered_db->charateristics[i];
+                characteristic[index][i] = discovered_db->charateristics[i];
             }
 
             uint16_t const value = 0x0001;
 
-            // Enable notification for second  characteristic for each client
+            // Enable notification for second characteristic for each client
             // Set CCCD value to 1
             ble_gattc_write_params_t const write_params = {
                 .offset = 0,
                 .flags = BLE_GATT_OP_WRITE_CMD,
-                .handle = characteristic[current_conn - 1][1].cccd_handle,
+                .handle = characteristic[index][1].cccd_handle,
                 .len = sizeof(value),
                 .write_op = BLE_GATT_OP_WRITE_CMD,
                 .p_value = (uint8_t *)&value
             };
 
-            err_code = sd_ble_gattc_write(m_conn_handle[current_conn - 1], &write_params);
-            APP_ERROR_CHECK(err_code);
-
-            break;
+            err_code = sd_ble_gattc_write(peripheral_conn_handles[index], &write_params);
+            APP_ERROR_CHECK(err_code);        
+        }
+        break;
     
     case BLE_DB_DISCOVERY_ERROR:
         NRF_LOG_INFO("Database Discovery error.");
@@ -446,6 +476,14 @@ static void db_discovery_init()
 
     err_code = ble_db_discovery_evt_register(&service_uuid);
     APP_ERROR_CHECK(err_code);
+}
+
+static void handle_struct_init()
+{
+    for(uint8_t i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++ )
+    {
+        peripheral_conn_handles[i] = 0xff;
+    }
 }
 
 // USB CODE START
@@ -505,6 +543,7 @@ int main(void)
     timer_init();
     buttons_init();
     leds_init();
+    handle_struct_init();
 
     ret = nrf_drv_clock_init();
     APP_ERROR_CHECK(ret);
