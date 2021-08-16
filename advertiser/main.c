@@ -61,6 +61,9 @@
 
 #define DEAD_BEEF                       0xDEADBEEF                              /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
+#define LED_CHARACTERISTIC 0
+#define BTN_CHARACTERISTIC 1
+
 // Instance init
 NRF_BLE_GQ_DEF(m_ble_gatt_queue, NRF_SDH_BLE_CENTRAL_LINK_COUNT, NRF_BLE_GQ_QUEUE_SIZE);
 NRF_BLE_GATT_DEF(m_gatt);                                                       /**< GATT module instance. */
@@ -217,6 +220,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             bsp_board_led_on(CENTRAL_CONN_LED);
 
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+            m_cus.conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
           //  err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
             //APP_ERROR_CHECK(err_code);
 
@@ -264,9 +268,15 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             break;
 
         case BLE_GATTS_EVT_WRITE :
-            NRF_LOG_INFO("CCCD descriptor is changed.");
-            bsp_board_led_on(3);
+
+            if(p_ble_evt->evt.gatts_evt.params.write.uuid.uuid == CHAR0_UUID ) 
+            {
+                NRF_LOG_INFO("Value is wrote to LED characteristic turn on LED");
+                bsp_board_led_invert(2);
+                bsp_board_led_invert(3);
+            }
             break;
+
         default:
             // No implementation needed.
           //  NRF_LOG_INFO("Some event happened");
@@ -304,7 +314,7 @@ static void btn_evt_handler(bsp_event_t event)
             NRF_LOG_INFO("Button 0 is pressed.");
             if(m_conn_handle != BLE_CONN_HANDLE_INVALID)
             {
-            err_code =  ble_cus_value_update_and_notify(&m_cus, 0x01, 1);
+            err_code =  ble_cus_value_update_and_notify(&m_cus, 0x01, BTN_CHARACTERISTIC);
             APP_ERROR_CHECK(err_code);
             NRF_LOG_INFO("Value is set and scanner is notified.");
             }
@@ -317,6 +327,7 @@ static void btn_evt_handler(bsp_event_t event)
             break;
     }
 }
+
 static void advertising_init() 
 {
     ret_code_t             err_code;
