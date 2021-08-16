@@ -105,7 +105,7 @@ static void scan_start()
     bsp_board_led_on(CENTRAL_SCANNING_LED);
 }
 
-static void write_to_LED(uint8_t conn_handle, uint8_t value)
+static void write_to_LED(uint8_t conn_handle, uint8_t value, uint8_t char_index)
 {
     ret_code_t err_code;
 
@@ -129,7 +129,7 @@ static void write_to_LED(uint8_t conn_handle, uint8_t value)
     {
         .len = sizeof(uint8_t),
         .offset = 0,
-        .handle = characteristic[index][LED_CHARACTERISTIC].characteristic.handle_value,
+        .handle = characteristic[index][char_index].characteristic.handle_value,
         .flags = BLE_GATT_EXEC_WRITE_FLAG_PREPARED_WRITE,
         .write_op = BLE_GATT_OP_WRITE_CMD,
         .p_value = &value
@@ -270,7 +270,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                         NRF_LOG_INFO("Video is not paused. Winner is %d.", p_ble_evt->evt.gattc_evt.conn_handle);
                         video_paused++;
                         winner_conn_handle = p_ble_evt->evt.gattc_evt.conn_handle;
-                        write_to_LED(winner_conn_handle, 0x01);
+                        write_to_LED(winner_conn_handle, 0x01, LED_CHARACTERISTIC);
                         break;
                     
                     case 1:
@@ -278,7 +278,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                         {    
                             NRF_LOG_INFO("Video is paused. Winner clicked.");
                             video_paused--;
-                            write_to_LED(p_ble_evt->evt.gattc_evt.conn_handle, 0x00);
+                            write_to_LED(p_ble_evt->evt.gattc_evt.conn_handle, 0x00, LED_CHARACTERISTIC);
                         }
                         else
                         {
