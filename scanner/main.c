@@ -285,6 +285,12 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                         {    
                             NRF_LOG_INFO("Video is paused. Winner clicked.");
                             video_paused--;
+                            
+                            // Continue the movie
+                            err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
+                            APP_ERROR_CHECK(err_code);
+                            err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, false);
+                            APP_ERROR_CHECK(err_code);
                             write_to_LED(p_ble_evt->evt.gattc_evt.conn_handle, 0x00, LED_CHARACTERISTIC);
                         }
                         else
