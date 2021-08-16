@@ -48,6 +48,9 @@
 #define CONFIG_KBD_LETTER       APP_USBD_HID_KBD_SPACEBAR
 #define APP_USBD_INTERFACE_KBD      1
 
+#define LED_CHARACTERISTIC 0
+#define BTN_CHARACTERISTIC 1
+
 // SERVICE & CHARACTERISTIC UUID'S
 #define CUSTOM_SERVICE_UUID_BASE         {0xBC, 0x8A, 0xBF, 0x45, 0xCA, 0x05, 0x50, 0xBA, 0x40, 0x42, 0xB0, 0x00, 0xC9, 0xAD, 0x64, 0xF3}
 #define CUSTOM_SERVICE_UUID               0x1400
@@ -73,6 +76,8 @@ APP_USBD_HID_KBD_GLOBAL_DEF(m_app_hid_kbd,
 static ble_gatt_db_char_t characteristic[NRF_SDH_BLE_CENTRAL_LINK_COUNT][NUMBER_OF_CHARACTERISTIC];
 static uint8_t peripheral_conn_handles[NRF_SDH_BLE_CENTRAL_LINK_COUNT];
 static uint8_t connected_devices = 0;
+static uint8_t video_paused = 0;
+static uint8_t winner_conn_handle = 0;
  
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
@@ -98,6 +103,42 @@ static void scan_start()
 
     bsp_board_led_off(CENTRAL_CONNECTED_LED);
     bsp_board_led_on(CENTRAL_SCANNING_LED);
+}
+
+static void write_to_LED(uint8_t conn_handle, uint8_t value)
+{
+    ret_code_t err_code;
+
+    //find out index of conn handle
+    uint8_t index = -1;
+    for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+    {
+        if(conn_handle == peripheral_conn_handles[i])
+        {
+            index = i;
+            break;
+        }
+    }
+    
+    if (index == -1)
+    {
+        return;
+    }
+
+    ble_gattc_write_params_t const  write_params = 
+    {
+        .len = sizeof(uint8_t),
+        .offset = 0,
+        .handle = characteristic[index][LED_CHARACTERISTIC].characteristic.handle_value,
+        .flags = BLE_GATT_EXEC_WRITE_FLAG_PREPARED_WRITE,
+        .write_op = BLE_GATT_OP_WRITE_CMD,
+        .p_value = &value
+    };
+
+    err_code = sd_ble_gattc_write(conn_handle, &write_params);
+    APP_ERROR_CHECK(err_code);
+
+    NRF_LOG_INFO("Wrote to the characteristic.");
 }
 
 static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)  
@@ -220,12 +261,40 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
         case BLE_GATTC_EVT_HVX :
         {
-            NRF_LOG_INFO("Notification is delivered.");
-            NRF_LOG_INFO("New value is %d", p_ble_evt->evt.gattc_evt.params.hvx.data[0]);
-        }
+            //NRF_LOG_INFO("Notification is delivered.");
+            //NRF_LOG_INFO("New value is %d", p_ble_evt->evt.gattc_evt.params.hvx.data[0]);
+
+                switch (video_paused)
+                {
+                    case 0:
+                        NRF_LOG_INFO("Video is not paused. Winner is %d.", p_ble_evt->evt.gattc_evt.conn_handle);
+                        video_paused++;
+                        winner_conn_handle = p_ble_evt->evt.gattc_evt.conn_handle;
+                        write_to_LED(winner_conn_handle, 0x01);
+                        break;
+                    
+                    case 1:
+                        if(winner_conn_handle == p_ble_evt->evt.gattc_evt.conn_handle)
+                        {    
+                            NRF_LOG_INFO("Video is paused. Winner clicked.");
+                            video_paused--;
+                            write_to_LED(p_ble_evt->evt.gattc_evt.conn_handle, 0x00);
+                        }
+                        else
+                        {
+                            NRF_LOG_INFO("Someone clicked who is not winner");
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+            }
+        
         default:
             // No implementation needed.
-           // NRF_LOG_INFO("Some event happened");
+            //NRF_LOG_INFO("Some event happened");
             break;
     }
 }
