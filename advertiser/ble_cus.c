@@ -2,9 +2,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
-#include "../../../components/softdevice/s140/headers/ble.h"
-#include "../../../components/libraries/log/nrf_log.h"
-#include "../../../components/libraries/util/app_error.h"
+#include "ble.h"
+#include "nrf_log.h"
+#include "app_error.h"
+#include "bsp.h"
 
 
 static uint8_t char_value = 0;
@@ -13,6 +14,7 @@ static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 {
     ble_gatts_evt_write_t const * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
     NRF_LOG_INFO("inside on_write funciton");
+    bsp_board_led_invert(0);
     // Custom Value Characteristic Written to.
 
     if(p_evt_write->len == 2) 
@@ -231,7 +233,7 @@ uint32_t ble_cus_value_update_and_notify(ble_cus_t * p_cus, uint8_t new_value, u
 
         //NRF_LOG_INFO("%d = Conn handle: %d, Custom value handle : %d, CCCD handle : %d", i, p_cus->conn_handle, p_cus->custom_value_handles[0].value_handle, p_cus->custom_value_handles[0].cccd_handle );
         err_code = sd_ble_gatts_hvx(p_cus->conn_handle, &hvx_params);
-        //NRF_LOG_INFO("Error is %d", err_code);
+        NRF_LOG_INFO("Error is %d", err_code);
         APP_ERROR_CHECK(err_code);
         
     }
