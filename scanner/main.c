@@ -269,6 +269,13 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                     case 0:
                         NRF_LOG_INFO("Video is not paused. Winner is %d.", p_ble_evt->evt.gattc_evt.conn_handle);
                         video_paused++;
+                        
+                        // Stop the movie
+                        err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
+                        APP_ERROR_CHECK(err_code);
+                        err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, false);
+                        APP_ERROR_CHECK(err_code);
+
                         winner_conn_handle = p_ble_evt->evt.gattc_evt.conn_handle;
                         write_to_LED(winner_conn_handle, 0x01, LED_CHARACTERISTIC);
                         break;
@@ -326,16 +333,7 @@ static void button_event_handler(bsp_event_t bsp_event)
     switch ((unsigned int)bsp_event)
     {
        case BSP_EVENT_KEY_0:
-            NRF_LOG_INFO("Button is pressed.");
-
-            // USBD STOP THE MOVIE CODE USE IT LATER
-           /* err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
-            APP_ERROR_CHECK(err_code);
-            err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, false);
-            APP_ERROR_CHECK(err_code);*/
-
-            
-
+            //NRF_LOG_INFO("Button is pressed.");
             break;
 
         default:
