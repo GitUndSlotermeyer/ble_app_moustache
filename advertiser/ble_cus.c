@@ -65,8 +65,8 @@ static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
     
     attr_char_value.p_uuid = &ble_uuid;
     attr_char_value.p_attr_md = &attr_md;
-    attr_char_value.init_len  = sizeof(uint8_t);
-    attr_char_value.max_len   = sizeof(uint8_t);
+    attr_char_value.init_len  = sizeof(uint32_t);
+    attr_char_value.max_len   = sizeof(uint32_t);
     attr_char_value.p_value = &char_value;
 
     memset(&attr_md, 0, sizeof(attr_md));
