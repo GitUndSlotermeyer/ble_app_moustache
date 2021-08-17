@@ -29,6 +29,7 @@
 #include "nrf_log_default_backends.h"
 #include "nrf_drv_clock.h"
 #include "nrf_drv_power.h"
+#include "colors.h"
 
 #define DEVICE_NAME                     "nRF Connect"                       /**< Name of device. Will be included in the advertising data. */
 #define CENTRAL_SCANNING_LED            BSP_BOARD_LED_1                     /**< Scanning LED will be on when the device is scanning. */
@@ -132,7 +133,7 @@ static void write_to_LED(uint8_t conn_handle, uint32_t value, uint8_t char_index
         .handle = characteristic[index][char_index].characteristic.handle_value,
         .flags = BLE_GATT_EXEC_WRITE_FLAG_PREPARED_WRITE,
         .write_op = BLE_GATT_OP_WRITE_CMD,
-        .p_value = &value
+        .p_value = (uint8_t *)&value
     };
 
     err_code = sd_ble_gattc_write(conn_handle, &write_params);
@@ -503,7 +504,8 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
             };
 
             err_code = sd_ble_gattc_write(peripheral_conn_handles[index], &write_params);
-            APP_ERROR_CHECK(err_code);        
+            APP_ERROR_CHECK(err_code);
+
         }
         break;
     
