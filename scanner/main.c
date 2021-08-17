@@ -79,6 +79,8 @@ static uint8_t peripheral_conn_handles[NRF_SDH_BLE_CENTRAL_LINK_COUNT];
 static uint8_t connected_devices = 0;
 static uint8_t video_paused = 0;
 static uint8_t winner_conn_handle = 0;
+static uint32_t peripheral_colors[NUMBER_OF_COLORS] = {RED, GREEN, BLUE, YELLOW, MAGENTA, TURQUOISE, WHITE};
+
  
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
