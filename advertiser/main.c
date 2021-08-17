@@ -37,6 +37,7 @@
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 #include "ble_cus.h"
+#include "colors.h"
 
 #define DEVICE_NAME                     "nRF Connect"                       /**< Name of device. Will be included in the advertising data. */
 #define APP_ADV_INTERVAL                300                                     /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
