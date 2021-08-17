@@ -105,7 +105,7 @@ static void scan_start()
     bsp_board_led_on(CENTRAL_SCANNING_LED);
 }
 
-static void write_to_LED(uint8_t conn_handle, uint8_t value, uint8_t char_index)
+static void write_to_LED(uint8_t conn_handle, uint32_t value, uint8_t char_index)
 {
     ret_code_t err_code;
 
@@ -127,7 +127,7 @@ static void write_to_LED(uint8_t conn_handle, uint8_t value, uint8_t char_index)
 
     ble_gattc_write_params_t const  write_params = 
     {
-        .len = sizeof(uint8_t),
+        .len = sizeof(uint32_t),
         .offset = 0,
         .handle = characteristic[index][char_index].characteristic.handle_value,
         .flags = BLE_GATT_EXEC_WRITE_FLAG_PREPARED_WRITE,
@@ -268,7 +268,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                 {
                     case 0:
                         NRF_LOG_INFO("Video is not paused. Winner is %d.", p_ble_evt->evt.gattc_evt.conn_handle);
-                        video_paused++;
+                        video_paused = 1;
                         
                         // Stop the movie
                         err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
@@ -284,7 +284,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                         if(winner_conn_handle == p_ble_evt->evt.gattc_evt.conn_handle)
                         {    
                             NRF_LOG_INFO("Video is paused. Winner clicked.");
-                            video_paused--;
+                            video_paused = 0;
                             
                             // Continue the movie
                             err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
