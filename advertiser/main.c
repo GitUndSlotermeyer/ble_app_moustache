@@ -79,6 +79,7 @@ BLE_CUS_DEF(m_cus);
 
 // Global variables init
 static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID;                        /**< Handle of the current connection. */
+static uint8_t color[4];
 
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
@@ -256,9 +257,10 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
             if(p_ble_evt->evt.gatts_evt.params.write.uuid.uuid == CHAR0_UUID ) 
             {
-                NRF_LOG_INFO("Value is wrote to LED characteristic turn on LED");
-                bsp_board_led_invert(2);
-                bsp_board_led_invert(3);
+
+
+                
+
             }
             break;
 
@@ -368,7 +370,7 @@ static void idle_state_handle()
 static void advertising_start()
 {
     ret_code_t err_code = ble_advertising_start(&m_advertising, BLE_ADV_MODE_FAST);
-    bsp_board_led_on(CENTRAL_ADV_LED);
+   // bsp_board_led_on(CENTRAL_ADV_LED);
 
     APP_ERROR_CHECK(err_code);
 }
