@@ -344,7 +344,7 @@ static void constant_light(uint8_t const * color_code)
         };
 
     APP_ERROR_CHECK(nrf_drv_pwm_init(&m_pwm0, &config0, NULL));
-    
+
     static nrf_pwm_values_individual_t /*const*/ seq_values;
     nrf_pwm_sequence_t const seq =
     {
@@ -359,6 +359,61 @@ static void constant_light(uint8_t const * color_code)
     seq_values.channel_2 = color_code[1];
              
     nrfx_pwm_simple_playback(&m_pwm0, &seq, 1,  NRF_DRV_PWM_FLAG_LOOP);
+}
+
+static void start_blinking(uint8_t const * color_code)
+{
+    nrf_drv_pwm_config_t const config0 =
+    {
+        .output_pins =
+        {
+            BSP_LED_1 | NRF_DRV_PWM_PIN_INVERTED,    // channel 0
+            BSP_LED_2  | NRF_DRV_PWM_PIN_INVERTED ,  // channel 1
+            BSP_LED_3 | NRF_DRV_PWM_PIN_INVERTED ,   // channel 2
+            NRF_DRV_PWM_PIN_NOT_USED,                // channel 3
+        },
+        .irq_priority = APP_IRQ_PRIORITY_LOWEST,
+        .base_clock   = NRF_PWM_CLK_125kHz,
+        .count_mode   = NRF_PWM_MODE_UP,
+        .top_value    = m_top,
+        .load_mode    = NRF_PWM_LOAD_INDIVIDUAL,
+        .step_mode    = NRF_PWM_STEP_AUTO
+    };
+    APP_ERROR_CHECK(nrf_drv_pwm_init(&m_pwm0, &config0, NULL));
+
+
+    // This array cannot be allocated on stack (hence "static") and it must
+    // be in RAM (hence no "const", though its content is not changed).
+    
+    static nrf_pwm_values_individual_t /*const*/ seq_values0;
+
+    seq_values0.channel_0 = color_code[3];
+    seq_values0.channel_1 = color_code[2];
+    seq_values0.channel_2 = color_code[1];
+
+    static nrf_pwm_values_individual_t /*const*/ seq_values1;
+
+    seq_values1.channel_0 = 0x00;
+    seq_values1.channel_1 = 0x00;
+    seq_values1.channel_2 = 0x00;
+
+    nrf_pwm_sequence_t const seq0 =
+    {
+        .values.p_individual = &seq_values0,
+        .length          = NRF_PWM_VALUES_LENGTH(seq_values0),
+        .repeats         = 0,
+        .end_delay       = 50
+    };
+
+        nrf_pwm_sequence_t const seq1 =
+    {
+        .values.p_individual = &seq_values1,
+        .length          = NRF_PWM_VALUES_LENGTH(seq_values1),
+        .repeats         = 0,
+        .end_delay       = 50
+    };
+
+    (void)nrf_drv_pwm_complex_playback(&m_pwm0, &seq0, &seq1, 2, NRF_DRV_PWM_FLAG_LOOP);
 }
 
 static void btn_evt_handler(bsp_event_t event)
