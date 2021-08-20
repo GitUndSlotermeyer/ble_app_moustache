@@ -269,7 +269,28 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                 p_data = p_data | p_ble_evt->evt.gatts_evt.params.write.data[i];
               }
 
-                
+            // check if data is signal to start blinking
+            if(p_data == START_BLINKING)
+            {
+                // Add code necessary for blinking
+            }
+            // check if data is signal to stop blinking
+            else if (p_data == STOP_BLINKING)
+            {
+                // Add code necessary for stopping blinking
+            }
+            else 
+            {
+                    //data is color code, save it to local variable
+
+                    color[0] = p_ble_evt->evt.gatts_evt.params.write.data[0];
+                    color[1] = p_ble_evt->evt.gatts_evt.params.write.data[1];
+                    color[2] = p_ble_evt->evt.gatts_evt.params.write.data[2];
+                    color[3] = p_ble_evt->evt.gatts_evt.params.write.data[3];
+
+                    // Add pwm function that turns on  RGB LEDs
+                }
+
 
             }
             break;
