@@ -66,6 +66,9 @@
 #define LED_CHARACTERISTIC 0
 #define BTN_CHARACTERISTIC 1
 
+#define START_BLINKING  1
+#define STOP_BLINKING   0
+
 // Instance init
 NRF_BLE_GQ_DEF(m_ble_gatt_queue, NRF_SDH_BLE_CENTRAL_LINK_COUNT, NRF_BLE_GQ_QUEUE_SIZE);
 NRF_BLE_GATT_DEF(m_gatt);                                                       /**< GATT module instance. */
