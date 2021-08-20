@@ -99,9 +99,15 @@ static void conn_params_error_handler(uint32_t nrf_error)
 
 static void timers_init()
 {
-    ret_code_t err_code = app_timer_init();
+    ret_code_t err_code = nrf_drv_clock_init();
+    APP_ERROR_CHECK(err_code);
+    
+    nrf_drv_clock_lfclk_request(NULL);
+
+    err_code = app_timer_init();
     APP_ERROR_CHECK(err_code);
 }
+
 
 static void on_cus_evt(ble_cus_t * p_cus_service, ble_cus_evt_t * p_evt)
 {
