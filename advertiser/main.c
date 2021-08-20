@@ -388,6 +388,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                     color[3] = p_ble_evt->evt.gatts_evt.params.write.data[3];
 
                     // Add pwm function that turns on  RGB LEDs
+                    constant_light(color);
                 }
 
 
