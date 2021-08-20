@@ -222,7 +222,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             m_cus.conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-
             break;
 
         case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
@@ -253,19 +252,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             APP_ERROR_CHECK(err_code);
             break;
 
-        case BLE_GAP_EVT_SCAN_REQ_REPORT:
-            NRF_LOG_INFO("Scan request has landed.");
-            break;
-
-        case BLE_GATTC_EVT_READ_RSP:
-            NRF_LOG_INFO("Read response value is %d", p_ble_evt->evt.gattc_evt.params.read_rsp.data[0]);
-            NRF_LOG_INFO("Read response value is %d", p_ble_evt->evt.gattc_evt.params.read_rsp.data[1]);
-            break;
-        
-        case BLE_GATTS_EVT_HVN_TX_COMPLETE:
-            NRF_LOG_INFO("Hand value notification complete.");
-            break;
-
         case BLE_GATTS_EVT_WRITE :
 
             if(p_ble_evt->evt.gatts_evt.params.write.uuid.uuid == CHAR0_UUID ) 
@@ -278,7 +264,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
         default:
             // No implementation needed.
-          //  NRF_LOG_INFO("Some event happened");
             break;
     }
 }
