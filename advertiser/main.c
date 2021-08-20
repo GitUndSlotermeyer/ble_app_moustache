@@ -32,7 +32,8 @@
 #include "nrf_ble_gq.h"
 #include "ble_db_discovery.h"
 #include "ble_gatt_db.h"
-
+#include "nrf_drv_pwm.h"
+#include "nrf_drv_clock.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
