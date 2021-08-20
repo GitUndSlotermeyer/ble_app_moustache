@@ -81,16 +81,13 @@ BLE_CUS_DEF(m_cus);
 static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID;                        /**< Handle of the current connection. */
 static uint8_t color[4];
 
+static nrfx_pwm_t m_pwm0 = NRF_DRV_PWM_INSTANCE(0);
+static uint16_t const m_top  = 255;
+
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
     app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
-
-/*
-static void nrf_qwr_error_handler(uint32_t nrf_error)
-{
-    APP_ERROR_HANDLER(nrf_error);
-}*/
 
 static void conn_params_error_handler(uint32_t nrf_error)
 {
