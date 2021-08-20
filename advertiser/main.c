@@ -105,7 +105,6 @@ static void timers_init()
     APP_ERROR_CHECK(err_code);
 }
 
-
 static void on_cus_evt(ble_cus_t * p_cus_service, ble_cus_evt_t * p_evt)
 {
     switch(p_evt->evt_type)
@@ -323,6 +322,43 @@ static void ble_stack_init()
 
     // Register a handler for BLE events.
     NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
+}
+
+static void constant_light(uint8_t const * color_code)
+{
+    nrfx_pwm_config_t const config0 =
+        {
+            .output_pins =
+            {
+                BSP_LED_1 | NRF_DRV_PWM_PIN_INVERTED , // channel 0
+                BSP_LED_2  | NRF_DRV_PWM_PIN_INVERTED , // channel 1
+                BSP_LED_3 | NRF_DRV_PWM_PIN_INVERTED , // channel 2
+                NRF_DRV_PWM_PIN_NOT_USED, // channel 3
+            },
+            .irq_priority = APP_IRQ_PRIORITY_LOWEST,
+            .base_clock   = NRF_PWM_CLK_2MHz ,
+            .count_mode   = NRF_PWM_MODE_UP,
+            .top_value    = m_top,
+            .load_mode    = NRF_PWM_LOAD_INDIVIDUAL,
+            .step_mode    = NRF_PWM_STEP_AUTO
+        };
+
+    APP_ERROR_CHECK(nrf_drv_pwm_init(&m_pwm0, &config0, NULL));
+    
+    static nrf_pwm_values_individual_t /*const*/ seq_values;
+    nrf_pwm_sequence_t const seq =
+    {
+        .values.p_individual = &seq_values,
+        .length          = NRF_PWM_VALUES_LENGTH(seq_values),
+        .repeats         = 0,
+        .end_delay       = 0
+    };
+
+    seq_values.channel_0 = color_code[3];
+    seq_values.channel_1 = color_code[2];
+    seq_values.channel_2 = color_code[1];
+             
+    nrfx_pwm_simple_playback(&m_pwm0, &seq, 1,  NRF_DRV_PWM_FLAG_LOOP);
 }
 
 static void btn_evt_handler(bsp_event_t event)
