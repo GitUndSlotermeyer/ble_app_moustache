@@ -257,7 +257,17 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
             if(p_ble_evt->evt.gatts_evt.params.write.uuid.uuid == CHAR0_UUID ) 
             {
+                
+              uint16_t len = p_ble_evt->evt.gatts_evt.params.write.len;
+              uint32_t p_data = 0;
 
+              // Determine the data sent
+              // => determine color code or signal to start(1) or to stop blinking (0)
+              for(int i = len - 1; i >= 0; i-- )
+              {
+                p_data = p_data << 8;
+                p_data = p_data | p_ble_evt->evt.gatts_evt.params.write.data[i];
+              }
 
                 
 
