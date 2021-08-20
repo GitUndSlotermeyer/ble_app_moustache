@@ -215,19 +215,13 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_DISCONNECTED:
             NRF_LOG_INFO("Disconnected.");
-            bsp_board_led_off(CENTRAL_CONN_LED);
-            bsp_board_led_on(CENTRAL_ADV_LED);
             break;
 
         case BLE_GAP_EVT_CONNECTED:
             NRF_LOG_INFO("Connected.");
-            bsp_board_led_off(CENTRAL_ADV_LED);
-            bsp_board_led_on(CENTRAL_CONN_LED);
 
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             m_cus.conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-          //  err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
-            //APP_ERROR_CHECK(err_code);
 
             break;
 
