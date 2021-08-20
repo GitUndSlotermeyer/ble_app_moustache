@@ -210,120 +210,6 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     }
 }
 
-static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
-{
-    ret_code_t err_code = NRF_SUCCESS;
-
-    switch (p_ble_evt->header.evt_id)
-    {
-        case BLE_GAP_EVT_DISCONNECTED:
-            NRF_LOG_INFO("Disconnected.");
-            break;
-
-        case BLE_GAP_EVT_CONNECTED:
-            NRF_LOG_INFO("Connected.");
-
-            m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-            m_cus.conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-            break;
-
-        case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
-        {
-            NRF_LOG_DEBUG("PHY update request.");
-            ble_gap_phys_t const phys =
-            {
-                .rx_phys = BLE_GAP_PHY_AUTO,
-                .tx_phys = BLE_GAP_PHY_AUTO,
-            };
-            err_code = sd_ble_gap_phy_update(p_ble_evt->evt.gap_evt.conn_handle, &phys);
-            APP_ERROR_CHECK(err_code);
-        } break;
-
-        case BLE_GATTC_EVT_TIMEOUT:
-            // Disconnect on GATT Client timeout event.
-            NRF_LOG_DEBUG("GATT Client Timeout.");
-            err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gattc_evt.conn_handle,
-                                             BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
-            APP_ERROR_CHECK(err_code);
-            break;
-
-        case BLE_GATTS_EVT_TIMEOUT:
-            // Disconnect on GATT Server timeout event.
-            NRF_LOG_DEBUG("GATT Server Timeout.");
-            err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gatts_evt.conn_handle,
-                                             BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
-            APP_ERROR_CHECK(err_code);
-            break;
-
-        case BLE_GATTS_EVT_WRITE :
-
-            if(p_ble_evt->evt.gatts_evt.params.write.uuid.uuid == CHAR0_UUID ) 
-            {
-                
-              uint16_t len = p_ble_evt->evt.gatts_evt.params.write.len;
-              uint32_t p_data = 0;
-
-              // Determine the data sent
-              // => determine color code or signal to start(1) or to stop blinking (0)
-              for(int i = len - 1; i >= 0; i-- )
-              {
-                p_data = p_data << 8;
-                p_data = p_data | p_ble_evt->evt.gatts_evt.params.write.data[i];
-              }
-
-            // check if data is signal to start blinking
-            if(p_data == START_BLINKING)
-            {
-                // Add code necessary for blinking
-            }
-            // check if data is signal to stop blinking
-            else if (p_data == STOP_BLINKING)
-            {
-                // Add code necessary for stopping blinking
-            }
-            else 
-            {
-                    //data is color code, save it to local variable
-
-                    color[0] = p_ble_evt->evt.gatts_evt.params.write.data[0];
-                    color[1] = p_ble_evt->evt.gatts_evt.params.write.data[1];
-                    color[2] = p_ble_evt->evt.gatts_evt.params.write.data[2];
-                    color[3] = p_ble_evt->evt.gatts_evt.params.write.data[3];
-
-                    // Add pwm function that turns on  RGB LEDs
-                }
-
-
-            }
-            break;
-
-        default:
-            // No implementation needed.
-            break;
-    }
-}
-
-static void ble_stack_init()
-{
-    ret_code_t err_code;
-
-    err_code = nrf_sdh_enable_request();
-    APP_ERROR_CHECK(err_code);
-
-    // Configure the BLE stack using the default settings.
-    // Fetch the start address of the application RAM.
-    uint32_t ram_start = 0;
-    err_code = nrf_sdh_ble_default_cfg_set(APP_BLE_CONN_CFG_TAG, &ram_start);
-    APP_ERROR_CHECK(err_code);
-
-    // Enable BLE stack.
-    err_code = nrf_sdh_ble_enable(&ram_start);
-    APP_ERROR_CHECK(err_code);
-
-    // Register a handler for BLE events.
-    NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
-}
-
 static void constant_light(uint8_t const * color_code)
 {
     nrfx_pwm_config_t const config0 =
@@ -414,6 +300,125 @@ static void start_blinking(uint8_t const * color_code)
     };
 
     (void)nrf_drv_pwm_complex_playback(&m_pwm0, &seq0, &seq1, 2, NRF_DRV_PWM_FLAG_LOOP);
+}
+
+static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
+{
+    ret_code_t err_code = NRF_SUCCESS;
+
+    switch (p_ble_evt->header.evt_id)
+    {
+        case BLE_GAP_EVT_DISCONNECTED:
+            NRF_LOG_INFO("Disconnected.");
+            nrfx_pwm_stop(&m_pwm0, true);
+            break;
+
+        case BLE_GAP_EVT_CONNECTED:
+            NRF_LOG_INFO("Connected.");
+
+            m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+            m_cus.conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+            break;
+
+        case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
+        {
+            NRF_LOG_DEBUG("PHY update request.");
+            ble_gap_phys_t const phys =
+            {
+                .rx_phys = BLE_GAP_PHY_AUTO,
+                .tx_phys = BLE_GAP_PHY_AUTO,
+            };
+            err_code = sd_ble_gap_phy_update(p_ble_evt->evt.gap_evt.conn_handle, &phys);
+            APP_ERROR_CHECK(err_code);
+        } break;
+
+        case BLE_GATTC_EVT_TIMEOUT:
+            // Disconnect on GATT Client timeout event.
+            NRF_LOG_DEBUG("GATT Client Timeout.");
+            err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gattc_evt.conn_handle,
+                                             BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+            APP_ERROR_CHECK(err_code);
+            break;
+
+        case BLE_GATTS_EVT_TIMEOUT:
+            // Disconnect on GATT Server timeout event.
+            NRF_LOG_DEBUG("GATT Server Timeout.");
+            err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gatts_evt.conn_handle,
+                                             BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+            APP_ERROR_CHECK(err_code);
+            break;
+
+        case BLE_GATTS_EVT_WRITE :
+
+            if(p_ble_evt->evt.gatts_evt.params.write.uuid.uuid == CHAR0_UUID ) 
+            {
+                
+              uint16_t len = p_ble_evt->evt.gatts_evt.params.write.len;
+              uint32_t p_data = 0;
+
+              // Determine the data sent
+              // => determine color code or signal to start(1) or to stop blinking (0)
+              for(int i = len - 1; i >= 0; i-- )
+              {
+                p_data = p_data << 8;
+                p_data = p_data | p_ble_evt->evt.gatts_evt.params.write.data[i];
+              }
+
+            // check if data is signal to start blinking
+            if(p_data == START_BLINKING)
+            {
+                    nrfx_pwm_stop(&m_pwm0, true);
+                    nrfx_pwm_uninit(&m_pwm0);
+                    start_blinking(color);
+            }
+            // check if data is signal to stop blinking
+            else if (p_data == STOP_BLINKING)
+            {
+                    nrfx_pwm_stop(&m_pwm0, true);    
+                    nrfx_pwm_uninit(&m_pwm0);
+                    constant_light(color);
+            }
+            else 
+            {
+                    //data is color code, save it to local variable
+
+                    color[0] = p_ble_evt->evt.gatts_evt.params.write.data[0];
+                    color[1] = p_ble_evt->evt.gatts_evt.params.write.data[1];
+                    color[2] = p_ble_evt->evt.gatts_evt.params.write.data[2];
+                    color[3] = p_ble_evt->evt.gatts_evt.params.write.data[3];
+
+                    // Add pwm function that turns on  RGB LEDs
+                }
+
+
+            }
+            break;
+
+        default:
+            // No implementation needed.
+            break;
+    }
+}
+
+static void ble_stack_init()
+{
+    ret_code_t err_code;
+
+    err_code = nrf_sdh_enable_request();
+    APP_ERROR_CHECK(err_code);
+
+    // Configure the BLE stack using the default settings.
+    // Fetch the start address of the application RAM.
+    uint32_t ram_start = 0;
+    err_code = nrf_sdh_ble_default_cfg_set(APP_BLE_CONN_CFG_TAG, &ram_start);
+    APP_ERROR_CHECK(err_code);
+
+    // Enable BLE stack.
+    err_code = nrf_sdh_ble_enable(&ram_start);
+    APP_ERROR_CHECK(err_code);
+
+    // Register a handler for BLE events.
+    NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
 }
 
 static void btn_evt_handler(bsp_event_t event)
