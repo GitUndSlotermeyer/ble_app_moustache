@@ -454,7 +454,7 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
     switch (p_evt->evt_type)
     {
         // structure needed for differentiation of various peripheral characterstic is filled
-        case BLE_DB_DISCOVERY_COMPLETE:
+ case BLE_DB_DISCOVERY_COMPLETE:
         { 
            // NRF_LOG_INFO("BLE_DB_DISCOVERY_COMPLETE event triggered.");
 
@@ -485,7 +485,7 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
             ble_gattc_write_params_t const write_params = {
                 .offset = 0,
                 .flags = BLE_GATT_OP_WRITE_CMD,
-                .handle = characteristic[index][1].cccd_handle,
+                .handle = characteristic[index][BTN_CHARACTERISTIC].cccd_handle,
                 .len = sizeof(value),
                 .write_op = BLE_GATT_OP_WRITE_CMD,
                 .p_value = (uint8_t *)&value
@@ -494,6 +494,23 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
             err_code = sd_ble_gattc_write(peripheral_conn_handles[index], &write_params);
             APP_ERROR_CHECK(err_code);
 
+            // Give each peripheral device its color
+            // index MUST BE SMALLER than NUMBER OF COLORS
+
+            uint32_t color = peripheral_colors[index];
+            //NRF_LOG_INFO("Color is %x", color);
+            
+            ble_gattc_write_params_t const write_led_colors_params = {
+                .offset = 0,
+                .flags = BLE_GATT_OP_WRITE_CMD,
+                .handle = characteristic[index][LED_CHARACTERISTIC].characteristic.handle_value,
+                .len = sizeof(color),
+                .write_op = BLE_GATT_OP_WRITE_CMD,
+                .p_value = (uint8_t *)&color
+            };
+
+            err_code = sd_ble_gattc_write(peripheral_conn_handles[index], &write_led_colors_params);
+            APP_ERROR_CHECK(err_code);
         }
         break;
     
