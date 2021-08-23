@@ -252,7 +252,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         } 
         break; 
 
-        case BLE_GATTC_EVT_HVX :
+    case BLE_GATTC_EVT_HVX :
         {
                 switch (video_paused)
                 {
@@ -266,7 +266,24 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                         err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, false);
                         APP_ERROR_CHECK(err_code);
 
+                        // Turn on the RGB LED's
+
                         winner_conn_handle = p_ble_evt->evt.gattc_evt.conn_handle;
+                        uint8_t index = -1;
+                        
+                        //find winners index
+                        for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+                        {
+                            if(peripheral_conn_handles[i] == winner_conn_handle )
+                            {
+                                index = i;
+                                break;
+                            }
+                        };
+
+                        // turn on led with winners color
+                        turn_on_RGB_LED(peripheral_colors[index]);
+
                         write_to_LED(winner_conn_handle, 0x01, LED_CHARACTERISTIC);
                         break;
                     
@@ -275,6 +292,11 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                         {    
                             NRF_LOG_INFO("Video is paused. Winner clicked.");
                             video_paused = 0;
+                            
+                            // Turn OFF the RGB LED's
+                            bsp_board_led_off(1);
+                            bsp_board_led_off(2);
+                            bsp_board_led_off(3);
                             
                             // Continue the movie
                             err_code = app_usbd_hid_kbd_key_control(&m_app_hid_kbd, CONFIG_KBD_LETTER, true);
@@ -293,7 +315,8 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                         break;
                 }
 
-            }
+        }
+        break;
         
         default:
             // No implementation needed.
