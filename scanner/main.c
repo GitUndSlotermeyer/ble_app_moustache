@@ -79,7 +79,7 @@ static uint8_t peripheral_conn_handles[NRF_SDH_BLE_CENTRAL_LINK_COUNT];
 static uint8_t connected_devices = 0;
 static uint8_t video_paused = 0;
 static uint8_t winner_conn_handle = 0;
-static uint32_t peripheral_colors[NUMBER_OF_COLORS] = {RED, GREEN, BLUE, YELLOW, MAGENTA, TURQUOISE, WHITE};
+static uint32_t peripheral_colors[NUMBER_OF_COLORS] = { RED, GREEN, YELLOW, BLUE, MAGENTA, TURQUOISE, WHITE};
 
  
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
@@ -139,6 +139,50 @@ static void write_to_LED(uint8_t conn_handle, uint32_t value, uint8_t char_index
     APP_ERROR_CHECK(err_code);
 
     NRF_LOG_INFO("Wrote to the characteristic.");
+}
+
+static void turn_on_RGB_LED(uint32_t color_code)
+{
+    switch(color_code)
+    {
+        case RED:
+            bsp_board_led_on(1);    bsp_board_led_off(2);
+            bsp_board_led_off(3);
+            break;
+              
+        case GREEN:
+            bsp_board_led_on(2);    bsp_board_led_off(1);
+            bsp_board_led_off(3);
+            break;
+            
+        case BLUE:
+            bsp_board_led_on(3);    bsp_board_led_off(2);
+            bsp_board_led_off(1);
+            break;
+
+        case YELLOW:
+            bsp_board_led_on(1);    bsp_board_led_off(3);
+            bsp_board_led_on(2);
+            break;
+
+        case MAGENTA:
+            bsp_board_led_on(1);    bsp_board_led_off(2);
+            bsp_board_led_on(3);
+            break;
+
+        case TURQUOISE:
+            bsp_board_led_on(2);    bsp_board_led_off(1);
+            bsp_board_led_on(3);
+            break;   
+
+        case WHITE:
+            bsp_board_led_on(1);    bsp_board_led_on(2);
+            bsp_board_led_on(3);
+            break; 
+
+        default:
+            break;
+    }
 }
 
 static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)  
@@ -270,7 +314,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
                         winner_conn_handle = p_ble_evt->evt.gattc_evt.conn_handle;
                         uint8_t index = -1;
-                        
+
                         //find winners index
                         for(int i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
                         {
