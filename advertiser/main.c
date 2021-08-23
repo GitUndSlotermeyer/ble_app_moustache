@@ -32,11 +32,13 @@
 #include "nrf_ble_gq.h"
 #include "ble_db_discovery.h"
 #include "ble_gatt_db.h"
-
+#include "nrf_drv_pwm.h"
+#include "nrf_drv_clock.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 #include "ble_cus.h"
+#include "colors.h"
 
 #define DEVICE_NAME                     "nRF Connect"                       /**< Name of device. Will be included in the advertising data. */
 #define APP_ADV_INTERVAL                300                                     /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
@@ -64,6 +66,9 @@
 #define LED_CHARACTERISTIC 0
 #define BTN_CHARACTERISTIC 1
 
+#define START_BLINKING  1
+#define STOP_BLINKING   0
+
 // Instance init
 NRF_BLE_GQ_DEF(m_ble_gatt_queue, NRF_SDH_BLE_CENTRAL_LINK_COUNT, NRF_BLE_GQ_QUEUE_SIZE);
 NRF_BLE_GATT_DEF(m_gatt);                                                       /**< GATT module instance. */
@@ -74,17 +79,15 @@ BLE_CUS_DEF(m_cus);
 
 // Global variables init
 static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID;                        /**< Handle of the current connection. */
+static uint8_t color[4];
+
+static nrfx_pwm_t m_pwm0 = NRF_DRV_PWM_INSTANCE(0);
+static uint16_t const m_top  = 255;
 
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
     app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
-
-/*
-static void nrf_qwr_error_handler(uint32_t nrf_error)
-{
-    APP_ERROR_HANDLER(nrf_error);
-}*/
 
 static void conn_params_error_handler(uint32_t nrf_error)
 {
@@ -93,7 +96,12 @@ static void conn_params_error_handler(uint32_t nrf_error)
 
 static void timers_init()
 {
-    ret_code_t err_code = app_timer_init();
+    ret_code_t err_code = nrf_drv_clock_init();
+    APP_ERROR_CHECK(err_code);
+    
+    nrf_drv_clock_lfclk_request(NULL);
+
+    err_code = app_timer_init();
     APP_ERROR_CHECK(err_code);
 }
 
@@ -202,6 +210,98 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     }
 }
 
+static void constant_light(uint8_t const * color_code)
+{
+    nrfx_pwm_config_t const config0 =
+        {
+            .output_pins =
+            {
+                BSP_LED_1 | NRF_DRV_PWM_PIN_INVERTED , // channel 0
+                BSP_LED_2  | NRF_DRV_PWM_PIN_INVERTED , // channel 1
+                BSP_LED_3 | NRF_DRV_PWM_PIN_INVERTED , // channel 2
+                NRF_DRV_PWM_PIN_NOT_USED, // channel 3
+            },
+            .irq_priority = APP_IRQ_PRIORITY_LOWEST,
+            .base_clock   = NRF_PWM_CLK_2MHz ,
+            .count_mode   = NRF_PWM_MODE_UP,
+            .top_value    = m_top,
+            .load_mode    = NRF_PWM_LOAD_INDIVIDUAL,
+            .step_mode    = NRF_PWM_STEP_AUTO
+        };
+
+    APP_ERROR_CHECK(nrf_drv_pwm_init(&m_pwm0, &config0, NULL));
+
+    static nrf_pwm_values_individual_t /*const*/ seq_values;
+    nrf_pwm_sequence_t const seq =
+    {
+        .values.p_individual = &seq_values,
+        .length          = NRF_PWM_VALUES_LENGTH(seq_values),
+        .repeats         = 0,
+        .end_delay       = 0
+    };
+
+    seq_values.channel_0 = color_code[3];
+    seq_values.channel_1 = color_code[2];
+    seq_values.channel_2 = color_code[1];
+             
+    nrfx_pwm_simple_playback(&m_pwm0, &seq, 1,  NRF_DRV_PWM_FLAG_LOOP);
+}
+
+static void start_blinking(uint8_t const * color_code)
+{
+    nrf_drv_pwm_config_t const config0 =
+    {
+        .output_pins =
+        {
+            BSP_LED_1 | NRF_DRV_PWM_PIN_INVERTED,    // channel 0
+            BSP_LED_2  | NRF_DRV_PWM_PIN_INVERTED ,  // channel 1
+            BSP_LED_3 | NRF_DRV_PWM_PIN_INVERTED ,   // channel 2
+            NRF_DRV_PWM_PIN_NOT_USED,                // channel 3
+        },
+        .irq_priority = APP_IRQ_PRIORITY_LOWEST,
+        .base_clock   = NRF_PWM_CLK_125kHz,
+        .count_mode   = NRF_PWM_MODE_UP,
+        .top_value    = m_top,
+        .load_mode    = NRF_PWM_LOAD_INDIVIDUAL,
+        .step_mode    = NRF_PWM_STEP_AUTO
+    };
+    APP_ERROR_CHECK(nrf_drv_pwm_init(&m_pwm0, &config0, NULL));
+
+
+    // This array cannot be allocated on stack (hence "static") and it must
+    // be in RAM (hence no "const", though its content is not changed).
+    
+    static nrf_pwm_values_individual_t /*const*/ seq_values0;
+
+    seq_values0.channel_0 = color_code[3];
+    seq_values0.channel_1 = color_code[2];
+    seq_values0.channel_2 = color_code[1];
+
+    static nrf_pwm_values_individual_t /*const*/ seq_values1;
+
+    seq_values1.channel_0 = 0x00;
+    seq_values1.channel_1 = 0x00;
+    seq_values1.channel_2 = 0x00;
+
+    nrf_pwm_sequence_t const seq0 =
+    {
+        .values.p_individual = &seq_values0,
+        .length          = NRF_PWM_VALUES_LENGTH(seq_values0),
+        .repeats         = 0,
+        .end_delay       = 50
+    };
+
+        nrf_pwm_sequence_t const seq1 =
+    {
+        .values.p_individual = &seq_values1,
+        .length          = NRF_PWM_VALUES_LENGTH(seq_values1),
+        .repeats         = 0,
+        .end_delay       = 50
+    };
+
+    (void)nrf_drv_pwm_complex_playback(&m_pwm0, &seq0, &seq1, 2, NRF_DRV_PWM_FLAG_LOOP);
+}
+
 static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 {
     ret_code_t err_code = NRF_SUCCESS;
@@ -210,20 +310,14 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_DISCONNECTED:
             NRF_LOG_INFO("Disconnected.");
-            bsp_board_led_off(CENTRAL_CONN_LED);
-            bsp_board_led_on(CENTRAL_ADV_LED);
+            nrfx_pwm_stop(&m_pwm0, true);
             break;
 
         case BLE_GAP_EVT_CONNECTED:
             NRF_LOG_INFO("Connected.");
-            bsp_board_led_off(CENTRAL_ADV_LED);
-            bsp_board_led_on(CENTRAL_CONN_LED);
 
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             m_cus.conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-          //  err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
-            //APP_ERROR_CHECK(err_code);
-
             break;
 
         case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
@@ -254,32 +348,55 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             APP_ERROR_CHECK(err_code);
             break;
 
-        case BLE_GAP_EVT_SCAN_REQ_REPORT:
-            NRF_LOG_INFO("Scan request has landed.");
-            break;
-
-        case BLE_GATTC_EVT_READ_RSP:
-            NRF_LOG_INFO("Read response value is %d", p_ble_evt->evt.gattc_evt.params.read_rsp.data[0]);
-            NRF_LOG_INFO("Read response value is %d", p_ble_evt->evt.gattc_evt.params.read_rsp.data[1]);
-            break;
-        
-        case BLE_GATTS_EVT_HVN_TX_COMPLETE:
-            NRF_LOG_INFO("Hand value notification complete.");
-            break;
-
         case BLE_GATTS_EVT_WRITE :
 
             if(p_ble_evt->evt.gatts_evt.params.write.uuid.uuid == CHAR0_UUID ) 
             {
-                NRF_LOG_INFO("Value is wrote to LED characteristic turn on LED");
-                bsp_board_led_invert(2);
-                bsp_board_led_invert(3);
+                
+              uint16_t len = p_ble_evt->evt.gatts_evt.params.write.len;
+              uint32_t p_data = 0;
+
+              // Determine the data sent
+              // => determine color code or signal to start(1) or to stop blinking (0)
+              for(int i = len - 1; i >= 0; i-- )
+              {
+                p_data = p_data << 8;
+                p_data = p_data | p_ble_evt->evt.gatts_evt.params.write.data[i];
+              }
+
+            // check if data is signal to start blinking
+            if(p_data == START_BLINKING)
+            {
+                    nrfx_pwm_stop(&m_pwm0, true);
+                    nrfx_pwm_uninit(&m_pwm0);
+                    start_blinking(color);
+            }
+            // check if data is signal to stop blinking
+            else if (p_data == STOP_BLINKING)
+            {
+                    nrfx_pwm_stop(&m_pwm0, true);    
+                    nrfx_pwm_uninit(&m_pwm0);
+                    constant_light(color);
+            }
+            else 
+            {
+                    //data is color code, save it to local variable
+
+                    color[0] = p_ble_evt->evt.gatts_evt.params.write.data[0];
+                    color[1] = p_ble_evt->evt.gatts_evt.params.write.data[1];
+                    color[2] = p_ble_evt->evt.gatts_evt.params.write.data[2];
+                    color[3] = p_ble_evt->evt.gatts_evt.params.write.data[3];
+
+                    // Add pwm function that turns on  RGB LEDs
+                    constant_light(color);
+                }
+
+
             }
             break;
 
         default:
             // No implementation needed.
-          //  NRF_LOG_INFO("Some event happened");
             break;
     }
 }
@@ -384,7 +501,7 @@ static void idle_state_handle()
 static void advertising_start()
 {
     ret_code_t err_code = ble_advertising_start(&m_advertising, BLE_ADV_MODE_FAST);
-    bsp_board_led_on(CENTRAL_ADV_LED);
+   // bsp_board_led_on(CENTRAL_ADV_LED);
 
     APP_ERROR_CHECK(err_code);
 }

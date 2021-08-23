@@ -13,7 +13,7 @@ static uint8_t char_value = 0;
 static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 {
     ble_gatts_evt_write_t const * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
-    NRF_LOG_INFO("inside on_write funciton");
+    //NRF_LOG_INFO("inside on_write funciton");
     bsp_board_led_invert(0);
     // Custom Value Characteristic Written to.
 
@@ -23,7 +23,7 @@ static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 
         //NRF_LOG_INFO("CCCD value is %d", p_evt_write->data[0]);
        // NRF_LOG_INFO("CCCD value is %d", p_evt_write->data[1]);
-        NRF_LOG_INFO("CCCD Handle is %d", p_ble_evt->evt.gatts_evt.params.write.handle);
+       // NRF_LOG_INFO("CCCD Handle is %d", p_ble_evt->evt.gatts_evt.params.write.handle);
 
     }
 
@@ -65,8 +65,8 @@ static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
     
     attr_char_value.p_uuid = &ble_uuid;
     attr_char_value.p_attr_md = &attr_md;
-    attr_char_value.init_len  = sizeof(uint8_t);
-    attr_char_value.max_len   = sizeof(uint8_t);
+    attr_char_value.init_len  = sizeof(uint32_t);
+    attr_char_value.max_len   = sizeof(uint32_t);
     attr_char_value.p_value = &char_value;
 
     memset(&attr_md, 0, sizeof(attr_md));
@@ -80,7 +80,7 @@ static uint32_t char0_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
                                                &p_cus->custom_value_handles[0]);
     
     APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 0 successfully added + value handle is %d.", p_cus->custom_value_handles[0].value_handle);
+    //NRF_LOG_INFO("Characteristic 0 successfully added + value handle is %d.", p_cus->custom_value_handles[0].value_handle);
 
 
     return NRF_SUCCESS;
@@ -133,7 +133,7 @@ static uint32_t char1_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
                                                &p_cus->custom_value_handles[1]);
     
     APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("Characteristic 1 successfully added + value handle is %d.", p_cus->custom_value_handles[1].value_handle);
+    //NRF_LOG_INFO("Characteristic 1 successfully added + value handle is %d.", p_cus->custom_value_handles[1].value_handle);
 
     return NRF_SUCCESS;
 }
@@ -233,7 +233,7 @@ uint32_t ble_cus_value_update_and_notify(ble_cus_t * p_cus, uint8_t new_value, u
 
         //NRF_LOG_INFO("%d = Conn handle: %d, Custom value handle : %d, CCCD handle : %d", i, p_cus->conn_handle, p_cus->custom_value_handles[0].value_handle, p_cus->custom_value_handles[0].cccd_handle );
         err_code = sd_ble_gatts_hvx(p_cus->conn_handle, &hvx_params);
-        NRF_LOG_INFO("Error is %d", err_code);
+        //NRF_LOG_INFO("Error is %d", err_code);
         APP_ERROR_CHECK(err_code);
         
     }
