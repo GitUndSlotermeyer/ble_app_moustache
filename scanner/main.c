@@ -41,7 +41,7 @@
 #define MIN_CONN_INTERVAL               MSEC_TO_UNITS(100, UNIT_1_25_MS)        /**< Minimum acceptable connection interval (0.1 seconds). */
 #define MAX_CONN_INTERVAL               MSEC_TO_UNITS(200, UNIT_1_25_MS)        /**< Maximum acceptable connection interval (0.2 second). */
 #define SLAVE_LATENCY                   0                                       /**< Slave latency. */
-#define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(4000, UNIT_10_MS)         /**< Connection supervisory timeout (4 seconds). */
+#define CONN_SUP_TIMEOUT                MSEC_TO_UNITS(2000, UNIT_10_MS)         /**< Connection supervisory timeout (4 seconds). */
 
 #define NUMBER_OF_CHARACTERISTIC 2
 #define USBD_POWER_DETECTION true
@@ -103,9 +103,6 @@ static void scan_start()
 
     err_code = nrf_ble_scan_start(&m_scan);
     APP_ERROR_CHECK(err_code);
-
-    bsp_board_led_off(CENTRAL_CONNECTED_LED);
-    bsp_board_led_on(CENTRAL_SCANNING_LED);
 }
 
 static void write_to_LED(uint8_t conn_handle, uint32_t value, uint8_t char_index)
@@ -156,47 +153,41 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         // Upon connection, check which peripheral has connected (HR or RSC), initiate DB
         // discovery, update LEDs status and resume scanning if necessary. */
         case BLE_GAP_EVT_CONNECTED:
-        
-           // NRF_LOG_INFO("Connected %d.", p_ble_evt->evt.gap_evt.conn_handle);
-
-            // Update LEDs status, and check if we should be looking for more
-            // peripherals to connect to.
-
+        {
+            // start db service discovery
             memset(&m_db_disc, 0x00, sizeof(m_db_disc));
             err_code = ble_db_discovery_start(&m_db_disc, p_ble_evt->evt.gap_evt.conn_handle);
             APP_ERROR_CHECK(err_code);
 
-           // NRF_LOG_INFO("DB_DISCOVERY started.");
 
-           // find out what field in array is uninitialized
-           for(uint8_t i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
-           {
-               if(peripheral_conn_handles[i] == 0xFF) 
-               {
-                peripheral_conn_handles[i] = p_ble_evt->evt.gap_evt.conn_handle;
-               // NRF_LOG_INFO("Index = %d, value = %d", i,  p_ble_evt->evt.gap_evt.conn_handle);
-                break;
-               }
-           }
+            // find out what field in array is uninitialized
+            // then assign that field to the new connected peripheral
+            for(uint8_t i = 0; i < NRF_SDH_BLE_CENTRAL_LINK_COUNT; i++)
+            {
+                if(peripheral_conn_handles[i] == 0xFF) 
+                {
+                    peripheral_conn_handles[i] = p_ble_evt->evt.gap_evt.conn_handle;
+                    NRF_LOG_INFO("Connected %d.", i);
+                    break;
+                }
+            }
 
             if(++connected_devices == NRF_SDH_BLE_CENTRAL_LINK_COUNT) 
             {
                 NRF_LOG_INFO("Max peripherals connected");
-                bsp_board_led_off(CENTRAL_SCANNING_LED);
-                bsp_board_led_on(CENTRAL_CONNECTED_LED); 
             }
             else 
             {
                 NRF_LOG_INFO("Continue scanning");
                 scan_start();
             }
+        }
         break;
 
-        // Upon disconnection, reset the connection handle of the peer which disconnected, update
-        // the LEDs status and start scanning again.
+        // Upon disconnection, set to the inital value (0xff) the connection handle of the peer which disconnected,
+        //  then start scanning again.
         case BLE_GAP_EVT_DISCONNECTED:
         {
-            NRF_LOG_INFO("Disconnected.");
             connected_devices--;
 
             // uninitialize field of disconnected peripheral in array 
@@ -205,11 +196,10 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                 if(peripheral_conn_handles[i] == p_ble_evt->evt.gap_evt.conn_handle)
                 {
                     peripheral_conn_handles[i] = 0xff;
+                    NRF_LOG_INFO("Disconnected %d.", i);
                     break;
                 }
             }
-            bsp_board_led_off(CENTRAL_CONNECTED_LED);
-            bsp_board_led_on(CENTRAL_SCANNING_LED);
             scan_start();
         } 
         break;
@@ -264,9 +254,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
         case BLE_GATTC_EVT_HVX :
         {
-            //NRF_LOG_INFO("Notification is delivered.");
-            //NRF_LOG_INFO("New value is %d", p_ble_evt->evt.gattc_evt.params.hvx.data[0]);
-
                 switch (video_paused)
                 {
                     case 0:
@@ -310,7 +297,6 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         
         default:
             // No implementation needed.
-            //NRF_LOG_INFO("Some event happened");
             break;
     }
 }
@@ -548,7 +534,6 @@ static void db_discovery_init()
     };
     ble_uuid128_t const base_uuid = {CUSTOM_SERVICE_UUID_BASE};
     err_code = sd_ble_uuid_vs_add(&base_uuid, &(helper_uuid.type));
-    NRF_LOG_INFO("sd_vs_add error is %d", err_code);
     APP_ERROR_CHECK(err_code);
 
     err_code = ble_db_discovery_evt_register(&service_uuid);
@@ -648,13 +633,11 @@ int main(void)
 
       if (USBD_POWER_DETECTION)
     {
-        NRF_LOG_INFO("USB Power detection true.")
         ret = app_usbd_power_events_enable();
         APP_ERROR_CHECK(ret);
     }
     else
     {
-        NRF_LOG_INFO("No USB power detection enabled.");
 
         app_usbd_enable();
         app_usbd_start();
