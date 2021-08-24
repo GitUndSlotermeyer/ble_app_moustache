@@ -146,37 +146,44 @@ static void turn_on_RGB_LED(uint32_t color_code)
     switch(color_code)
     {
         case RED:
-            bsp_board_led_on(1);    bsp_board_led_off(2);
+            bsp_board_led_on(1);
+            bsp_board_led_off(2);
             bsp_board_led_off(3);
             break;
               
         case GREEN:
-            bsp_board_led_on(2);    bsp_board_led_off(1);
+            bsp_board_led_off(1);
+            bsp_board_led_on(2);
             bsp_board_led_off(3);
             break;
             
         case BLUE:
-            bsp_board_led_on(3);    bsp_board_led_off(2);
             bsp_board_led_off(1);
+            bsp_board_led_off(2);
+            bsp_board_led_on(3);
             break;
 
         case YELLOW:
-            bsp_board_led_on(1);    bsp_board_led_off(3);
+            bsp_board_led_on(1);
             bsp_board_led_on(2);
+            bsp_board_led_off(3);
             break;
 
         case MAGENTA:
-            bsp_board_led_on(1);    bsp_board_led_off(2);
+            bsp_board_led_on(1);
+            bsp_board_led_off(2);
             bsp_board_led_on(3);
             break;
 
         case TURQUOISE:
-            bsp_board_led_on(2);    bsp_board_led_off(1);
+            bsp_board_led_off(1);
+            bsp_board_led_on(2);
             bsp_board_led_on(3);
             break;   
 
         case WHITE:
-            bsp_board_led_on(1);    bsp_board_led_on(2);
+            bsp_board_led_on(1);
+            bsp_board_led_on(2);
             bsp_board_led_on(3);
             break; 
 
